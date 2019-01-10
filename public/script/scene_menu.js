@@ -8,7 +8,7 @@ function loadMenuScene(){
         sceneNumber = 1;
     });
     createObjButton("assets/btn_score.png","assets/btn_score_highlight.png","assets/btn_score_pressed.png",0.20,app.stage,470,280,function(){
-        console.log("SCORE");
+        sceneNumber = 2;
     });
 }
 
