@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <script src="script/pixi.min.js"></script>
+  <script src="script/import/pixi.js"></script>
 
   <p>Hello</p>
   <script>
@@ -31,7 +31,7 @@
     let container = new PIXI.Container();
     app.stage.addChild(container);
 
-    var texture = PIXI.Texture.fromImage('images/fishcook_background.png');
+    var texture = PIXI.Texture.fromImage('assets/fishcook_background.png');
     var background = new PIXI.Sprite(texture);
     background.width = 550;
     background.x = 0;
@@ -103,13 +103,13 @@
     background8.y = 0;
     app.stage.addChild(background8);
 
-    var texture = PIXI.Texture.fromImage('images/shopbackground.png');
+    var texture = PIXI.Texture.fromImage('assets/shopbackground.png');
     var background9 = new PIXI.Sprite(texture);
     background9.width = 345;
     background9.height = 80;
     app.stage.addChild(background9);
 
-    var texture = PIXI.Texture.fromImage('images/shopbackground.png');
+    var texture = PIXI.Texture.fromImage('assets/shopbackground.png');
     var background10 = new PIXI.Sprite(texture);
     background10.width = 345;
     background10.height = 80;
@@ -126,7 +126,7 @@
     app.stage.addChild(rectangle);
 
     // panel
-    var texture = PIXI.Texture.fromImage('images/panel.png');
+    var texture = PIXI.Texture.fromImage('assets/panel.png');
     var background11 = new PIXI.Sprite(texture);
     background11.x = 505;
     background11.y = 65;
@@ -144,35 +144,35 @@
     app.stage.addChild(scoreText);
 
     // life1
-    var texture = PIXI.Texture.fromImage('images/life.gif');
+    var texture = PIXI.Texture.fromImage('assets/life.gif');
     var life1 = new PIXI.Sprite(texture);
     life1.scale.set(1.7);
     life1.position.set(530, 110)
     app.stage.addChild(life1);
 
     // life2
-    var texture = PIXI.Texture.fromImage('images/life.gif');
+    var texture = PIXI.Texture.fromImage('assets/life.gif');
     var life2 = new PIXI.Sprite(texture);
     life2.scale.set(1.7);
     life2.position.set(555, 110)
     app.stage.addChild(life2);
 
     // life3
-    var texture = PIXI.Texture.fromImage('images/life.gif');
+    var texture = PIXI.Texture.fromImage('assets/life.gif');
     var life3 = new PIXI.Sprite(texture);
     life3.scale.set(1.7);
     life3.position.set(580, 110)
     app.stage.addChild(life3);
 
     // life4
-    var texture = PIXI.Texture.fromImage('images/life.gif');
+    var texture = PIXI.Texture.fromImage('assets/life.gif');
     var life4 = new PIXI.Sprite(texture);
     life4.scale.set(1.7);
     life4.position.set(605, 110)
     app.stage.addChild(life4);
 
     // life5
-    var texture = PIXI.Texture.fromImage('images/life.gif');
+    var texture = PIXI.Texture.fromImage('assets/life.gif');
     var life5 = new PIXI.Sprite(texture);
     life5.scale.set(1.7);
     life5.position.set(630, 110)
@@ -180,21 +180,21 @@
 
     // characters
     // boy_wating with speech bubble
-    var texture = PIXI.Texture.fromImage('images/boy_waiting.png');
+    var texture = PIXI.Texture.fromImage('assets/character/boy_waiting.png');
     var boy = new PIXI.Sprite(texture);
     boy.scale.set(0.5);
     boy.position.set(20, 57);
     app.stage.addChild(boy);
 
     // girl_wating with speech bubble * VIP added later
-    var texture = PIXI.Texture.fromImage('images/girl_waiting.png');
+    var texture = PIXI.Texture.fromImage('assets/character/girl_waiting.png');
     var girl = new PIXI.Sprite(texture);
     girl.scale.set(0.5);
     girl.position.set(260, 57);
     app.stage.addChild(girl);
 
     // speech_bubble1
-    var texture = PIXI.Texture.fromImage('images/speech_bubble_left.png');
+    var texture = PIXI.Texture.fromImage('assets/character/speech_bubble_left.png');
     var speech_bubble_left1 = new PIXI.Sprite(texture);
     speech_bubble_left1.scale.set(0.3);
     speech_bubble_left1.height = 100;
@@ -202,7 +202,7 @@
     app.stage.addChild(speech_bubble_left1);
 
     // speech_bubble2
-    var texture = PIXI.Texture.fromImage('images/speech_bubble_left.png');
+    var texture = PIXI.Texture.fromImage('assets/character/speech_bubble_left.png');
     var speech_bubble_left2 = new PIXI.Sprite(texture);
     speech_bubble_left2.scale.set(0.3);
     speech_bubble_left2.height = 100;
@@ -235,7 +235,7 @@
 
     // taiyaki_1~9
     // taiyaki1 ~ fish4
-    var texture = PIXI.Texture.fromImage('images/fish_empty1.png');
+    var texture = PIXI.Texture.fromImage('assets/fish_empty1.png');
     var taiyaki1 = new PIXI.Sprite(texture);
     taiyaki1.scale.set(0.25);
     taiyaki1.x = 20;
@@ -243,7 +243,7 @@
     app.stage.addChild(taiyaki1);
 
     // taiyaki2
-    var texture = PIXI.Texture.fromImage('images/fish_empty1.png');
+    var texture = PIXI.Texture.fromImage('assets/fish_empty1.png');
     var taiyaki2 = new PIXI.Sprite(texture);
     taiyaki2.scale.set(0.25);
     taiyaki2.x = 20;
@@ -251,7 +251,7 @@
     app.stage.addChild(taiyaki2);
 
     // taiyaki3
-    var texture = PIXI.Texture.fromImage('images/fish_empty1.png');
+    var texture = PIXI.Texture.fromImage('assets/fish_empty1.png');
     var taiyaki3 = new PIXI.Sprite(texture);
     taiyaki3.scale.set(0.25);
     taiyaki3.x = 20;
@@ -259,7 +259,7 @@
     app.stage.addChild(taiyaki3);
 
     // taiyaki4
-    var texture = PIXI.Texture.fromImage('images/fish_empty1.png');
+    var texture = PIXI.Texture.fromImage('assets/fish_empty1.png');
     var taiyaki4 = new PIXI.Sprite(texture);
     taiyaki4.scale.set(0.25);
     taiyaki4.x = 190;
@@ -267,7 +267,7 @@
     app.stage.addChild(taiyaki4);
 
     // taiyaki5
-    var texture = PIXI.Texture.fromImage('images/fish_empty1.png');
+    var texture = PIXI.Texture.fromImage('assets/fish_empty1.png');
     var taiyaki5 = new PIXI.Sprite(texture);
     taiyaki5.scale.set(0.25);
     taiyaki5.x = 190;
@@ -275,7 +275,7 @@
     app.stage.addChild(taiyaki5);
 
     // taiyaki6
-    var texture = PIXI.Texture.fromImage('images/fish_empty1.png');
+    var texture = PIXI.Texture.fromImage('assets/fish_empty1.png');
     var taiyaki6 = new PIXI.Sprite(texture);
     taiyaki6.scale.set(0.25);
     taiyaki6.x = 190;
@@ -283,7 +283,7 @@
     app.stage.addChild(taiyaki6);
 
     // taiyaki7
-    var texture = PIXI.Texture.fromImage('images/fish_empty1.png');
+    var texture = PIXI.Texture.fromImage('assets/fish_empty1.png');
     var taiyaki7 = new PIXI.Sprite(texture);
     taiyaki7.scale.set(0.25);
     taiyaki7.x = 360; // + 170
@@ -291,7 +291,7 @@
     app.stage.addChild(taiyaki7);
 
     // taiyaki8
-    var texture = PIXI.Texture.fromImage('images/fish_empty1.png');
+    var texture = PIXI.Texture.fromImage('assets/fish_empty1.png');
     var taiyaki8 = new PIXI.Sprite(texture);
     taiyaki8.scale.set(0.25);
     taiyaki8.x = 360;
@@ -299,7 +299,7 @@
     app.stage.addChild(taiyaki8);
 
     // taiyaki9
-    var texture = PIXI.Texture.fromImage('images/fish_empty1.png');
+    var texture = PIXI.Texture.fromImage('assets/fish_empty1.png');
     var taiyaki9 = new PIXI.Sprite(texture);
     taiyaki9.scale.set(0.25);
     taiyaki9.x = 360;
@@ -315,13 +315,13 @@
     rectangle1.y = 245;
     app.stage.addChild(rectangle1);
 
-    var texture = PIXI.Texture.fromImage('images/ankospoon.png');
+    var texture = PIXI.Texture.fromImage('assets/ankospoon.png');
     var ankoSpoon = new PIXI.Sprite(texture);
     ankoSpoon.scale.set(0.5);
     app.stage.addChild(ankoSpoon);
 
     // Anko
-    var texture = PIXI.Texture.fromImage('images/ingredients2.png');
+    var texture = PIXI.Texture.fromImage('assets/ingredients2.png');
     var anko = new PIXI.Sprite(texture);
     anko.interactive = true;
     anko.buttonMode = true;
@@ -364,7 +364,7 @@
     }
 
     // hand
-    var texture = PIXI.Texture.fromImage('images/hand.png');
+    var texture = PIXI.Texture.fromImage('assets/hand.png');
     var hand = new PIXI.Sprite(texture);
     hand.scale.set(1.2);
     hand.x = 580;
@@ -372,7 +372,7 @@
     app.stage.addChild(hand);
 
     // trash
-    var texture = PIXI.Texture.fromImage('images/trash.png');
+    var texture = PIXI.Texture.fromImage('assets/trash.png');
     var trash = new PIXI.Sprite(texture);
     trash.x = 530;
     trash.y = 465;
@@ -388,7 +388,7 @@
     circle.visible = false;
 
     // create a texture from an image path
-    var texture = PIXI.Texture.fromImage('images/ingredients1.png');
+    var texture = PIXI.Texture.fromImage('assets/ingredients1.png');
 
     // Scale mode for pixelation
     texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
@@ -442,7 +442,7 @@
         console.log("Collsion");
 
         // change images
-        var texture = PIXI.Texture.fromImage('images/fish_01.png');
+        var texture = PIXI.Texture.fromImage('assets/fish_01.png');
         var taiyaki_1 = new PIXI.Sprite(texture);
         taiyaki_1.scale.set(0.25);
         taiyaki_1.x = 20;
@@ -456,7 +456,7 @@
         console.log("Collsion");
 
         // change images
-        var texture = PIXI.Texture.fromImage('images/fish_01.png');
+        var texture = PIXI.Texture.fromImage('assets/fish_01.png');
         var taiyaki_1 = new PIXI.Sprite(texture);
         taiyaki_1.scale.set(0.25);
         taiyaki_1.x = 20;
