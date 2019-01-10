@@ -21,7 +21,7 @@ function goToProperScene(){
 
 //fires each frame
 function fireEachFrame(delta){
-    if(sceneNumber == 1){
+    if(sceneNumber == 1){ 
         gameTimer += app.ticker.elapsedMS;
     }
     //console.log(app.ticker.FPS);
