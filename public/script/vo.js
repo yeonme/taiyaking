@@ -6,3 +6,7 @@ class Guest {
 
     }
 }
+
+class GameInfo {
+    
+}

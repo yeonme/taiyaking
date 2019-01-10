@@ -14,7 +14,8 @@ function goToProperScene(){
         isNewScene ? loadGameScene() : 
             tickGameScene();
     } else if(sceneNumber == 2){ // High Score screen
-        
+        isNewScene ? loadScoreScene() :
+            tickScoreScene();
     }
 }
 
