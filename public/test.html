@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="script/pixi.min.js"></script>
+
+  <p>Hello</p>
+  <script>
+    let type = "WebGL"
+    if (!PIXI.utils.isWebGLSupported()) {
+      type = "canvas"
+    }
+
+    PIXI.utils.sayHello(type);
+
+    //Create a Pixi Application
+    let app = new PIXI.Application({ width: 690, height: 550 });
+
+    //Add the canvas that Pixi automatically created for you to the HTML document
+    document.body.appendChild(app.view);
+
+    // images
+    // background
+    let container = new PIXI.Container();
+    app.stage.addChild(container);
+
+    var texture = PIXI.Texture.fromImage('images/fishcook_background.png');
+    var background = new PIXI.Sprite(texture);
+    background.width = 550;
+    background.x = 0;
+    background.y = 230;
+    container.addChild(background);
+    // app.stage.addChild(taiyaki);
+
+    // backgroud1
+    var background1 = new PIXI.Graphics();
+    background1.beginFill(0xEAC067);
+    background1.drawRect(0, 0, 690, 210);
+    background1.endFill();
+    background1.x = 0;
+    background1.y = 0;
+    app.stage.addChild(background1);
+
+    // backgroud
+    var background2 = new PIXI.Graphics();
+    background2.beginFill(0xAA6A01);
+    background2.drawRect(0, 0, 15, 210);
+    background2.endFill();
+    background2.x = 20;
+    background2.y = 0;
+    app.stage.addChild(background2);
+
+    var background3 = new PIXI.Graphics();
+    background3.beginFill(0xAA6A01);
+    background3.drawRect(0, 0, 15, 210);
+    background3.endFill();
+    background3.x = 120;
+    background3.y = 0;
+    app.stage.addChild(background3);
+
+    var background4 = new PIXI.Graphics();
+    background4.beginFill(0xAA6A01);
+    background4.drawRect(0, 0, 15, 210);
+    background4.endFill();
+    background4.x = 220;
+    background4.y = 0;
+    app.stage.addChild(background4);
+
+    var background5 = new PIXI.Graphics();
+    background5.beginFill(0xAA6A01);
+    background5.drawRect(0, 0, 15, 210);
+    background5.endFill();
+    background5.x = 320;
+    background5.y = 0;
+    app.stage.addChild(background5);
+
+    
+
+
+
+
+    // taiyaki1
+    var texture = PIXI.Texture.fromImage('images/fish_empty1.png');
+    var taiyaki1 = new PIXI.Sprite(texture);
+    taiyaki1.scale.set(0.25);
+    taiyaki1.x = 20;
+    taiyaki1.y = 240;
+    app.stage.addChild(taiyaki1);
+
+    // taiyaki2
+    var texture = PIXI.Texture.fromImage('images/fish_empty2.png');
+    var taiyaki2 = new PIXI.Sprite(texture);
+    taiyaki2.scale.set(0.25);
+    taiyaki2.x = 20;
+    taiyaki2.y = 340;
+    app.stage.addChild(taiyaki2);
+
+    // taiyaki3
+    var texture = PIXI.Texture.fromImage('images/fish_empty3.png');
+    var taiyaki3 = new PIXI.Sprite(texture);
+    taiyaki3.scale.set(0.25);
+    taiyaki3.x = 20;
+    taiyaki3.y = 440;
+    app.stage.addChild(taiyaki3);
+
+    // taiyaki4
+    var texture = PIXI.Texture.fromImage('images/fish_empty4.png');
+    var taiyaki4 = new PIXI.Sprite(texture);
+    taiyaki4.scale.set(0.25);
+    taiyaki4.x = 190;
+    taiyaki4.y = 240;
+    app.stage.addChild(taiyaki4);
+
+    // taiyaki5
+    var texture = PIXI.Texture.fromImage('images/fish_empty5.png');
+    var taiyaki5 = new PIXI.Sprite(texture);
+    taiyaki5.scale.set(0.25);
+    taiyaki5.x = 190;
+    taiyaki5.y = 340; // + 100
+    app.stage.addChild(taiyaki5);
+
+    // taiyaki6
+    var texture = PIXI.Texture.fromImage('images/fish_empty6.png');
+    var taiyaki6 = new PIXI.Sprite(texture);
+    taiyaki6.scale.set(0.25);
+    taiyaki6.x = 190;
+    taiyaki6.y = 440; // + 100
+    app.stage.addChild(taiyaki6);
+
+    // taiyaki7
+    var texture = PIXI.Texture.fromImage('images/fish_empty7.png');
+    var taiyaki7 = new PIXI.Sprite(texture);
+    taiyaki7.scale.set(0.25);
+    taiyaki7.x = 360; // + 170
+    taiyaki7.y = 240;
+    app.stage.addChild(taiyaki7);
+
+    // taiyaki8
+    var texture = PIXI.Texture.fromImage('images/fish_empty8.png');
+    var taiyaki8 = new PIXI.Sprite(texture);
+    taiyaki8.scale.set(0.25);
+    taiyaki8.x = 360;
+    taiyaki8.y = 340;
+    app.stage.addChild(taiyaki8);
+
+    // taiyaki9
+    var texture = PIXI.Texture.fromImage('images/fish_empty9.png');
+    var taiyaki9 = new PIXI.Sprite(texture);
+    taiyaki9.scale.set(0.25);
+    taiyaki9.x = 360;
+    taiyaki9.y = 440;
+    app.stage.addChild(taiyaki9);
+
+    // red bar
+    var rectangle = new PIXI.Graphics();
+    rectangle.beginFill(0xE84C09);
+    rectangle.drawRect(0, 0, 690, 25);
+    rectangle.endFill();
+    rectangle.x = 0;
+    rectangle.y = 210;
+    app.stage.addChild(rectangle);
+
+    // ingredient space
+    var rectangle1 = new PIXI.Graphics();
+    rectangle1.beginFill(0x7ED824);
+    rectangle1.drawRect(0, 0, 140, 280);
+    rectangle1.endFill();
+    rectangle1.x = 550;
+    rectangle1.y = 235;
+    app.stage.addChild(rectangle1);
+
+    // Anko
+    var texture = PIXI.Texture.fromImage('images/ingredients2.png');
+    var anko = new PIXI.Sprite(texture);
+    anko.scale.set(0.2);
+    anko.x = 580;
+    anko.y = 320;
+    app.stage.addChild(anko);
+
+    // hand
+    var texture = PIXI.Texture.fromImage('images/hand.png');
+    var hand = new PIXI.Sprite(texture);
+    hand.scale.set(1.2);
+    hand.x = 580;
+    hand.y = 405;
+    app.stage.addChild(hand);
+
+    // trash
+    var texture = PIXI.Texture.fromImage('images/trash.png');
+    var trash = new PIXI.Sprite(texture);
+    trash.x = 530;
+    trash.y = 465;
+    trash.width = 200;
+    app.stage.addChild(trash);
+
+    // create a texture from an image path
+    var texture = PIXI.Texture.fromImage('images/ingredients1.png');
+
+    // Scale mode for pixelation
+    texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
+
+    // Create
+    create(
+      640, 300
+    );
+
+    function create(x, y) {
+      var ingredients1 = new PIXI.Sprite(texture);
+
+      ingredients1.interactive = true;
+
+      ingredients1.buttonMode = true;
+
+      ingredients1.anchor.set(0.7);
+
+      ingredients1.scale.set(0.22);
+
+      ingredients1
+        .on('mousedown', onDragStart)
+        .on('mouseup', onDragEnd)
+        .on('mouseupoutside', onDragEnd)
+        .on('mousemove', onDragMove);
+
+      ingredients1.x = x;
+      ingredients1.y = y;
+
+      // add it to the stage
+      app.stage.addChild(ingredients1);
+    }
+
+    function onDragStart(event) {
+      // store a reference to the data
+      // the reason for this is because of multitouch
+      // we want to track the movement of this particular touch
+      this.data = event.data;
+      this.alpha = 0.5;
+      this.dragging = true;
+    }
+
+    function onDragEnd() {
+      this.alpha = 1;
+      // 기울기 되돌리기
+      this.rotation = 0.0;
+      // Collision Detection
+      if (hitTestRectangle(this, background)) {
+
+        //if there's a collision
+        console.log("Collsion");
+
+        // change images
+        var texture = PIXI.Texture.fromImage('images/taiyaki1.png');
+        var taiyaki1 = new PIXI.Sprite(texture);
+        taiyaki1.scale.set(1);
+        taiyaki1.x = 100;
+        taiyaki1.y = 300;
+
+        // add it to the stage
+        app.stage.addChild(taiyaki1);
+      }
+
+      // 나중에 this(해당 붕어빵)으로 수정
+      if (hitTestRectangle(this, trash)) {
+        console.log("Collsion");
+
+        // remove image -> 안 보이게 처리
+        this.visible = false;
+      }
+
+      // 원래 위치로
+      this.x = 640;
+      this.y = 300;
+      this.dragging = false;
+      // set the interaction data to null
+      this.data = null;
+    }
+
+    function onDragMove() {
+      if (this.dragging) {
+        var newPosition = this.data.getLocalPosition(this.parent);
+        this.rotation = -0.8;
+        this.x = newPosition.x;
+        this.y = newPosition.y;
+      }
+    }
+
+    // Collision Detection
+    function hitTestRectangle(r1, r2) {
+
+      //Define the variables we'll need to calculate
+      let hit, combinedHalfWidths, combinedHalfHeights, vx, vy;
+
+      //hit will determine whether there's a collision
+      hit = false;
+
+      //Find the center points of each sprite
+      r1.centerX = r1.x + r1.width / 2;
+      r1.centerY = r1.y + r1.height / 2;
+      r2.centerX = r2.x + r2.width / 2;
+      r2.centerY = r2.y + r2.height / 2;
+
+      //Find the half-widths and half-heights of each sprite
+      r1.halfWidth = r1.width / 2;
+      r1.halfHeight = r1.height / 2;
+      r2.halfWidth = r2.width / 2;
+      r2.halfHeight = r2.height / 2;
+
+      //Calculate the distance vector between the sprites
+      vx = r1.centerX - r2.centerX;
+      vy = r1.centerY - r2.centerY;
+
+      //Figure out the combined half-widths and half-heights
+      combinedHalfWidths = r1.halfWidth + r2.halfWidth;
+      combinedHalfHeights = r1.halfHeight + r2.halfHeight;
+
+      //Check for a collision on the x axis
+      if (Math.abs(vx) < combinedHalfWidths) {
+
+        //A collision might be occurring. Check for a collision on the y axis
+        if (Math.abs(vy) < combinedHalfHeights) {
+
+          //There's definitely a collision happening
+          hit = true;
+        } else {
+
+          //There's no collision on the y axis
+          hit = false;
+        }
+      } else {
+
+        //There's no collision on the x axis
+        hit = false;
+      }
+
+      //`hit` will be either `true` or `false`
+      return hit;
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>
