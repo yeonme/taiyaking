@@ -206,18 +206,18 @@
     var speech_bubble_left2 = new PIXI.Sprite(texture);
     speech_bubble_left2.scale.set(0.3);
     speech_bubble_left2.height = 100;
-    speech_bubble_left2.position.set(390, 15);
+    speech_bubble_left2.position.set(380, 15);
     app.stage.addChild(speech_bubble_left2);
 
     // speech_bubble1_text
     var style = new PIXI.TextStyle({
       align: 'center',
       fontWeight: 'bold',
-      fontSize : 15
+      fontSize: 15
     });
     // random(1~6)
     var requestAmount1 = Math.floor((Math.random() * 6) + 1);
-    var speech_bubble1_text1 = new PIXI.Text("たい焼き"+ requestAmount1 + " 個", style);
+    var speech_bubble1_text1 = new PIXI.Text("たい焼き" + requestAmount1 + " 個", style);
     var speech_bubble1_text2 = new PIXI.Text("ください!", style);
     speech_bubble1_text1.position.set(168, 50);
     speech_bubble1_text2.position.set(168, 70);
@@ -226,23 +226,15 @@
 
     // speech_bubble2_text
     var requestAmount2 = Math.floor((Math.random() * 6) + 1);
-    var speech_bubble1_text3 = new PIXI.Text("たい焼き"+ requestAmount2 + " 個", style);
+    var speech_bubble1_text3 = new PIXI.Text("たい焼き" + requestAmount2 + " 個", style);
     var speech_bubble1_text4 = new PIXI.Text("ください!", style);
-    speech_bubble1_text3.position.set(410, 50);
-    speech_bubble1_text4.position.set(410, 70);
+    speech_bubble1_text3.position.set(405, 50);
+    speech_bubble1_text4.position.set(405, 70);
     app.stage.addChild(speech_bubble1_text3);
     app.stage.addChild(speech_bubble1_text4);
 
-
-
-
-
-
-   
-
-
     // taiyaki_1~9
-    // taiyaki1
+    // taiyaki1 ~ fish4
     var texture = PIXI.Texture.fromImage('images/fish_empty1.png');
     var taiyaki1 = new PIXI.Sprite(texture);
     taiyaki1.scale.set(0.25);
@@ -323,13 +315,53 @@
     rectangle1.y = 245;
     app.stage.addChild(rectangle1);
 
+    var texture = PIXI.Texture.fromImage('images/ankospoon.png');
+    var ankoSpoon = new PIXI.Sprite(texture);
+    ankoSpoon.scale.set(0.5);
+    app.stage.addChild(ankoSpoon);
+
     // Anko
     var texture = PIXI.Texture.fromImage('images/ingredients2.png');
     var anko = new PIXI.Sprite(texture);
+    anko.interactive = true;
+    anko.buttonMode = true;
+    anko
+      .on('mousedown', ankoOnDragStart)
+      .on('mouseup', ankoOnDragEnd)
+      .on('mouseupoutside', ankoOnDragEnd)
+      .on('mousemove', ankoOnDragMove);
+
     anko.scale.set(0.2);
     anko.x = 580;
     anko.y = 325;
     app.stage.addChild(anko);
+
+    function ankoOnDragStart(event) {
+      this.data = event.data;
+      this.alpha = 0.5;
+      this.dragging = true;
+    }
+
+    function ankoOnDragEnd() {
+      if (this.dragging) {
+        var newPosition = this.data.getLocalPosition(this.parent);
+        this.rotation = -0.8;
+
+        // pointer -> visable
+        circle.visible = true;
+
+        // exact point
+        circle.x = newPosition.x - 80;
+        circle.y = newPosition.y + 20;
+
+        this.x = newPosition.x;
+        this.y = newPosition.y;
+      }
+    }
+
+    function ankoOnDragMove() {
+
+    }
 
     // hand
     var texture = PIXI.Texture.fromImage('images/hand.png');
@@ -346,6 +378,14 @@
     trash.y = 465;
     trash.width = 200;
     app.stage.addChild(trash);
+
+    // point circle
+    var circle = new PIXI.Graphics();
+    circle.beginFill(0xEB0000);
+    circle.drawCircle(0, 0, 8);
+    circle.endFill();
+    app.stage.addChild(circle);
+    circle.visible = false;
 
     // create a texture from an image path
     var texture = PIXI.Texture.fromImage('images/ingredients1.png');
@@ -370,10 +410,10 @@
       ingredients1.scale.set(0.22);
 
       ingredients1
-        .on('mousedown', onDragStart)
-        .on('mouseup', onDragEnd)
-        .on('mouseupoutside', onDragEnd)
-        .on('mousemove', onDragMove);
+        .on('mousedown', ingredient1onDragStart)
+        .on('mouseup', ingredient1onDragEnd)
+        .on('mouseupoutside', ingredient1onDragEnd)
+        .on('mousemove', ingredient1onDragMove);
 
       ingredients1.x = x;
       ingredients1.y = y;
@@ -382,7 +422,7 @@
       app.stage.addChild(ingredients1);
     }
 
-    function onDragStart(event) {
+    function ingredient1onDragStart(event) {
       // store a reference to the data
       // the reason for this is because of multitouch
       // we want to track the movement of this particular touch
@@ -391,25 +431,37 @@
       this.dragging = true;
     }
 
-    function onDragEnd() {
+    function ingredient1onDragEnd() {
       this.alpha = 1;
       // 기울기 되돌리기
       this.rotation = 0.0;
-      // Collision Detection
-      if (hitTestRectangle(this, background)) {
+      // Collision Detection - takiyaki1
+      if (hitTestRectangle(circle, taiyaki1)) {
 
         //if there's a collision
         console.log("Collsion");
 
         // change images
-        var texture = PIXI.Texture.fromImage('images/taiyaki1.png');
-        var taiyaki1 = new PIXI.Sprite(texture);
-        taiyaki1.scale.set(1);
-        taiyaki1.x = 100;
-        taiyaki1.y = 300;
+        var texture = PIXI.Texture.fromImage('images/fish_01.png');
+        var taiyaki_1 = new PIXI.Sprite(texture);
+        taiyaki_1.scale.set(0.25);
+        taiyaki_1.x = 20;
+        taiyaki_1.y = 240;
+        app.stage.addChild(taiyaki_1);
+      }
 
-        // add it to the stage
-        app.stage.addChild(taiyaki1);
+      if (hitTestRectangle(circle, taiyaki2)) {
+
+        //if there's a collision
+        console.log("Collsion");
+
+        // change images
+        var texture = PIXI.Texture.fromImage('images/fish_01.png');
+        var taiyaki_1 = new PIXI.Sprite(texture);
+        taiyaki_1.scale.set(0.25);
+        taiyaki_1.x = 20;
+        taiyaki_1.y = 340;
+        app.stage.addChild(taiyaki_1);
       }
 
       // 나중에 this(해당 붕어빵)으로 수정
@@ -424,14 +476,25 @@
       this.x = 640;
       this.y = 305;
       this.dragging = false;
+
+      circle.visible = false;
+
       // set the interaction data to null
       this.data = null;
     }
 
-    function onDragMove() {
+    function ingredient1onDragMove() {
       if (this.dragging) {
         var newPosition = this.data.getLocalPosition(this.parent);
         this.rotation = -0.8;
+
+        // pointer -> visable
+        circle.visible = true;
+
+        // exact point
+        circle.x = newPosition.x - 80;
+        circle.y = newPosition.y + 20;
+
         this.x = newPosition.x;
         this.y = newPosition.y;
       }
@@ -487,6 +550,24 @@
 
       //`hit` will be either `true` or `false`
       return hit;
+    };
+
+    function checkNearestPoint(r1, r2) {
+      //Define the variables we'll need to calculate
+      let vx, vy;
+
+      //Find the center points of each sprite
+      r1.centerX = r1.x + r1.width / 2;
+      r1.centerY = r1.y + r1.height / 2;
+      r2.centerX = r2.x + r2.width / 2;
+      r2.centerY = r2.y + r2.height / 2;
+
+      //Calculate the distance vector between the sprites
+      vx = r1.centerX - r2.centerX;
+      vy = r1.centerY - r2.centerY;
+
+      //`hit` will be either `true` or `false`
+      return Math.pow(Math.abs(vx), 2) + Math.pow(Math.abs(vy), 2);
     };
 
 
