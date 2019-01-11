@@ -1,9 +1,18 @@
 /**
- * PixiUtil: Own class to pack Pixi.js useful functions
- * jinbaek.lee
+ * static_routine.js
+ * - TornadoUtil
+ * - ButtonEvents
+ * - DragEvents
+ * - TornadoLogic
+ * 
+ * jinbaek.lee, miri.yoo
  * 2019-01-10
  */
-class PixiUtil {
+
+/**
+ * TornadoUtil: Own class to pack Pixi.js useful functions
+ */
+class TornadoUtil {
     /**
      * clear the stage by removing all children.
      * @param {PIXI.Container} stage the base of stage changed
@@ -21,6 +30,7 @@ class PixiUtil {
      * @param {String} spriteType Reserved. (Default: "Sprite")
      * @param {Number} x Left X
      * @param {Number} y Top Y
+     * @returns {PIXI.Sprite} Sprite Object
      */
     static createObjUsingTexture(fileName, scale, targetObj, spriteType, x, y){
         let texture = PIXI.Texture.fromImage(fileName);
@@ -75,6 +85,7 @@ class PixiUtil {
      * @param {Number} height Height
      * @param {PIXI.Container} targetObj Target stage to be changed
      * @param {Number?} alpha Optional. Alpha value
+     * @returns {PIXI.Graphics} Graphics object
      */
     static fillRect(color, x, y, width, height, targetObj, alpha) {
         let graphic = new PIXI.Graphics();
@@ -92,10 +103,20 @@ class PixiUtil {
      * @param {String} text Text to output
      * @param {Number} x Left X
      * @param {Number} y Top Y
+     * @param {PIXI.Container} targetObj Target stage to be changed
      * @param {PIXI.TextStyle?} textStyle Default: 'center'
+     * @returns {PIXI.Text} Text Object
      */
-    static textOut(text, x, y, textStyle) {
-        
+    static textOut(text, x, y, targetObj, textStyle) {
+        /*if(typeof textStyle == "undefined") {
+            textStyle = new PIXI.TextStyle({
+                //Set default text style here
+            });
+        }*/
+        let txtObj = new PIXI.Text(text, textStyle);
+        txtObj.position.set(x, y);
+        targetObj.addChild(txtObj);
+        return txtObj;
     }
 }
 
@@ -193,7 +214,12 @@ class DragEvents {
     }
 }
 
-class Logic {
+/**
+ * TornadoLogic : Pixi.js useful logics
+ * 
+ * miri.yoo
+ */
+class TornadoLogic {
     static hitTestRectangle(r1, r2) {
 
         //Define the variables we'll need to calculate
