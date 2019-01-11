@@ -3,7 +3,7 @@ if (!PIXI.utils.isWebGLSupported()) {
     type = "canvas"
 }
 
-PIXI.utils.sayHello(type);
+//PIXI.utils.skipHello(type); //Skips log out PIXI version
 
 //Create a Pixi Application
 let app = new PIXI.Application({
