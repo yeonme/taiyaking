@@ -11,6 +11,7 @@
 class Guest {
     constructor() {
         this.timeAppeared = new Date().getTime();
+        this.objGuest = null;
         this.newOrder();
     }
     /**

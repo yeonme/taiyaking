@@ -1,8 +1,10 @@
 class DragEvents {
+
+    /**
+     * onDragStart 
+     * @param {DragEvent} event Event variable
+     */
     static onDragStart(event) {
-        // store a reference to the data
-        // the reason for this is because of multitouch
-        // we want to track the movement of this particular touch
         this.data = event.data;
         this.alpha = 0.5;
         this.dragging = true;
@@ -10,13 +12,14 @@ class DragEvents {
 
     static onDragEnd() {
         this.alpha = 1;
-        // 기울기 되돌리기
         this.rotation = 0.0;
-        // Collision Detection
-        if (hitTestRectangle(this, background)) {
 
-            //if there's a collision
+        //if (TornadoLogic.checkNearestPoint(this, gameInfo.objBack)) {
+            if (TornadoLogic.hitTestRectangle(this, gameInfo.objBack)) {
             console.log("Collsion");
+
+            //TODO 9 TAITYAKI
+            //gameInfo.taiyakis
 
             // change images
             var texture = PIXI.Texture.fromImage('images/taiyaki1.png');

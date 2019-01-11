@@ -10,8 +10,9 @@ function loadGameScene() {
     // fish cook (Background)
     let container = new PIXI.Container();
     app.stage.addChild(container);
-    TornadoUtil.createObjUsingTexture('assets/fishcook_background.png', 1.0, container, "Sprite", 0, 230);
- 
+    gameInfo.objBack = TornadoUtil.createObjUsingTexture('assets/fishcook_background.png', 1.0, container, "Sprite", 0, 230);
+    
+
     //Guest part wall (Background)
     TornadoUtil.fillRect(0xEAC067,0,0,690,220,app.stage);
     TornadoUtil.fillRect(0xAA6A01,40,0,15,220,app.stage);
@@ -60,33 +61,19 @@ function loadGameScene() {
     TornadoUtil.createObjUsingTexture('assets/fish_empty1.png', 0.25, app.stage, "Sprite", 360, 340);
     TornadoUtil.createObjUsingTexture('assets/fish_empty1.png', 0.25, app.stage, "Sprite", 360, 440);
 
-    // Fish_kiji
-    TornadoUtil.createObjUsingTexture('assets/fish_01.png', 0.25, app.stage, "Sprite", 20, 240).visible = false;
-    TornadoUtil.createObjUsingTexture('assets/fish_01.png', 0.25, app.stage, "Sprite", 20, 340).visible = false;
-    TornadoUtil.createObjUsingTexture('assets/fish_01.png', 0.25, app.stage, "Sprite", 20, 440).visible = false;
-    TornadoUtil.createObjUsingTexture('assets/fish_01.png', 0.25, app.stage, "Sprite", 190, 240).visible = false;
-    TornadoUtil.createObjUsingTexture('assets/fish_01.png', 0.25, app.stage, "Sprite", 190, 340).visible = false;
-    TornadoUtil.createObjUsingTexture('assets/fish_01.png', 0.25, app.stage, "Sprite", 190, 440).visible = false;
-    TornadoUtil.createObjUsingTexture('assets/fish_01.png', 0.25, app.stage, "Sprite", 360, 240).visible = false;
-    TornadoUtil.createObjUsingTexture('assets/fish_01.png', 0.25, app.stage, "Sprite", 360, 340).visible = false;
-    TornadoUtil.createObjUsingTexture('assets/fish_01.png', 0.25, app.stage, "Sprite", 360, 440).visible = false;
-
-    // Fish_inside
-    TornadoUtil.createObjUsingTexture('assets/fish_anko.png', 0.8, app.stage, "Sprite", 75, 275).visible = false;
-    TornadoUtil.createObjUsingTexture('assets/fish_anko.png', 0.8, app.stage, "Sprite", 75, 375).visible = false;
-    TornadoUtil.createObjUsingTexture('assets/fish_anko.png', 0.8, app.stage, "Sprite", 75, 475).visible = false;
-    TornadoUtil.createObjUsingTexture('assets/fish_anko.png', 0.8, app.stage, "Sprite", 245, 275).visible = false;
-    TornadoUtil.createObjUsingTexture('assets/fish_anko.png', 0.8, app.stage, "Sprite", 245, 375).visible = false;
-    TornadoUtil.createObjUsingTexture('assets/fish_anko.png', 0.8, app.stage, "Sprite", 245, 475).visible = false;
-    TornadoUtil.createObjUsingTexture('assets/fish_anko.png', 0.8, app.stage, "Sprite", 415, 275).visible = false;
-    TornadoUtil.createObjUsingTexture('assets/fish_anko.png', 0.8, app.stage, "Sprite", 415, 375).visible = false;
-    TornadoUtil.createObjUsingTexture('assets/fish_anko.png', 0.8, app.stage, "Sprite", 415, 475).visible = false;
-
-    // Fish_singleFlip
-
-    // Fish_doubleFlip
-
-    // Fish_bunred
+    for (let y = 0; y < 3; y++) {
+        for (let x = 0; x < 3; x++) {
+            let placeX = 20+(170*x);
+            let placeY = 240+(100*y);
+            gameInfo.taiyakis.push(
+                new Taiyaki(TornadoUtil.createObjUsingTexture('assets/fish_01.png', 0.25, app.stage, "Sprite", placeX, placeY),
+                    TornadoUtil.createObjUsingTexture('assets/fish_anko.png', 0.8, app.stage, "Sprite", placeX, placeY),
+                    TornadoUtil.createObjUsingTexture('assets/fish_02.png', 0.25, app.stage, "Sprite", placeX, placeY),
+                    TornadoUtil.createObjUsingTexture('assets/fish_03.png', 0.25, app.stage, "Sprite", placeX, placeY),
+                    TornadoUtil.createObjUsingTexture('assets/fish_04.png', 0.25, app.stage, "Sprite", placeX, placeY))
+            ); 
+        }    
+    }
 
     // paperbag
     let paperbag = TornadoUtil.createObjUsingTexture('assets/paperbag.png', 1.0, app.stage, "Sprite", 530, 465);
@@ -97,6 +84,15 @@ function loadGameScene() {
     kiji.anchor.set(0.7);
     TornadoUtil.createObjUsingTexture('assets/ingredients2.png', 0.2, app.stage, "Sprite", 580, 325);
     TornadoUtil.createObjUsingTexture('assets/hand.png', 1.2, app.stage, "Sprite", 580, 410);
+
+    kiji.interactive = true;
+    kiji.buttonMode = true;
+
+    kiji
+    .on('mousedown', DragEvents.onDragStart)
+    .on('mouseup', DragEvents.onDragEnd)
+    .on('mouseupoutside', DragEvents.onDragEnd)
+    .on('mousemove', DragEvents.onDragMove);
 }
 
 var gameInfo = new GameInfo();
