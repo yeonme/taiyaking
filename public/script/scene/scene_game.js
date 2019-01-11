@@ -102,10 +102,10 @@ function loadGameScene() {
 var gameInfo = new GameInfo();
 
 function tickGameScene() {
-    /* if (typeof lastFrameTime == "undefined" || (new Date().getTime() - lastFrameTime) > 500) { */
+    if (typeof lastFrameTime == "undefined" || (new Date().getTime() - lastFrameTime) > 500) {
         //fires every 500ms or first time entered
         lazyTick();
-    /* } */
+    }
 }
 
 function lazyTick() {
