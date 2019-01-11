@@ -3,6 +3,7 @@ function loadGameScene() {
     gameTimer = 0;
     //Scene 배치
     gameInfo = new GameInfo();
+    clearStage(app.stage);
 
     gameInfo.lifes[0] = createObjUsingTexture('assets/life.gif', 1.7, app.stage, "Sprite", 530, 110);
     gameInfo.lifes[1] = createObjUsingTexture('assets/life.gif', 1.7, app.stage, "Sprite", 555, 110);
@@ -71,6 +72,4 @@ function showMonitor() {
             gameInfo.lifes[0].visible = false;
             break;
     }
-
-
 }
