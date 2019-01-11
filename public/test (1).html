@@ -37,7 +37,6 @@
     background.x = 0;
     background.y = 230;
     container.addChild(background);
-    // app.stage.addChild(taiyaki);
 
     var background1 = new PIXI.Graphics();
     background1.beginFill(0xEAC067);
@@ -115,6 +114,15 @@
     background10.height = 80;
     background10.x = 345;
     app.stage.addChild(background10);
+
+    // ingredient space
+    var rectangle1 = new PIXI.Graphics();
+    rectangle1.beginFill(0x7ED824);
+    rectangle1.drawRect(0, 0, 140, 280);
+    rectangle1.endFill();
+    rectangle1.x = 550;
+    rectangle1.y = 245;
+    app.stage.addChild(rectangle1);
 
     // red bar
     var rectangle = new PIXI.Graphics();
@@ -306,19 +314,55 @@
     taiyaki9.y = 440;
     app.stage.addChild(taiyaki9);
 
-    // ingredient space
-    var rectangle1 = new PIXI.Graphics();
-    rectangle1.beginFill(0x7ED824);
-    rectangle1.drawRect(0, 0, 140, 280);
-    rectangle1.endFill();
-    rectangle1.x = 550;
-    rectangle1.y = 245;
-    app.stage.addChild(rectangle1);
+    // fish_01(1st step)
+    var texture = PIXI.Texture.fromImage('assets/fish_01.png');
+    var taiyaki_1 = new PIXI.Sprite(texture);
+    taiyaki_1.scale.set(0.25);
+    taiyaki_1.x = 20;
+    taiyaki_1.y = 240;
+    app.stage.addChild(taiyaki_1);
+    taiyaki_1.visible = false;
+
+    // fish_02(1st step)
+    var texture = PIXI.Texture.fromImage('assets/fish_01.png');
+    var taiyaki_2 = new PIXI.Sprite(texture);
+    taiyaki_2.scale.set(0.25);
+    taiyaki_2.x = 20;
+    taiyaki_2.y = 340;
+    app.stage.addChild(taiyaki_2);
+    taiyaki_2.visible = false;
+
+    // fish_anko1(2nd step)
+    var texture = PIXI.Texture.fromImage('assets/fish_anko.png');
+    var fish_anko1 = new PIXI.Sprite(texture);
+    fish_anko1.scale.set(0.8);
+    fish_anko1.x = 75;
+    fish_anko1.y = 275;
+    app.stage.addChild(fish_anko1);
+    fish_anko1.visible = false;
+
+    // fish_anko2(2nd step)
+    var texture = PIXI.Texture.fromImage('assets/fish_anko.png');
+    var fish_anko2 = new PIXI.Sprite(texture);
+    fish_anko2.scale.set(0.8);
+    fish_anko2.x = 75;
+    fish_anko2.y = 375; //+ 100
+    app.stage.addChild(fish_anko2);
+    fish_anko2.visible = false;
+
+    // paperbag
+    var texture = PIXI.Texture.fromImage('assets/paperbag.png');
+    var paperbag = new PIXI.Sprite(texture);
+    paperbag.x = 530;
+    paperbag.y = 465;
+    paperbag.width = 200;
+    app.stage.addChild(paperbag);
 
     var texture = PIXI.Texture.fromImage('assets/ankospoon.png');
     var ankoSpoon = new PIXI.Sprite(texture);
     ankoSpoon.scale.set(0.5);
     app.stage.addChild(ankoSpoon);
+    ankoSpoon.visible = false;
 
     // Anko
     var texture = PIXI.Texture.fromImage('assets/ingredients2.png');
@@ -336,31 +380,68 @@
     anko.y = 325;
     app.stage.addChild(anko);
 
-    function ankoOnDragStart(event) {
+    // hand
+    var texture = PIXI.Texture.fromImage('assets/hand.png');
+    var hand = new PIXI.Sprite(texture);
+    hand.interactive = true;
+    hand.buttonMode = true;
+    hand
+      .on('mousedown', handOnDragStart)
+      .on('mouseup', handOnDragEnd)
+      .on('mouseupoutside', handOnDragEnd)
+      .on('mousemove', handOnDragMove);
+
+    hand.scale.set(1.2);
+    hand.x = 580;
+    hand.y = 410;
+    app.stage.addChild(hand);
+
+    var handClick = false;
+
+    function handOnDragStart(event) {
+      // store a reference to the data
+      // the reason for this is because of multitouch
+      // we want to track the movement of this particular touch
       this.data = event.data;
       this.alpha = 0.5;
-      this.dragging = true;
+      this.click = true;
     }
 
-    function ankoOnDragEnd() {
-      if (this.dragging) {
-        var newPosition = this.data.getLocalPosition(this.parent);
-        this.rotation = -0.8;
+    function handOnDragEnd() {
+      this.alpha = 1;
+
+      // 원래 위치로
+      this.x = 580;
+      this.y = 410;
+      
+      circle.visible = false;
+
+      // set the interaction data to null
+      this.data = null;
+    }
+
+    function handOnDragMove() {
+      if (this.click) {
+        var mousePosition = app.renderer.plugins.interaction.mouse.global;
 
         // pointer -> visable
         circle.visible = true;
 
         // exact point
-        circle.x = newPosition.x - 80;
-        circle.y = newPosition.y + 20;
+        circle.x = mousePosition.x;
+        circle.y = mousePosition.y + 50;
 
-        this.x = newPosition.x;
-        this.y = newPosition.y;
+        this.x = mousePosition.x;
+        this.y = mousePosition.y;
+
+        if (hitTestRectangle(this, taiyaki1)) {
+          //if there's a collision
+          console.log("Collsion");
+
+          // change image
+          // taiyaki_1.visible = true;
+        }
       }
-    }
-
-    function ankoOnDragMove() {
-
     }
 
     // hand
@@ -410,10 +491,10 @@
       ingredients1.scale.set(0.22);
 
       ingredients1
-        .on('mousedown', ingredient1onDragStart)
-        .on('mouseup', ingredient1onDragEnd)
-        .on('mouseupoutside', ingredient1onDragEnd)
-        .on('mousemove', ingredient1onDragMove);
+        .on('mousedown', onDragStart)
+        .on('mouseup', onDragEnd)
+        .on('mouseupoutside', onDragEnd)
+        .on('mousemove', onDragMove);
 
       ingredients1.x = x;
       ingredients1.y = y;
@@ -422,7 +503,7 @@
       app.stage.addChild(ingredients1);
     }
 
-    function ingredient1onDragStart(event) {
+    function onDragStart(event) {
       // store a reference to the data
       // the reason for this is because of multitouch
       // we want to track the movement of this particular touch
@@ -431,7 +512,7 @@
       this.dragging = true;
     }
 
-    function ingredient1onDragEnd() {
+    function onDragEnd() {
       this.alpha = 1;
       // 기울기 되돌리기
       this.rotation = 0.0;
@@ -462,10 +543,11 @@
         taiyaki_1.x = 20;
         taiyaki_1.y = 340;
         app.stage.addChild(taiyaki_1);
+        taiyaki_2.visible = true;
       }
 
       // 나중에 this(해당 붕어빵)으로 수정
-      if (hitTestRectangle(this, trash)) {
+      if (hitTestRectangle(this, paperbag)) {
         console.log("Collsion");
 
         // remove image -> 안 보이게 처리
@@ -483,7 +565,7 @@
       this.data = null;
     }
 
-    function ingredient1onDragMove() {
+    function onDragMove() {
       if (this.dragging) {
         var newPosition = this.data.getLocalPosition(this.parent);
         this.rotation = -0.8;
@@ -497,6 +579,59 @@
 
         this.x = newPosition.x;
         this.y = newPosition.y;
+      }
+    }
+
+    // anko_dragEvent
+    function ankoOnDragStart(event) {
+      this.data = event.data;
+      this.alpha = 0.5;
+      this.dragging = true;
+    }
+
+    function ankoOnDragEnd() {
+      this.alpha = 1;
+
+      if (taiyaki_1.visible == true && hitTestRectangle(circle, taiyaki1)) {
+
+        //if there's a collision
+        console.log("Collsion");
+
+        // change image
+        fish_anko1.visible = true;
+      }
+
+      if (taiyaki_2.visible == true && hitTestRectangle(circle, taiyaki2)) {
+
+        //if there's a collision
+        console.log("Collsion");
+
+        // change image
+        fish_anko2.visible = true;
+      }
+
+      this.dragging = false;
+
+      ankoSpoon.visible = false;
+      circle.visible = false;
+
+      // set the interaction data to null
+      this.data = null;
+    }
+
+    function ankoOnDragMove() {
+      if (this.dragging) {
+        var newPosition = this.data.getLocalPosition(this.parent);
+
+        // pointer -> visable
+        ankoSpoon.visible = true;
+        circle.visible = true;
+        // exact point
+        circle.x = newPosition.x - 10;
+        circle.y = newPosition.y + 60;
+
+        ankoSpoon.x = newPosition.x;
+        ankoSpoon.y = newPosition.y;
       }
     }
 
