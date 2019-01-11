@@ -101,6 +101,7 @@
     background8.x = 640;
     background8.y = 0;
     app.stage.addChild(background8);
+    
 
     var texture = PIXI.Texture.fromImage('assets/shopbackground.png');
     var background9 = new PIXI.Sprite(texture);
@@ -185,6 +186,8 @@
     life5.scale.set(1.7);
     life5.position.set(630, 110)
     app.stage.addChild(life5);
+
+
 
     // characters
     // boy_wating with speech bubble
@@ -314,6 +317,8 @@
     taiyaki9.y = 440;
     app.stage.addChild(taiyaki9);
 
+    ///////////////////////////////////////////////////////////////
+
     // fish_01(1st step)
     var texture = PIXI.Texture.fromImage('assets/fish_01.png');
     var taiyaki_1 = new PIXI.Sprite(texture);
@@ -350,6 +355,13 @@
     app.stage.addChild(fish_anko2);
     fish_anko2.visible = false;
 
+    // ankoSpoon -> later
+    var texture = PIXI.Texture.fromImage('assets/ankospoon.png');
+    var ankoSpoon = new PIXI.Sprite(texture);
+    ankoSpoon.scale.set(0.5);
+    app.stage.addChild(ankoSpoon);
+    // ankoSpoon.visible = false;
+
     // paperbag
     var texture = PIXI.Texture.fromImage('assets/paperbag.png');
     var paperbag = new PIXI.Sprite(texture);
@@ -357,12 +369,6 @@
     paperbag.y = 465;
     paperbag.width = 200;
     app.stage.addChild(paperbag);
-
-    var texture = PIXI.Texture.fromImage('assets/ankospoon.png');
-    var ankoSpoon = new PIXI.Sprite(texture);
-    ankoSpoon.scale.set(0.5);
-    app.stage.addChild(ankoSpoon);
-    ankoSpoon.visible = false;
 
     // Anko
     var texture = PIXI.Texture.fromImage('assets/ingredients2.png');
@@ -444,23 +450,7 @@
       }
     }
 
-    // hand
-    var texture = PIXI.Texture.fromImage('assets/hand.png');
-    var hand = new PIXI.Sprite(texture);
-    hand.scale.set(1.2);
-    hand.x = 580;
-    hand.y = 410;
-    app.stage.addChild(hand);
-
-    // trash
-    var texture = PIXI.Texture.fromImage('assets/trash.png');
-    var trash = new PIXI.Sprite(texture);
-    trash.x = 530;
-    trash.y = 465;
-    trash.width = 200;
-    app.stage.addChild(trash);
-
-    // point circle
+    // point circle -> later
     var circle = new PIXI.Graphics();
     circle.beginFill(0xEB0000);
     circle.drawCircle(0, 0, 8);
