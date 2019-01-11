@@ -23,20 +23,44 @@ class GameInfo {
     }
 }
 
+const AngryStage = Object.freeze({
+    A_NORMAL: 0,
+    B_NERVOUS: 1,
+    C_RAGED: 2
+});
+
+const CookStage = Object.freeze({
+    EMPTY: 0,
+    KIJI: 1,
+    INSIDE: 2,
+    SINGLEFLIP: 3,
+    DOUBLEFLIP: 4,
+    BURNED: -1
+});
+
 /**
  * Guest: Each guest
  */
+/**
+ * Guest
+ * @property {Array} order : What taiyaki guest wants
+ * @property {Number} timeAppeared : When guest appeared
+ * @property {AngryStage} angryStage : Get current face
+ * 
+ */
 class Guest {
-    //Guest doc
-    /*
-    - order: Array of Taiyaki
-    - timeAppeared
-    - angryStage
-    - 
-    */
-    constructor() {  }
-    appear() {
-
+    constructor() {
+        this.timeAppeared = new Date().getTime();
+        this.newOrder();
+    }
+    /**
+     * @property {AngryStage}
+     */
+    get angryStage() {
+        return AngryStage.A_NORMAL;
+    }
+    newOrder() {
+        
     }
 }
 
@@ -48,20 +72,35 @@ class Taiyaki {
     //Taiyaki doc
     /*
     - type: 0-2 / Anko, Cream, Choco
-    - cookStage: 
+    - cookStage: Cooked Stage
     - 
     */
     constructor() { 
-        var CookStage = {
-            EMPTY: 0,
-            KIJI: 1,
-            INSIDE: 2,
-            SINGLEFLIP: 3,
-            DOUBLEFLIP: 4,
-            TRIPLEFLIP: 5
-        };
         this.cookStage = CookStage.EMPTY;
     }
-    
+
 }
 
+class TaiyakiCollection extends Array {
+    constructor() {
+
+    }
+    add(item) {
+        this.push(item);
+    }
+    similar(collection) {
+        if(!(collection instanceof TaiyakiCollection)){
+            console.log('ERROR: TaiyakiCollection.similar() does not fit type');
+            return false;
+        }
+        array.forEach(element => {
+            Taiyaki tai = new Taiyaki();
+            tai.
+        });
+    }
+}
+
+function voTest(){
+    let guest = new Guest();
+    console.log(guest.angryStage);
+}
