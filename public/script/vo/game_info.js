@@ -13,5 +13,7 @@ class GameInfo {
         this.objScore = null;
         this.objLifes = new Array(5);
         this.objBack = null;
+        this.pointer = null;
+        this.ankoSpoon = null;
     }
 }

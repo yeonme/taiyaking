@@ -1,3 +1,4 @@
+//@ts-check
 /**
  * Taiyaki: 
  * @property 
@@ -18,21 +19,47 @@ class Taiyaki {
         this.cookStage = CookStage.EMPTY;
         this.type = TaiyakiType.ANKO;
         this.timeStarted = new Date().getTime();
+        /** @type {PIXI.Sprite} */
         this.objKiji = null;
+        /** @type {PIXI.Sprite} */
         this.objInside = null;
+        /** @type {PIXI.Sprite} */
         this.objSingleFlip = null;
+        /** @type {PIXI.Sprite} */
         this.objDoubleFlip = null;
+        /** @type {PIXI.Sprite} */
         this.objBurned = null;
 
-        kiji.visible = false;
+        this.x = 0;
+        this.y = 0;
+
         this.objKiji = kiji;
-        inside.visible = false;
         this.objInside = inside;
-        single.visible = false;
         this.objSingleFlip = single;
-        double.visible = false;
         this.objDoubleFlip = double;
-        burned.visible = false;
         this.objBurned = burned;
+
+        this.updateVisual();
+    }
+
+    setXY(x, y){
+        this.x = x;
+        this.y = y;
+    }
+
+    updateVisual() {
+        this.objBurned.visible = false;
+        this.objDoubleFlip.visible = false;
+        this.objInside.visible = false;
+        this.objKiji.visible = false;
+        this.objSingleFlip.visible = false;
+
+        switch(this.cookStage) {
+            case CookStage.KIJI: this.objKiji.visible = true; break;
+            case CookStage.INSIDE: this.objInside.visible = true; break;
+            case CookStage.SINGLEFLIP: this.objSingleFlip.visible = true; break;
+            case CookStage.DOUBLEFLIP: this.objDoubleFlip.visible = true; break;
+            case CookStage.BURNED: this.objDoubleFlip.visible = true; break;
+        }
     }
 }
