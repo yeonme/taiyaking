@@ -53,11 +53,11 @@ class TornadoUtil {
         sprite.anchor.set(0.5,0.5);
         sprite.interactive = true;
         sprite.buttonMode = true;
-        sprite.textureButton = PIXI.Texture.fromImage(fileNameDef);
-        sprite.textureButtonDown = PIXI.Texture.fromImage(fileNamePressed);
-        sprite.textureButtonOver = PIXI.Texture.fromImage(fileNameHover);
-        sprite.tap = onClick;
-        sprite.click = onClick;
+        sprite["textureButton"] = PIXI.Texture.fromImage(fileNameDef);
+        sprite["textureButtonDown"] = PIXI.Texture.fromImage(fileNamePressed);
+        sprite["textureButtonOver"] = PIXI.Texture.fromImage(fileNameHover);
+        sprite["tap"] = onClick;
+        sprite["click"] = onClick;
         sprite.on('pointerdown', ButtonEvents.onButtonDown)
         .on('pointerup', ButtonEvents.onButtonUp)
         .on('pointerupoutside', ButtonEvents.onButtonUp)
@@ -76,7 +76,7 @@ class TornadoUtil {
      * @param {Number?} alpha Optional. Alpha value
      * @returns {PIXI.Graphics} Graphics object
      */
-    static fillRect(color, x, y, width, height, targetObj, alpha) {
+    static fillRect(color, x, y, width, height, targetObj, alpha = undefined) {
         let graphic = new PIXI.Graphics();
         typeof alpha == "undefined" ? graphic.beginFill(color) : graphic.beginFill(color,alpha);
         graphic.drawRect(0,0,width,height);
