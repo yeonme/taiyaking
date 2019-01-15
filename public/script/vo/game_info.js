@@ -17,5 +17,7 @@ class GameInfo {
         this.objLifes = new Array(5);
         /** @type {PIXI.Sprite} */
         this.objBack = null;
+        this.pointer = null;
+        this.ankoSpoon = null;
     }
 }

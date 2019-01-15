@@ -88,6 +88,24 @@ class TornadoUtil {
     }
 
     /**
+     * Fill the rect by specified color.
+     * @param {Number} color Color to fill
+     * @param {Number} x Left X
+     * @param {Number} y Top Y
+     * @param {Number} radius radius
+     * @param {PIXI.Container} targetObj Target stage to be changed
+     * @returns {PIXI.Graphics} Graphics object
+     */
+    static fillCircle(color, x, y, radius, targetObj) {
+        let graphic = new PIXI.Graphics();
+        graphic.beginFill(color);
+        graphic.drawCircle(x, y, radius);
+        graphic.endFill();
+        targetObj.addChild(graphic);
+        return graphic;
+    }
+
+    /**
      * Print Pixi.js Text
      * @param {String} text Text to output
      * @param {Number} x Left X

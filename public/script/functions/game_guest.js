@@ -4,7 +4,7 @@ class GuestManager {
     }
     createGuest() {
         let guest = new Guest();
-        guest.newOrder
+        guest.newOrder();
         guest.display();
         this.guests.push(new Guest());
     }
