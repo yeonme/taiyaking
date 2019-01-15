@@ -87,12 +87,12 @@ function loadGameScene() {
     let hand = TornadoUtil.createObjUsingTexture('assets/hand.png', 1.2, app.stage, "Sprite", 580, 410);
 
     // Cooking tools red pointer
-    gameInfo.pointer = TornadoUtil.fillCircle(0xEB0000, 0, 0, 8, app.stage);
-    gameInfo.pointer.visible = false;
+    gameInfo.objPointer = TornadoUtil.fillCircle(0xEB0000, 0, 0, 8, app.stage);
+    gameInfo.objPointer.visible = false;
 
     // Anko Spoon
-    gameInfo.ankoSpoon = TornadoUtil.createObjUsingTexture('assets/ankospoon.png', 0.5, app.stage, "Sprite", 0, 0);
-    gameInfo.ankoSpoon.visible = false;
+    gameInfo.objAnkoSpoon = TornadoUtil.createObjUsingTexture('assets/ankospoon.png', 0.5, app.stage, "Sprite", 0, 0);
+    gameInfo.objAnkoSpoon.visible = false;
 
     // Kiji Drag event
     kiji.interactive = true;
@@ -116,12 +116,10 @@ function loadGameScene() {
     hand.interactive = true;
     hand.buttonMode = true;
     hand
-        .on('mousedown', DragEvents.handOnDragStart)
-        .on('mousemove', DragEvents.handOnDragMove)
-        // .on('pointerup', ButtonEvents.handOnButtonUp)
-        // .on('pointerupoutside', ButtonEvents.handOnButtonUp)
-        // .on('pointerover', ButtonEvents.handOnButtonOver)
-        // .on('pointerout', ButtonEvents.handOnButtonOut);B
+        .on('mousedown', DragEvents.handOnMouseDown)
+        .on('mousemove', DragEvents.handOnMouseMove)
+        .on('mouseupoutside', DragEvents.handOnMouseEnd)
+        .on('mouseup', DragEvents.handOnMouseEnd);
 
 
 }
