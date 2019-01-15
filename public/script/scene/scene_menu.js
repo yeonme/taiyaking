@@ -1,3 +1,4 @@
+//@ts-nocheck
 function loadMenuScene(){
     visibleScene = 0;
     console.log(sceneNumber);

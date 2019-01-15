@@ -44,7 +44,7 @@ class TornadoUtil {
      * @param {PIXI.Container} targetObj Target stage to be changed
      * @param {Number} x Left x
      * @param {Number} y Top y
-     * @param {Event} onClick EventHandler to fire on click (or tap)
+     * @param {PIXI.interaction.InteractionEvent} onClick EventHandler to fire on click (or tap)
      */
     static createObjButton(fileNameDef, fileNameHover, fileNamePressed, scale, targetObj, x, y, onClick){
         // let textureButtonDown = PIXI.Texture.fromImage(fileNamePressed);
@@ -83,6 +83,24 @@ class TornadoUtil {
         graphic.endFill();
         graphic.x = x;
         graphic.y = y;
+        targetObj.addChild(graphic);
+        return graphic;
+    }
+
+    /**
+     * Fill the rect by specified color.
+     * @param {Number} color Color to fill
+     * @param {Number} x Left X
+     * @param {Number} y Top Y
+     * @param {Number} radius radius
+     * @param {PIXI.Container} targetObj Target stage to be changed
+     * @returns {PIXI.Graphics} Graphics object
+     */
+    static fillCircle(color, x, y, radius, targetObj) {
+        let graphic = new PIXI.Graphics();
+        graphic.beginFill(color);
+        graphic.drawCircle(x, y, radius);
+        graphic.endFill();
         targetObj.addChild(graphic);
         return graphic;
     }
