@@ -67,11 +67,11 @@ function loadGameScene() {
             let placeX = 20 + (170 * x);
             let placeY = 240 + (100 * y);
             let taiyaki = new Taiyaki(TornadoUtil.createObjUsingTexture('assets/fish_01.png', 0.25, app.stage, "Sprite", placeX, placeY),
-            TornadoUtil.createObjUsingTexture('assets/fish_anko.png', 0.25, app.stage, "Sprite", placeX, placeY),
-            TornadoUtil.createObjUsingTexture('assets/fish_02.png', 0.25, app.stage, "Sprite", placeX, placeY),
-            TornadoUtil.createObjUsingTexture('assets/fish_03.png', 0.25, app.stage, "Sprite", placeX, placeY),
-            TornadoUtil.createObjUsingTexture('assets/fish_04.png', 0.25, app.stage, "Sprite", placeX, placeY));
-            taiyaki.setXY(x,y);
+                TornadoUtil.createObjUsingTexture('assets/fish_anko.png', 0.25, app.stage, "Sprite", placeX, placeY),
+                TornadoUtil.createObjUsingTexture('assets/fish_02.png', 0.25, app.stage, "Sprite", placeX, placeY),
+                TornadoUtil.createObjUsingTexture('assets/fish_03.png', 0.25, app.stage, "Sprite", placeX, placeY),
+                TornadoUtil.createObjUsingTexture('assets/fish_04.png', 0.25, app.stage, "Sprite", placeX, placeY));
+            taiyaki.setXY(x, y);
             gameInfo.taiyakis.push(taiyaki);
         }
     }
@@ -111,6 +111,18 @@ function loadGameScene() {
         .on('mouseup', DragEvents.ankoOnDragEnd)
         .on('mouseupoutside', DragEvents.ankoOnDragEnd)
         .on('mousemove', DragEvents.ankoOnDragMove);
+
+    // Hand Drag event
+    hand.interactive = true;
+    hand.buttonMode = true;
+    hand
+        .on('mousedown', DragEvents.handOnDragStart)
+        .on('mousemove', DragEvents.handOnDragMove)
+        // .on('pointerup', ButtonEvents.handOnButtonUp)
+        // .on('pointerupoutside', ButtonEvents.handOnButtonUp)
+        // .on('pointerover', ButtonEvents.handOnButtonOver)
+        // .on('pointerout', ButtonEvents.handOnButtonOut);B
+
 
 }
 
@@ -158,5 +170,5 @@ function showMonitor() {
     if (typeof gameInfo.objScore != "undefined" && gameInfo.objScore != null) {
         app.stage.removeChild(gameInfo.objScore);
     }
-    gameInfo.objScore = TornadoUtil.textOut((Math.round(gameTimer / 1000.0 * 100) / 100).toString(), 550, 160, app.stage, new PIXI.TextStyle({align: 'center', fontWeight: 'bold'}));
+    gameInfo.objScore = TornadoUtil.textOut((Math.round(gameTimer / 1000.0 * 100) / 100).toString(), 550, 160, app.stage, new PIXI.TextStyle({ align: 'center', fontWeight: 'bold' }));
 }

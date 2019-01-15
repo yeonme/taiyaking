@@ -44,7 +44,7 @@ class TornadoUtil {
      * @param {PIXI.Container} targetObj Target stage to be changed
      * @param {Number} x Left x
      * @param {Number} y Top y
-     * @param {Event} onClick EventHandler to fire on click (or tap)
+     * @param {PIXI.interaction.InteractionEvent} onClick EventHandler to fire on click (or tap)
      */
     static createObjButton(fileNameDef, fileNameHover, fileNamePressed, scale, targetObj, x, y, onClick){
         // let textureButtonDown = PIXI.Texture.fromImage(fileNamePressed);

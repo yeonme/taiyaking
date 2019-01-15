@@ -1,8 +1,9 @@
+//@ts-nocheck
 class DragEvents {
 
     /**
      * onDragStart 
-     * @param {DragEvent} event Event variable
+     * @param {PIXI.interaction.InteractionEvent} event Event variable
      */
     static onDragStart(event) {
         this.data = event.data;
@@ -10,6 +11,10 @@ class DragEvents {
         this.dragging = true;
     }
 
+    /**
+     * Kiji Drag Move
+     *
+     */
     static kijiOnDragMove() {
         if (this.dragging) {
             var newPosition = this.data.getLocalPosition(this.parent);
@@ -58,6 +63,10 @@ class DragEvents {
         this.data = null;
     }
 
+    /**
+     * Anko event
+     *
+     */
     static ankoOnDragMove() {
         if (this.dragging) {
             var newPosition = this.data.getLocalPosition(this.parent);
@@ -104,6 +113,26 @@ class DragEvents {
         gameInfo.pointer.visible = false;
         gameInfo.ankoSpoon.visible = false;
         this.data = null;
+    }
+
+    static handOnDragStart(event) {
+        this.data = event.data;
+        this.alpha = 0.5;
+        gameInfo.handClick = true;
+    }
+
+    static handOnDragMove() {
+        if (gameInfo.handClick) {
+            var mousePosition = app.renderer.plugins.interaction.mouse.global;
+
+            gameInfo.pointer.visible = true;
+
+            gameInfo.pointer.x = mousePosition.x;
+            gameInfo.pointer.y = mousePosition.y + 50;
+
+            this.x = mousePosition.x;
+            this.y = mousePosition.y;
+        }
     }
 
 

@@ -19,5 +19,6 @@ class GameInfo {
         this.objBack = null;
         this.pointer = null;
         this.ankoSpoon = null;
+        this.handClick = null;
     }
 }
