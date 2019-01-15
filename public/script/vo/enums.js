@@ -1,3 +1,9 @@
+const GuestType = Object.freeze({
+    BOY: 0,
+    GIRL: 1,
+    VIP: 2
+})
+
 const AngryStage = Object.freeze({
     A_NORMAL: 0,
     B_NERVOUS: 1,
