@@ -93,6 +93,8 @@ function loadGameScene() {
     .on('mouseup', DragEvents.onDragEnd)
     .on('mouseupoutside', DragEvents.onDragEnd)
     .on('mousemove', DragEvents.onDragMove);
+
+    
 }
 
 var gameInfo = new GameInfo();
@@ -116,7 +118,7 @@ var lifeMinus = 0; //Test Val
 let other;
 
 function lifeCheck() {
-    let newlifeMinus = parseInt(gameTimer / 5000);
+    let newlifeMinus = Math.floor(gameTimer / 5000);
     //console.log(newlifeMinus);
     if (newlifeMinus > lifeMinus) {
         lifeMinus = newlifeMinus;
@@ -139,5 +141,5 @@ function showMonitor() {
     if(typeof gameInfo.objScore != "undefined" && gameInfo.objScore != null){
         app.stage.removeChild(gameInfo.objScore);
     }
-    gameInfo.objScore = TornadoUtil.textOut(Math.round(gameTimer / 1000.0 * 100) / 100, 550, 160, app.stage, new PIXI.TextStyle({align: 'center', fontWeight: 'bold'}));
+    gameInfo.objScore = TornadoUtil.textOut((Math.round(gameTimer / 1000.0 * 100) / 100).toString(), 550, 160, app.stage, new PIXI.TextStyle({align: 'center', fontWeight: 'bold'}));
 }

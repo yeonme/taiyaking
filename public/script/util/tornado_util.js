@@ -76,7 +76,7 @@ class TornadoUtil {
      * @param {Number?} alpha Optional. Alpha value
      * @returns {PIXI.Graphics} Graphics object
      */
-    static fillRect(color, x, y, width, height, targetObj, alpha) {
+    static fillRect(color, x, y, width, height, targetObj, alpha = undefined) {
         let graphic = new PIXI.Graphics();
         typeof alpha == "undefined" ? graphic.beginFill(color) : graphic.beginFill(color,alpha);
         graphic.drawRect(0,0,width,height);
