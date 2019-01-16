@@ -20,7 +20,7 @@ class Guest {
         this.guestType = GuestType.BOY;
         this.angryStage = AngryStage.A_NORMAL;
         /** @type {TaiyakiHashMap} The order of taiyakis */
-        this.order = null;
+        this.order = new TaiyakiHashMap();
     }
     get slotPos() {
         return 20 + 240 * this.slotNumber;
@@ -37,23 +37,31 @@ class Guest {
         this.slotNumber = slotNum;
         this.objGuest.scale.set(0.5);
         this.objGuest.position.set(20+240*slotNum,57);
+        //Skip animation this time as not implemented.
+
     }
     /**
      * Set the order randomly.
      */
     newOrder() {
+        this.order = new TaiyakiHashMap();
         let quantity = Math.floor((Math.random() * 6) + 1);
+        for (let i = 0; i < quantity; i++) {
+            let taiyaki = new Taiyaki();
+            taiyaki.type = TaiyakiType.ANKO;
+            this.order.add(new Taiyaki());
+        };
     }
     /**
      * Leave from the store.
      */
     away() {
-
+        // TODO: Push animation to AnimManager
     }
     /**
      * Update the texture using current status.
      */
     update() {
-
+        // TODO: Change texture by angry status
     }
 }

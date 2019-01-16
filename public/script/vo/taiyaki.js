@@ -15,7 +15,15 @@ class Taiyaki {
     - objDoubleFlip: Sprite
     - objBurned: Sprite
     */
-    constructor(kiji, inside, single, double, burned) {
+   /**
+    * Constructor
+    * @param {PIXI.Sprite} kiji 
+    * @param {PIXI.Sprite} inside 
+    * @param {PIXI.Sprite} single 
+    * @param {PIXI.Sprite} double 
+    * @param {PIXI.Sprite} burned 
+    */
+    constructor(kiji = null, inside = null, single = null, double = null, burned = null) {
         this.cookStage = CookStage.EMPTY;
         this.type = TaiyakiType.ANKO;
         this.timeStarted = new Date().getTime();
@@ -48,6 +56,9 @@ class Taiyaki {
     }
 
     updateVisual() {
+        if(this.objBurned == null) {
+            return;
+        }
         this.objBurned.visible = false;
         this.objDoubleFlip.visible = false;
         this.objInside.visible = false;
