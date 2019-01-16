@@ -13,6 +13,7 @@ let app = new PIXI.Application({
 
 //Add the canvas that Pixi automatically created for you to the HTML document
 document.body.appendChild(app.view);
+app.renderer.plugins.interaction.cursorStyles["none"] = "none";
 app.ticker.add(function(delta){
     fireEachFrame(delta);
     //located on game_manager.js

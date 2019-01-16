@@ -142,8 +142,6 @@ function loadGameScene() {
         .on('mousemove', DragEvents.handOnMouseMove)
         .on('mouseupoutside', DragEvents.handOnMouseUp)
         .on('mouseup', DragEvents.handOnMouseUp);
-
-
 }
 
 var gameInfo = new GameInfo();
@@ -159,6 +157,7 @@ function lazyTick() {
     lastFrameTime = new Date().getTime();
     // console.log("lazyTick: " + gameTimer);
     lifeCheck();
+    gameInfo.guests.tickGuest();
 }
 
 /* Game Functions */

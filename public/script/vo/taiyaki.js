@@ -15,15 +15,15 @@ class Taiyaki {
     - objDoubleFlip: Sprite
     - objBurned: Sprite
     */
-    /**
-     * 
-     * @param {PIXI.Sprite} kiji 
-     * @param {PIXI.Sprite} inside 
-     * @param {PIXI.Sprite} single 
-     * @param {PIXI.Sprite} double 
-     * @param {PIXI.Sprite} burned 
-     */
-    constructor(kiji, inside, single, double, burned) {
+   /**
+    * Constructor
+    * @param {PIXI.Sprite} kiji 
+    * @param {PIXI.Sprite} inside 
+    * @param {PIXI.Sprite} single 
+    * @param {PIXI.Sprite} double 
+    * @param {PIXI.Sprite} burned 
+    */
+    constructor(kiji = null, inside = null, single = null, double = null, burned = null) {
         this.cookStage = CookStage.EMPTY;
         this.type = TaiyakiType.ANKO;
         this.timeStarted = new Date().getTime();
@@ -48,8 +48,10 @@ class Taiyaki {
         this.objSingleFlip = single;
         this.objDoubleFlip = double;
         this.objBurned = burned;
-        this.objGrab = TornadoUtil.createObjUsingTexture("assets/graphand.png", 1.0, app.stage, "Sprite", kiji.position.x, kiji.position.y);
-        this.objGrab.visible = false;
+        if(kiji != null) {
+            this.objGrab = TornadoUtil.createObjUsingTexture("assets/graphand.png", 1.0, app.stage, "Sprite", kiji.position.x, kiji.position.y);
+            this.objGrab.visible = false;
+        }
 
         this._minCookStep = [0, 0, 5000, 4500, 5000, 0]; // 2->3, 3->4
         this._maxCookStep = [0, 0, 0, 0, 7000, 0];
@@ -119,6 +121,9 @@ class Taiyaki {
     }
 
     updateVisual() {
+        if(this.objBurned == null) {
+            return;
+        }
         this.objBurned.visible = false;
         this.objDoubleFlip.visible = false;
         this.objInside.visible = false;
