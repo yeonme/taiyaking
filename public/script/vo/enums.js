@@ -24,3 +24,7 @@ const TaiyakiType = Object.freeze({
     CREAM: 1,
     CHOCO: 2
 });
+
+const AnimationType = Object.freeze({
+    TRANSITION: 0
+});
