@@ -1,23 +1,45 @@
+const guestTypePercentage = [0.1,0.55];
 class GuestManager {
     constructor(){
         /** @type {Array<Guest>} */
         this.guests = [];
+        this.nextPos = 0;
+        this.lastGenerated = new Date().getTime();
     }
     createGuest() {
         if(this.guests.length >= 2) {
             return;
         }
+        this.lastGenerated = new Date().getTime();
         let guest = new Guest();
         guest.newOrder();
-        guest.display(this.guests.length, Math.floor((Math.random()*2)+1));
-        this.guests.push(new Guest());
+        let randomValue = Math.random();
+        let guestType = (randomValue < guestTypePercentage[0])?GuestType.VIP:(randomValue < guestTypePercentage[1]?GuestType.GIRL:GuestType.BOY);
+        guest.display(this.nextPos, guestType);
+        this.nextPos = (this.nextPos+1)%2;
+        this.guests.push(guest);
+        console.log(guest);
     }
-    updateGuest() {
-        
+    tickGuest() {
+        let elapsed = new Date().getTime() - this.lastGenerated;
+        if(elapsed > 1000) {
+            this.createGuest();
+        }
+
+        let idx = 0;
+        while(idx < this.count()) {
+            this.guests[idx].lifecycle();
+            if(!this.guests[idx].active) {
+                let guest = this.guests.shift();
+                guest.away();
+            } else {
+                idx++;
+            }
+        }
     }
     clearGuest() {
         while(this.guests.length > 0){
-            let guest = this.guests.pop();
+            let guest = this.guests.shift();
             guest.away();
         }
     }

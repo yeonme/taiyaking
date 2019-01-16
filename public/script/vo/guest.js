@@ -9,18 +9,6 @@
  * 
  */
 class Guest {
-    /** @type {Array<PIXI.Texture>} */
-    static texturesBoy;
-    /** @type {Array<PIXI.Texture>} */
-    static texturesGirl;
-    /** @type {Array<PIXI.Texture>} */
-    static texturesVIP;
-    /** @type {PIXI.TextStyle} */
-    static textStyleDefault = new PIXI.TextStyle({
-        align: 'center',
-        fontWeight: 'bold',
-        fontSize: 15
-    });
     constructor() {
         this.timeAppeared = new Date().getTime();
         /** @type {PIXI.Sprite} **/
@@ -36,6 +24,20 @@ class Guest {
         this.angryStage = AngryStage.A_NORMAL;
         /** @type {TaiyakiHashMap} The order of taiyakis */
         this.order = new TaiyakiHashMap();
+
+        this.active = true;
+
+        /** @type {Array<PIXI.Texture>} */
+        this.texturesBoy = [PIXI.Texture.fromImage("assets/character/boy_waiting.png", undefined, 0.5)];
+        /** @type {Array<PIXI.Texture>} */
+        this.texturesGirl = [PIXI.Texture.fromImage("assets/character/girl_waiting.png", undefined, 0.5)];
+        /** @type {Array<PIXI.Texture>} */
+        this.texturesVIP = [PIXI.Texture.fromImage("assets/character/vip_waiting.png", undefined, 0.5)];
+        this.textStyleDefault = new PIXI.TextStyle({
+            align: 'center',
+            fontWeight: 'bold',
+            fontSize: 15
+        });
     }
     get slotPos() {
         return 20 + 240 * this.slotNumber;
@@ -49,15 +51,19 @@ class Guest {
             console.log("Guest object is not initialized.");
             return;
         }
+        this.guestType = guestType;
         this.slotNumber = slotNum;
+        this.objGuest = TornadoUtil.createObjUsingTexture("assets/character/boy_waiting.png", 0.5, app.stage, "Sprite", 0, 0);
         this.objGuest.scale.set(0.5);
         this.objGuest.position.set(20+240*slotNum,57);
+        this.update();
         //Skip animation this time as not implemented.
 
         if(this.objBubble == null) {
-            this.objBubble = TornadoUtil.createObjUsingTexture("assets/character/speech_bubble_left.png", 0.3,
+            this.objBubble = TornadoUtil.createObjUsingTexture("assets/speech_bubble_left.png", 0.3,
             app.stage, "Sprite", 145 + 235*slotNum, 15);
-            this.objText = TornadoUtil.textOut(this.builtText, 168 + 237*slotNum, 50, app.stage, Guest.textStyleDefault);
+            this.objBubble.height = 100;
+            this.objText = TornadoUtil.textOut(this.builtText, 168 + 237*slotNum, 50, app.stage, this.textStyleDefault);
         }
     }
     /**
@@ -71,7 +77,7 @@ class Guest {
             taiyaki.type = TaiyakiType.ANKO;
             this.order.add(new Taiyaki());
         };
-        this.builtText = "I want\n\r"+quantity+" Taiyakis!";
+        this.builtText = "I want\n"+quantity+" Taiyakis!";
     }
     /**
      * Leave from the store.
@@ -94,15 +100,30 @@ class Guest {
         let textures = null;
         switch(this.guestType) {
             case GuestType.BOY: 
-                textures = Guest.texturesBoy;
+                textures = this.texturesBoy;
             break;
             case GuestType.GIRL: 
-                textures = Guest.texturesGirl;
+                textures = this.texturesGirl;
             break;
             case GuestType.VIP: 
-                textures = Guest.texturesVIP;
+                textures = this.texturesVIP;
             break;
         }
         this.objGuest.texture = textures[Math.min(textures.length-1,this.angryStage)];
+    }
+    lifecycle() {
+        // 0 - 10000 Normal
+        // 10000 - 20000 Angry
+        // 20000 - 25000 Angry2
+        let waitingTime = new Date().getTime() - this.timeAppeared;
+        if(waitingTime < 1000) {
+            this.angryStage = AngryStage.A_NORMAL;
+        } else if(waitingTime < 2000) {
+            this.angryStage = AngryStage.B_NERVOUS;
+        } else if(waitingTime < 5000) {
+            this.angryStage = AngryStage.C_RAGED;
+        } else {
+            this.active = false;
+        }
     }
 }

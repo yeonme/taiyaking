@@ -48,8 +48,10 @@ class Taiyaki {
         this.objSingleFlip = single;
         this.objDoubleFlip = double;
         this.objBurned = burned;
-        this.objGrab = TornadoUtil.createObjUsingTexture("assets/graphand.png", 1.0, app.stage, "Sprite", kiji.position.x, kiji.position.y);
-        this.objGrab.visible = false;
+        if(kiji != null) {
+            this.objGrab = TornadoUtil.createObjUsingTexture("assets/graphand.png", 1.0, app.stage, "Sprite", kiji.position.x, kiji.position.y);
+            this.objGrab.visible = false;
+        }
 
         this._minCookStep = [0, 0, 5000, 4500, 5000, 0]; // 2->3, 3->4
         this._maxCookStep = [0, 0, 0, 0, 7000, 0];
