@@ -11,7 +11,7 @@ function loadGameScene() {
     let container = new PIXI.Container();
     app.stage.addChild(container);
     gameInfo.objBack = TornadoUtil.createObjUsingTexture('assets/fishcook_background.png', 1.0, container, "Sprite", 0, 230);
-
+    gameInfo.objBack.width = 550;
 
     //Guest part wall (Background)
     TornadoUtil.fillRect(0xEAC067, 0, 0, 690, 220, app.stage);
@@ -87,12 +87,12 @@ function loadGameScene() {
     let hand = TornadoUtil.createObjUsingTexture('assets/hand.png', 1.2, app.stage, "Sprite", 580, 410);
 
     // Cooking tools red pointer
-    gameInfo.pointer = TornadoUtil.fillCircle(0xEB0000, 0, 0, 8, app.stage);
-    gameInfo.pointer.visible = false;
+    gameInfo.objPointer = TornadoUtil.fillCircle(0xEB0000, 0, 0, 8, app.stage);
+    gameInfo.objPointer.visible = false;
 
     // Anko Spoon
-    gameInfo.ankoSpoon = TornadoUtil.createObjUsingTexture('assets/ankospoon.png', 0.5, app.stage, "Sprite", 0, 0);
-    gameInfo.ankoSpoon.visible = false;
+    gameInfo.objAnkoSpoon = TornadoUtil.createObjUsingTexture('assets/ankospoon.png', 0.5, app.stage, "Sprite", 0, 0);
+    gameInfo.objAnkoSpoon.visible = false;
 
     // Kiji Drag event
     kiji.interactive = true;
@@ -116,12 +116,10 @@ function loadGameScene() {
     hand.interactive = true;
     hand.buttonMode = true;
     hand
-        .on('mousedown', DragEvents.handOnDragStart)
-        .on('mousemove', DragEvents.handOnDragMove)
-        // .on('pointerup', ButtonEvents.handOnButtonUp)
-        // .on('pointerupoutside', ButtonEvents.handOnButtonUp)
-        // .on('pointerover', ButtonEvents.handOnButtonOver)
-        // .on('pointerout', ButtonEvents.handOnButtonOut);B
+        .on('mousedown', DragEvents.handOnMouseDown)
+        .on('mousemove', DragEvents.handOnMouseMove)
+        .on('mouseupoutside', DragEvents.handOnMouseUp)
+        .on('mouseup', DragEvents.handOnMouseUp);
 
 
 }
@@ -137,7 +135,7 @@ function tickGameScene() {
 
 function lazyTick() {
     lastFrameTime = new Date().getTime();
-    console.log("lazyTick: " + gameTimer);
+    // console.log("lazyTick: " + gameTimer);
     lifeCheck();
 }
 
@@ -151,8 +149,8 @@ function lifeCheck() {
     //console.log(newlifeMinus);
     if (newlifeMinus > lifeMinus) {
         lifeMinus = newlifeMinus;
-        gameInfo.life--;
-        console.log(gameInfo.life);
+        // gameInfo.life--;
+        // console.log(gameInfo.life);
     }
     showMonitor();
 }
