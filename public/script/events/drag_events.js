@@ -123,6 +123,10 @@ class DragEvents {
             this.data = event.data;
             this.alpha = 0.5;
             gameInfo.handClick = true;
+            //app.stage.cursor = "none";
+            this.cursor = "none";
+
+            console.log(this);
         }
 
         let taiyaki = DragEvents.findNearTaiyaki();
@@ -131,14 +135,19 @@ class DragEvents {
                 this.alpha = 0.0;
                 gameInfo.objPointer.visible = false;
                 taiyaki.grab(true);
+                //app.stage.cursor = "none";
+                this.cursor = "none";
             }
         } else if (gameInfo.handClickCount > 1 && typeof taiyaki === 'undefined') {
             this.alpha = 1;
+            this.anchor.set(0,0);
             this.x = 580;
             this.y = 403;
             gameInfo.handClick = false;
             gameInfo.objPointer.visible = false;
             gameInfo.handClickCount = 0; // reset handClickCount
+            //app.stage.cursor = "inherit";
+            this.cursor = "inherit";
         }
     }
 
@@ -146,11 +155,15 @@ class DragEvents {
         if (gameInfo.handClick) {
             var mousePosition = app.renderer.plugins.interaction.mouse.global;
             this.alpha = 1.0;
+            
             gameInfo.objPointer.visible = true;
-            gameInfo.objPointer.x = mousePosition.x;
-            gameInfo.objPointer.y = mousePosition.y + 50;
+            this.anchor.set(0.5,0.5);
+            gameInfo.objPointer.x = mousePosition.x - 25;
+            gameInfo.objPointer.y = mousePosition.y + 25;
             this.x = mousePosition.x;
             this.y = mousePosition.y;
+            //app.stage.cursor = "none";
+            this.cursor = "none";
         }
     }
 
@@ -159,6 +172,8 @@ class DragEvents {
         if (gameInfo.handClick && gameInfo.handClickCount > 1 && !(typeof taiyaki === 'undefined')) {
             if (taiyaki instanceof Taiyaki) {
                 taiyaki.grab(false);
+                //app.stage.cursor = "none";
+                this.cursor = "none";
             }
         }
     }
