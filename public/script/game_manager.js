@@ -1,4 +1,4 @@
-var sceneNumber = 1, visibleScene = -1;
+var sceneNumber = 0, visibleScene = -1;
 var gameTimer = 0, lastFrameTime;
 //gameTimer: Used for only scene 1. Time after started the game.
 //lastFrameTime: Used for lazyTick()
