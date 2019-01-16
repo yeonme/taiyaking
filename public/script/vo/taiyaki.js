@@ -15,14 +15,14 @@ class Taiyaki {
     - objDoubleFlip: Sprite
     - objBurned: Sprite
     */
-   /**
-    * 
-    * @param {PIXI.Sprite} kiji 
-    * @param {PIXI.Sprite} inside 
-    * @param {PIXI.Sprite} single 
-    * @param {PIXI.Sprite} double 
-    * @param {PIXI.Sprite} burned 
-    */
+    /**
+     * 
+     * @param {PIXI.Sprite} kiji 
+     * @param {PIXI.Sprite} inside 
+     * @param {PIXI.Sprite} single 
+     * @param {PIXI.Sprite} double 
+     * @param {PIXI.Sprite} burned 
+     */
     constructor(kiji, inside, single, double, burned) {
         this.cookStage = CookStage.EMPTY;
         this.type = TaiyakiType.ANKO;
@@ -75,29 +75,32 @@ class Taiyaki {
             BURNED: -1 V
         */
 
-        console.log("flipOverIfCan: "+this.cookStage+", "+this.cookTime());
+        console.log("flipOverIfCan: " + this.cookStage + ", " + this.cookTime());
 
         switch (this.cookStage) {
             case CookStage.INSIDE:
-                if(this.cookTime() > this._minCookStep[CookStage.INSIDE]){
+                if (this.cookTime() > this._minCookStep[CookStage.INSIDE]) {
                     this.cookStage++;
                     this.resetCookTime();
                 }
                 break;
             case CookStage.SINGLEFLIP:
-                if(this.cookTime() > this._minCookStep[CookStage.SINGLEFLIP]){
+                if (this.cookTime() > this._minCookStep[CookStage.SINGLEFLIP]) {
                     this.cookStage++;
                     this.resetCookTime();
                 }
                 break;
             case CookStage.DOUBLEFLIP:
-                if(this.cookTime() > this._minCookStep[CookStage.DOUBLEFLIP] && this.cookTime() < this._maxCookStep[CookStage.DOUBLEFLIP]){
+                if (this.cookTime() > this._minCookStep[CookStage.DOUBLEFLIP] && this.cookTime() < this._maxCookStep[CookStage.DOUBLEFLIP]) {
                     // Put into basket
                     this.cookStage = CookStage.EMPTY;
                     gameInfo.takiyakiCount++;
-                    gameInfo.objBasket.texture = gameInfo.textureBaseket[Math.min(gameInfo.textureBaseket.length-1, gameInfo.takiyakiCount)];
+                    gameInfo.objBasket.texture = gameInfo.textureBaseket[Math.min(gameInfo.textureBaseket.length - 1, gameInfo.takiyakiCount)];
+                    gameInfo.taiyakiCountBoard.visible = true;
+                    gameInfo.taiyakiCountText.visible = true;
+                    gameInfo.taiyakiCountText.text = gameInfo.takiyakiCount;
                     this.resetCookTime();
-                } else if(this.cookTime() > this._maxCookStep[CookStage.DOUBLEFLIP]) {
+                } else if (this.cookTime() > this._maxCookStep[CookStage.DOUBLEFLIP]) {
                     // Too late
                     this.cookStage = CookStage.BURNED;
                 }

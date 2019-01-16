@@ -96,8 +96,9 @@ class TornadoUtil {
      * @param {PIXI.Container} targetObj Target stage to be changed
      * @returns {PIXI.Graphics} Graphics object
      */
-    static fillCircle(color, x, y, radius, targetObj) {
+    static fillCircle(color, x, y, radius, targetObj, lineStylePixelWide, lineColor, lineAlpha) {
         let graphic = new PIXI.Graphics();
+        graphic.lineStyle(lineStylePixelWide, lineColor, lineAlpha);
         graphic.beginFill(color);
         graphic.drawCircle(x, y, radius);
         graphic.endFill();
