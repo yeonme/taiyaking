@@ -29,5 +29,8 @@ class GameInfo {
         /** @type {PIXI.Sprite} **/
         this.objBasket = null;
         this.takiyakiCount = 0;
+         /** @type {PIXI.Graphics} */
+        this.taiyakiCountBoard = null;
+        this.taiyakiCountText = null;
     }
 }

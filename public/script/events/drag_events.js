@@ -110,9 +110,10 @@ class DragEvents {
             }
         }
 
-        this.dragging = false;
         gameInfo.objPointer.visible = false;
         gameInfo.objAnkoSpoon.visible = false;
+
+        this.dragging = false;
         this.data = null;
     }
 

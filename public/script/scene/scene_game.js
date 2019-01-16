@@ -78,13 +78,13 @@ function loadGameScene() {
 
     // basket
     gameInfo.objBasket = TornadoUtil.createObjUsingTexture('assets/basket.png', 0.4, app.stage, "Sprite", 527, 478);
-    
-    gameInfo.textureBaseket[0] = PIXI.Texture.fromImage('assets/basket.png',undefined,0.4);
-    gameInfo.textureBaseket[1] = PIXI.Texture.fromImage('assets/basket1.png',undefined,0.4);
-    gameInfo.textureBaseket[2] = PIXI.Texture.fromImage('assets/basket2.png',undefined,0.4);
-    gameInfo.textureBaseket[3] = PIXI.Texture.fromImage('assets/basket3.png',undefined,0.4);
-    gameInfo.textureBaseket[4] = PIXI.Texture.fromImage('assets/basket4.png',undefined,0.4);
-    gameInfo.textureBaseket[5] = PIXI.Texture.fromImage('assets/basket5.png',undefined,0.4);
+
+    gameInfo.textureBaseket[0] = PIXI.Texture.fromImage('assets/basket.png', undefined, 0.4);
+    gameInfo.textureBaseket[1] = PIXI.Texture.fromImage('assets/basket1.png', undefined, 0.4);
+    gameInfo.textureBaseket[2] = PIXI.Texture.fromImage('assets/basket2.png', undefined, 0.4);
+    gameInfo.textureBaseket[3] = PIXI.Texture.fromImage('assets/basket3.png', undefined, 0.4);
+    gameInfo.textureBaseket[4] = PIXI.Texture.fromImage('assets/basket4.png', undefined, 0.4);
+    gameInfo.textureBaseket[5] = PIXI.Texture.fromImage('assets/basket5.png', undefined, 0.4);
 
     gameInfo.objBasket.texture = gameInfo.textureBaseket[0];
 
@@ -95,13 +95,27 @@ function loadGameScene() {
     let hand = TornadoUtil.createObjUsingTexture('assets/hand.png', 1.2, app.stage, "Sprite", 580, 403);
 
     // Cooking tools red pointer
-    gameInfo.objPointer = TornadoUtil.fillCircle(0xEB0000, 0, 0, 8, app.stage);
+    gameInfo.objPointer = TornadoUtil.fillCircle(0xEB0000, 0, 0, 8, app.stage, null, null, null);
     gameInfo.objPointer.visible = false;
 
     // Anko Spoon
     gameInfo.objAnkoSpoon = TornadoUtil.createObjUsingTexture('assets/ankospoon.png', 0.5, app.stage, "Sprite", 0, 0);
     gameInfo.objAnkoSpoon.visible = false;
 
+    // TaiyakiCountBoard
+    gameInfo.taiyakiCountBoard = TornadoUtil.fillCircle(0xDB005B, 667, 527, 20, app.stage, 3.5, 0xFFF0F5, 1);
+    gameInfo.taiyakiCountBoard.visible = false;
+
+    // TakiyakiCountText
+    var style = new PIXI.TextStyle({
+        align: 'center',
+        fontWeight: 'bold',
+        fontSize: 30,
+        fill: '0xFFF0F5'
+    });
+    gameInfo.taiyakiCountText = TornadoUtil.textOut("0", 659, 510, app.stage, style);
+    gameInfo.taiyakiCountText.visible = false;
+    
     // Kiji Drag event
     kiji.interactive = true;
     kiji.buttonMode = true;
