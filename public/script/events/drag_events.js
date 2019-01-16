@@ -58,7 +58,7 @@ class DragEvents {
         gameInfo.objPointer.visible = false;
 
         this.x = 640;
-        this.y = 300;
+        this.y = 303;
         this.dragging = false;
         this.data = null;
     }
@@ -135,7 +135,7 @@ class DragEvents {
         } else if (gameInfo.handClickCount > 1 && typeof taiyaki === 'undefined') {
             this.alpha = 1;
             this.x = 580;
-            this.y = 410;
+            this.y = 403;
             gameInfo.handClick = false;
             gameInfo.objPointer.visible = false;
             gameInfo.handClickCount = 0; // reset handClickCount

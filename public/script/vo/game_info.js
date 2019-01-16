@@ -24,5 +24,10 @@ class GameInfo {
         this.objAnkoSpoon = null;
         this.handClick = false;
         this.handClickCount = 0;
+        /** @type {Array<PIXI.Texture>} **/
+        this.textureBaseket = new Array(6);
+        /** @type {PIXI.Sprite} **/
+        this.objBasket = null;
+        this.takiyakiCount = 0;
     }
 }
