@@ -76,15 +76,23 @@ function loadGameScene() {
         }
     }
 
-    // paperbag
-    let paperbag = TornadoUtil.createObjUsingTexture('assets/paperbag.png', 1.0, app.stage, "Sprite", 530, 465);
-    paperbag.width = 200;
+    // basket
+    gameInfo.objBasket = TornadoUtil.createObjUsingTexture('assets/basket.png', 0.4, app.stage, "Sprite", 527, 478);
+    
+    gameInfo.textureBaseket[0] = PIXI.Texture.fromImage('assets/basket.png',undefined,0.4);
+    gameInfo.textureBaseket[1] = PIXI.Texture.fromImage('assets/basket1.png',undefined,0.4);
+    gameInfo.textureBaseket[2] = PIXI.Texture.fromImage('assets/basket2.png',undefined,0.4);
+    gameInfo.textureBaseket[3] = PIXI.Texture.fromImage('assets/basket3.png',undefined,0.4);
+    gameInfo.textureBaseket[4] = PIXI.Texture.fromImage('assets/basket4.png',undefined,0.4);
+    gameInfo.textureBaseket[5] = PIXI.Texture.fromImage('assets/basket5.png',undefined,0.4);
+
+    gameInfo.objBasket.texture = gameInfo.textureBaseket[0];
 
     // Cooking tools
     let kiji = TornadoUtil.createObjUsingTexture('assets/ingredients1.png', 0.22, app.stage, "Sprite", 640, 303);
     kiji.anchor.set(0.7);
-    let anko = TornadoUtil.createObjUsingTexture('assets/ingredients2.png', 0.2, app.stage, "Sprite", 580, 325);
-    let hand = TornadoUtil.createObjUsingTexture('assets/hand.png', 1.2, app.stage, "Sprite", 580, 410);
+    let anko = TornadoUtil.createObjUsingTexture('assets/ingredients2.png', 0.2, app.stage, "Sprite", 580, 320);
+    let hand = TornadoUtil.createObjUsingTexture('assets/hand.png', 1.2, app.stage, "Sprite", 580, 403);
 
     // Cooking tools red pointer
     gameInfo.objPointer = TornadoUtil.fillCircle(0xEB0000, 0, 0, 8, app.stage);
