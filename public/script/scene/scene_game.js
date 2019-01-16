@@ -151,11 +151,13 @@ function tickGameScene() {
         //fires every 500ms or first time entered
         lazyTick();
     }
+    gameInfo.animman.tick();
 }
 
 function lazyTick() {
     lastFrameTime = new Date().getTime();
     // console.log("lazyTick: " + gameTimer);
+
     lifeCheck();
     gameInfo.guests.tickGuest();
 }

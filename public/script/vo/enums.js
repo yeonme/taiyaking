@@ -26,5 +26,11 @@ const TaiyakiType = Object.freeze({
 });
 
 const AnimationType = Object.freeze({
-    TRANSITION: 0
+    TRANSITION: 0,
+    ALPHA: 1
+});
+
+const EasingType = Object.freeze({
+    DEFAULT: 0,
+    EASING: 1
 });

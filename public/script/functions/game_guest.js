@@ -18,7 +18,7 @@ class GuestManager {
         guest.display(this.nextPos, guestType);
         this.nextPos = (this.nextPos+1)%2;
         this.guests.push(guest);
-        console.log(guest);
+        //console.log(guest);
     }
     tickGuest() {
         let elapsed = new Date().getTime() - this.lastGenerated;

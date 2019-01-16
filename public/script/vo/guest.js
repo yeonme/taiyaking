@@ -53,17 +53,21 @@ class Guest {
         }
         this.guestType = guestType;
         this.slotNumber = slotNum;
-        this.objGuest = TornadoUtil.createObjUsingTexture("assets/character/boy_waiting.png", 0.5, app.stage, "Sprite", 0, 0);
+        this.objGuest = TornadoUtil.createObjUsingTexture("assets/character/boy_waiting.png", 0.5, app.stage, "Sprite", -300, -300);
         this.objGuest.scale.set(0.5);
-        this.objGuest.position.set(20+240*slotNum,57);
+        //this.objGuest.position.set(20+240*slotNum,57);
+        gameInfo.animman.add(new AnimItem(gameTimer, 300, AnimationType.TRANSITION, this.objGuest, EasingType.DEFAULT, slotNum % 2 == 0 ? -100 : 690, 57, 20+240*slotNum, 57));
         this.update();
         //Skip animation this time as not implemented.
 
         if(this.objBubble == null) {
             this.objBubble = TornadoUtil.createObjUsingTexture("assets/speech_bubble_left.png", 0.3,
             app.stage, "Sprite", 145 + 235*slotNum, 15);
+            this.objBubble.alpha = 0;
             this.objBubble.height = 100;
             this.objText = TornadoUtil.textOut(this.builtText, 168 + 237*slotNum, 50, app.stage, this.textStyleDefault);
+            this.objText.alpha = 0;
+            gameInfo.animman.add(new AnimItem(gameTimer+300, 300, AnimationType.ALPHA, this.objBubble, EasingType.DEFAULT, 0, undefined, 1));
         }
     }
     /**

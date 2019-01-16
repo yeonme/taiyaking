@@ -32,5 +32,7 @@ class GameInfo {
          /** @type {PIXI.Graphics} */
         this.taiyakiCountBoard = null;
         this.taiyakiCountText = null;
+
+        this.animman = new AnimManager();
     }
 }
