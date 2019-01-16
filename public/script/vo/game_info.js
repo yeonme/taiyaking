@@ -23,5 +23,6 @@ class GameInfo {
         /** @type {PIXI.Sprite} */
         this.objAnkoSpoon = null;
         this.handClick = false;
+        this.handClickCount = 0;
     }
 }

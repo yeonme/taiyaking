@@ -51,7 +51,7 @@ class Taiyaki {
         this.objGrab = TornadoUtil.createObjUsingTexture("assets/graphand.png", 1.0, app.stage, "Sprite", kiji.position.x, kiji.position.y);
         this.objGrab.visible = false;
 
-        this._minCookStep = [0, 0, 0, 4500, 5000, 0]; //2->3, 3->4
+        this._minCookStep = [0, 0, 5000, 4500, 5000, 0]; // 2->3, 3->4
         this._maxCookStep = [0, 0, 0, 0, 7000, 0];
 
         this.updateVisual();
@@ -62,7 +62,7 @@ class Taiyaki {
     }
 
     resetCookTime() {
-        this.timeStarted = new Date().getDate();
+        this.timeStarted = new Date().getTime();
     }
 
     flipOverIfCan() {
@@ -75,10 +75,14 @@ class Taiyaki {
             BURNED: -1 V
         */
 
+        console.log("flipOverIfCan: "+this.cookStage+", "+this.cookTime());
+
         switch (this.cookStage) {
             case CookStage.INSIDE:
-                this.cookStage++;
-                this.resetCookTime();
+                if(this.cookTime() > this._minCookStep[CookStage.INSIDE]){
+                    this.cookStage++;
+                    this.resetCookTime();
+                }
                 break;
             case CookStage.SINGLEFLIP:
                 if(this.cookTime() > this._minCookStep[CookStage.SINGLEFLIP]){
@@ -87,14 +91,17 @@ class Taiyaki {
                 }
                 break;
             case CookStage.DOUBLEFLIP:
-                //Put into basket
-                if(this.cookTime() > this._minCookStep[CookStage.DOUBLEFLIP] && this.cookTime() ){
+                if(this.cookTime() > this._minCookStep[CookStage.DOUBLEFLIP] && this.cookTime() < this._maxCookStep[CookStage.DOUBLEFLIP]){
+                    // Put into basket
                     this.cookStage = CookStage.EMPTY;
                     this.resetCookTime();
+                } else if(this.cookTime() > this._maxCookStep[CookStage.DOUBLEFLIP]) {
+                    // Too late
+                    this.cookStage = CookStage.BURNED;
                 }
                 break;
             case CookStage.BURNED:
-                //Waste
+                // Waste
                 this.cookStage = CookStage.EMPTY;
                 break;
         }
@@ -118,7 +125,7 @@ class Taiyaki {
             case CookStage.INSIDE: this.objInside.visible = true; break;
             case CookStage.SINGLEFLIP: this.objSingleFlip.visible = true; break;
             case CookStage.DOUBLEFLIP: this.objDoubleFlip.visible = true; break;
-            case CookStage.BURNED: this.objDoubleFlip.visible = true; break;
+            case CookStage.BURNED: this.objBurned.visible = true; break;
         }
     }
 

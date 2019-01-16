@@ -116,50 +116,51 @@ class DragEvents {
         this.data = null;
     }
 
-    static handOnMouseDown(event) {
-        this.data = event.data;
-        this.alpha = 0.5;
+    static handOnMouseDown(event) { 
+        gameInfo.handClickCount++;
+
+        if (gameInfo.handClickCount == 1) {
+            this.data = event.data;
+            this.alpha = 0.5;
+            gameInfo.handClick = true;
+        }
 
         let taiyaki = DragEvents.findNearTaiyaki();
-        console.log("handOnMouseDown: ");
-        console.log(taiyaki);
-        if(typeof taiyaki === "undefined") {
-            //Outside
-            gameInfo.handClick = !gameInfo.handClick;
-        } else if(gameInfo.handClick) {
-            // this.visible = false;
-            this.alpha = 0.0;
+        if (gameInfo.handClickCount > 1 && !(typeof taiyaki === 'undefined')) {
+            if (!(taiyaki.cookStage == CookStage.EMPTY || taiyaki.cookStage == CookStage.BURNED || taiyaki.cookStage == CookStage.KIJI)) {
+                this.alpha = 0.0;
+                gameInfo.objPointer.visible = false;
+                taiyaki.grab(true);
+            }
+        } else if (gameInfo.handClickCount > 1 && typeof taiyaki === 'undefined') {
+            this.alpha = 1;
+            this.x = 580;
+            this.y = 410;
+            gameInfo.handClick = false;
             gameInfo.objPointer.visible = false;
-            taiyaki.grab(true);
+            gameInfo.handClickCount = 0; // reset handClickCount
         }
     }
 
     static handOnMouseMove() {
         if (gameInfo.handClick) {
             var mousePosition = app.renderer.plugins.interaction.mouse.global;
+            this.alpha = 1.0;
+            gameInfo.objPointer.visible = true;
             gameInfo.objPointer.x = mousePosition.x;
             gameInfo.objPointer.y = mousePosition.y + 50;
-
             this.x = mousePosition.x;
             this.y = mousePosition.y;
         }
     }
 
-    static handOnMouseEnd() {
+    static handOnMouseUp() {
         let taiyaki = DragEvents.findNearTaiyaki();
-        console.log("handOnMouseUp: ");
-        console.log(taiyaki);
-        if(gameInfo.handClick) {
-            if(taiyaki instanceof Taiyaki) {
+        if (gameInfo.handClick && gameInfo.handClickCount > 1 && !(typeof taiyaki === 'undefined')) {
+            if (taiyaki instanceof Taiyaki) {
                 taiyaki.grab(false);
             }
         }
-
-        this.alpha = 1;
-
-        gameInfo.objPointer.visible = false;
-
-        this.data = null;
     }
 
     /**

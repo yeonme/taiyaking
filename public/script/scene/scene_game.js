@@ -11,7 +11,7 @@ function loadGameScene() {
     let container = new PIXI.Container();
     app.stage.addChild(container);
     gameInfo.objBack = TornadoUtil.createObjUsingTexture('assets/fishcook_background.png', 1.0, container, "Sprite", 0, 230);
-
+    gameInfo.objBack.width = 550;
 
     //Guest part wall (Background)
     TornadoUtil.fillRect(0xEAC067, 0, 0, 690, 220, app.stage);
@@ -118,8 +118,8 @@ function loadGameScene() {
     hand
         .on('mousedown', DragEvents.handOnMouseDown)
         .on('mousemove', DragEvents.handOnMouseMove)
-        .on('mouseupoutside', DragEvents.handOnMouseEnd)
-        .on('mouseup', DragEvents.handOnMouseEnd);
+        .on('mouseupoutside', DragEvents.handOnMouseUp)
+        .on('mouseup', DragEvents.handOnMouseUp);
 
 
 }
@@ -135,7 +135,7 @@ function tickGameScene() {
 
 function lazyTick() {
     lastFrameTime = new Date().getTime();
-    console.log("lazyTick: " + gameTimer);
+    // console.log("lazyTick: " + gameTimer);
     lifeCheck();
 }
 
@@ -149,8 +149,8 @@ function lifeCheck() {
     //console.log(newlifeMinus);
     if (newlifeMinus > lifeMinus) {
         lifeMinus = newlifeMinus;
-        gameInfo.life--;
-        console.log(gameInfo.life);
+        // gameInfo.life--;
+        // console.log(gameInfo.life);
     }
     showMonitor();
 }
