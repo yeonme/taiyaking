@@ -35,8 +35,8 @@ class Guest {
             return;
         }
         this.slotNumber = slotNum;
-        this.objGuest.position.set(0,0);
-        this.slotPos
+        this.objGuest.scale.set(0.5);
+        this.objGuest.position.set(20+240*slotNum,57);
     }
     /**
      * Set the order randomly.
@@ -48,6 +48,12 @@ class Guest {
      * Leave from the store.
      */
     away() {
+
+    }
+    /**
+     * Update the texture using current status.
+     */
+    update() {
 
     }
 }
