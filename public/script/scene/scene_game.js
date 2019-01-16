@@ -120,28 +120,28 @@ function loadGameScene() {
     kiji.interactive = true;
     kiji.buttonMode = true;
     kiji
-        .on('mousedown', DragEvents.onDragStart)
-        .on('mouseup', DragEvents.kijiOnDragEnd)
-        .on('mouseupoutside', DragEvents.kijiOnDragEnd)
-        .on('mousemove', DragEvents.kijiOnDragMove);
+        .on('pointerdown', DragEvents.onDragStart)
+        .on('pointerup', DragEvents.kijiOnDragEnd)
+        .on('pointerupoutside', DragEvents.kijiOnDragEnd)
+        .on('pointermove', DragEvents.kijiOnDragMove);
 
     // Anko Drag event
     anko.interactive = true;
     anko.buttonMode = true;
     anko
-        .on('mousedown', DragEvents.onDragStart)
-        .on('mouseup', DragEvents.ankoOnDragEnd)
-        .on('mouseupoutside', DragEvents.ankoOnDragEnd)
-        .on('mousemove', DragEvents.ankoOnDragMove);
+        .on('pointerdown', DragEvents.onDragStart)
+        .on('pointerup', DragEvents.ankoOnDragEnd)
+        .on('pointerupoutside', DragEvents.ankoOnDragEnd)
+        .on('pointermove', DragEvents.ankoOnDragMove);
 
     // Hand Drag event
     hand.interactive = true;
     hand.buttonMode = true;
     hand
-        .on('mousedown', DragEvents.handOnMouseDown)
-        .on('mousemove', DragEvents.handOnMouseMove)
-        .on('mouseupoutside', DragEvents.handOnMouseUp)
-        .on('mouseup', DragEvents.handOnMouseUp);
+        .on('pointerdown', DragEvents.handOnMouseDown)
+        .on('pointermove', DragEvents.handOnMouseMove)
+        .on('pointerupoutside', DragEvents.handOnMouseUp)
+        .on('pointerup', DragEvents.handOnMouseUp);
 }
 
 var gameInfo = new GameInfo();
