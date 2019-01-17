@@ -179,7 +179,7 @@ function lazyTick() {
     // console.log("lazyTick: " + gameTimer);
 
     lifeCheck();
-    gameInfo.guests.tickGuest();
+    gameInfo.guestman.tickGuest();
 }
 
 /* Game Functions */

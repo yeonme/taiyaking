@@ -54,10 +54,11 @@ class Guest {
         }
         this.guestType = guestType;
         this.slotNumber = slotNum;
-        this.objGuest = TornadoUtil.createObjUsingTexture("assets/character/boy_waiting.png", 0.5, app.stage, "Sprite", 30000, 30000, zorder);
+        this.objGuest = TornadoUtil.createObjUsingTexture("assets/character/boy_waiting.png", 0.5, app.stage, "Sprite", 30000, 30000);
+        this.objGuest.anchor.set(0.5, 0.5);
         this.objGuest.scale.set(0.5);
         //this.objGuest.position.set(20+240*slotNum,57);
-        gameInfo.animman.add(new AnimItem(gameTimer, 300+(slotNum*300), AnimationType.TRANSITION, this.objGuest, EasingType.EASING, slotNum % 2 == 0 ? -100 : 690, 58, 20+240*slotNum, 58));
+        gameInfo.animman.add(new AnimItem(gameTimer, 300+(slotNum*300), AnimationType.TRANSITION, this.objGuest, EasingType.EASING, slotNum % 2 == 0 ? -100 : 690, 140, 80+240*slotNum, 140));
         this.update();
         //Skip animation this time as not implemented.
 
@@ -86,8 +87,8 @@ class Guest {
      */
     away() {
         if(this.objGuest !== null) {
-            gameInfo.animman.add(new AnimItem(gameTimer, 300+(this.slotNumber*300), AnimationType.TRANSITION, this.objGuest, EasingType.EASING, 20+240*this.slotNumber, 58,
-            this.slotNumber % 2 == 0 ? -900 : 1090, 58, true));
+            gameInfo.animman.add(new AnimItem(gameTimer, 300+(this.slotNumber*300), AnimationType.TRANSITION, this.objGuest, EasingType.EASING, 80+240*this.slotNumber, 140,
+            this.slotNumber % 2 == 0 ? -900 : 1090, 140, true));
         }
         if(this.objBubble !== null) {
             gameInfo.animman.add(new AnimItem(gameTimer, 100, AnimationType.ALPHA, this.objBubble, EasingType.DEFAULT, 1, undefined,

@@ -1,4 +1,4 @@
-//@ts-nocheck
+//@ts-check
 class DragEvents {
 
     /**
@@ -197,7 +197,7 @@ class DragEvents {
             var newPosition = this.data.getLocalPosition(this.parent);
 
             gameInfo.objRequestBasket.visible = true;
-            gameInfo.objRequestBasket.texture = gameInfo.textureRequestBaseket[Math.min(gameInfo.textureBaseket.length -1, gameInfo.takiyakiCount)];    
+            gameInfo.objRequestBasket.texture = gameInfo.textureRequestBaseket[Math.min(gameInfo.textureBaseket.length - 1, gameInfo.takiyakiCount)];
 
             gameInfo.objRequestBasket.anchor.set(0.5, 0.5);
 
@@ -208,31 +208,8 @@ class DragEvents {
 
     static basketOnDragEnd() {
 
-
-        // if (TornadoLogic.hitTestRectangle(gameInfo.objAnkoSpoon, gameInfo.objBack)) {
-        //     let kvIdxSprite = [];
-        //     for (let idx = 0; idx < gameInfo.taiyakis.length; idx++) {
-        //         var newitem = {};
-        //         newitem.key = idx;
-        //         newitem.val = TornadoLogic.checkNearestPoint(gameInfo.objPointer, gameInfo.taiyakis[idx].objKiji);
-        //         kvIdxSprite.push(newitem);
-        //     }
-        //     console.log(kvIdxSprite);
-        //     kvIdxSprite.sort(function (a, b) {
-        //         var dflt = Number.MAX_VALUE;
-
-        //         var aVal = (a == null ? dflt : a.val);
-        //         var bVal = (b == null ? dflt : b.val);
-        //         return aVal - bVal;
-        //     });
-        //     console.log(kvIdxSprite);
-
-        //     if (gameInfo.taiyakis[kvIdxSprite[0].key].cookStage == CookStage.KIJI) {
-        //         gameInfo.taiyakis[kvIdxSprite[0].key].cookStage = CookStage.INSIDE;
-        //         gameInfo.taiyakis[kvIdxSprite[0].key].resetCookTime();
-        //         gameInfo.taiyakis[kvIdxSprite[0].key].updateVisual();
-        //     }
-        // }
+        let guest = DragEvents.findNearGuest();
+        console.log(guest)
 
         gameInfo.objRequestBasket.visible = false;
 
@@ -262,5 +239,42 @@ class DragEvents {
             console.log(kvIdxSprite);
             return gameInfo.taiyakis[kvIdxSprite[0].key];
         }
+    }
+
+    /**
+     * @returns {Guest} Nearest Guest
+     */
+    static findNearGuest() {
+        let isGuest = false;
+        gameInfo.guestman.guests.every(function(guest, index) {
+            if (TornadoLogic.hitTestRectangle(gameInfo.objRequestBasket, guest.objGuest)) {
+                isGuest = true;
+                return false;
+            }
+            return true;
+        });
+        
+        if(isGuest) {
+            console.log("Collison!");
+
+            let kvIdxSprite = [];
+            for (let idx = 0; idx < gameInfo.guestman.guests.length; idx++) {
+                var newitem = {};
+                newitem.key = idx;
+                newitem.val = TornadoLogic.checkNearestPoint(gameInfo.objRequestBasket, gameInfo.guestman.guests[idx].objGuest);
+                console.log(newitem.val);
+                kvIdxSprite.push(newitem);
+            }
+            // console.log(kvIdxSprite);
+            kvIdxSprite.sort(function (a, b) {
+                var dflt = Number.MAX_VALUE;
+                var aVal = (a == null ? dflt : a.val);
+                var bVal = (b == null ? dflt : b.val);
+                return aVal - bVal;
+            });
+            // console.log(kvIdxSprite);
+            return gameInfo.guestman.guests[kvIdxSprite[0].key];
+        }
+        return undefined;
     }
 }

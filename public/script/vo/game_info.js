@@ -8,7 +8,7 @@ class GameInfo {
     constructor(){
         this.life = 5;
         /** @type {GuestManager} **/
-        this.guests = new GuestManager();
+        this.guestman = new GuestManager();
         /** @type {Array<Taiyaki>} **/
         this.taiyakis = new Array(9);
         this.basket = new TaiyakiHashMap();
