@@ -25,6 +25,9 @@ class Guest {
         /** @type {TaiyakiHashMap} The order of taiyakis */
         this.order = new TaiyakiHashMap();
 
+        this._requiredTime = 0;
+        this.enduranceTime = 0;
+
         this.active = true;
 
         /** @type {Array<PIXI.Texture>} */
@@ -80,6 +83,8 @@ class Guest {
         this.order = new TaiyakiHashMap();
         let quantity = Math.floor((Math.random() * 6) + 1);
         this.order.setQuantity(TaiyakiType.ANKO, quantity);
+        this._requiredTime = 20000 + 3000*quantity;
+        this.enduranceTime = this._requiredTime + Math.random()*10000;
         this.builtText = "I want\n"+quantity+" Taiyaki"+(quantity>1?"s":"")+"!";
     }
     /**
@@ -126,11 +131,14 @@ class Guest {
         // 10000 - 20000 Angry
         // 20000 - 25000 Angry2
         let waitingTime = new Date().getTime() - this.timeAppeared;
-        if(waitingTime < 1000) {
+        if(waitingTime < this.enduranceTime * 0.6) {
+            console.log("normal: "+waitingTime);
             this.angryStage = AngryStage.A_NORMAL;
-        } else if(waitingTime < 2000) {
+        } else if(waitingTime < this.enduranceTime * 0.8) {
+            console.log("nervous: "+waitingTime);
             this.angryStage = AngryStage.B_NERVOUS;
-        } else if(waitingTime < 5000) {
+        } else if(waitingTime < this.enduranceTime) {
+            console.log("raged: "+waitingTime);
             this.angryStage = AngryStage.C_RAGED;
         } else {
             this.active = false;
