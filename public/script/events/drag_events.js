@@ -1,4 +1,4 @@
-//@ts-nocheck
+//@ts-check
 class DragEvents {
 
     /**
@@ -197,7 +197,7 @@ class DragEvents {
             var newPosition = this.data.getLocalPosition(this.parent);
 
             gameInfo.objRequestBasket.visible = true;
-            gameInfo.objRequestBasket.texture = gameInfo.textureRequestBaseket[Math.min(gameInfo.textureBaseket.length - 1, gameInfo.takiyakiCount)];
+            gameInfo.objRequestBasket.texture = gameInfo.textureRequestBaseket[Math.min(gameInfo.textureBaseket.length - 1, gameInfo.basket.count())];
 
             gameInfo.objRequestBasket.anchor.set(0.5, 0.5);
 
@@ -207,9 +207,15 @@ class DragEvents {
     }
 
     static basketOnDragEnd() {
-
         let guest = DragEvents.findNearGuest();
-        console.log(guest)
+        if(guest) {
+            console.log(guest);
+
+            if(gameInfo.basket.similar(guest.order)) {
+                console.log("Correct!");
+                gameInfo.basket.clear();
+            }
+        }
 
         gameInfo.objRequestBasket.visible = false;
 
