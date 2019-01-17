@@ -31,6 +31,8 @@ function loadGameScene() {
     roof.width = 345;
     roof.height = 80;
 
+    console.log(app.stage.children.length);
+
     // Ingredient space (Green zone);
     let greenSpace = TornadoUtil.fillRect(0x7ED824, 0, 0, 140, 280, app.stage);
     greenSpace.x = 550;

@@ -47,13 +47,14 @@ class Guest {
      * @param {Number} slotNum Where to be created from the left side.
      */
     display(slotNum = 0, guestType = GuestType.BOY) {
+        let zorder = 11; // Upper than background stage of Guests
         if(this.objGuest != null) {
             console.log("Guest object is not initialized.");
             return;
         }
         this.guestType = guestType;
         this.slotNumber = slotNum;
-        this.objGuest = TornadoUtil.createObjUsingTexture("assets/character/boy_waiting.png", 0.5, app.stage, "Sprite", 30000, 30000);
+        this.objGuest = TornadoUtil.createObjUsingTexture("assets/character/boy_waiting.png", 0.5, app.stage, "Sprite", 30000, 30000, zorder);
         this.objGuest.scale.set(0.5);
         //this.objGuest.position.set(20+240*slotNum,57);
         gameInfo.animman.add(new AnimItem(gameTimer, 300+(slotNum*300), AnimationType.TRANSITION, this.objGuest, EasingType.EASING, slotNum % 2 == 0 ? -100 : 690, 58, 20+240*slotNum, 58));
@@ -62,7 +63,7 @@ class Guest {
 
         if(this.objBubble == null) {
             this.objBubble = TornadoUtil.createObjUsingTexture("assets/speech_bubble_left.png", 0.3,
-            app.stage, "Sprite", 145 + 235*slotNum, 15);
+            app.stage, "Sprite", 145 + 235*slotNum, 15, zorder);
             this.objBubble.alpha = 0;
             this.objBubble.height = 100;
             this.objText = TornadoUtil.textOut(this.builtText, 168 + 237*slotNum, 50, app.stage, this.textStyleDefault);
