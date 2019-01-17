@@ -17,6 +17,7 @@ class DragEvents {
      */
     static kijiOnDragMove() {
         if (this.dragging) {
+            // @ts-ignore
             var newPosition = this.data.getLocalPosition(this.parent);
             this.rotation = -0.8;
 
@@ -69,6 +70,7 @@ class DragEvents {
      */
     static ankoOnDragMove() {
         if (this.dragging) {
+            // @ts-ignore
             var newPosition = this.data.getLocalPosition(this.parent);
 
             gameInfo.objAnkoSpoon.visible = true;
@@ -141,6 +143,7 @@ class DragEvents {
             }
         } else if (gameInfo.handClickCount > 1 && typeof taiyaki === 'undefined') {
             this.alpha = 1;
+            // @ts-ignore
             this.anchor.set(0, 0);
             this.x = 580;
             this.y = 403;
@@ -158,6 +161,7 @@ class DragEvents {
             this.alpha = 1.0;
 
             gameInfo.objPointer.visible = true;
+            // @ts-ignore
             this.anchor.set(0.5, 0.5);
             gameInfo.objPointer.x = mousePosition.x - 25;
             gameInfo.objPointer.y = mousePosition.y + 25;
@@ -194,6 +198,7 @@ class DragEvents {
     }
     static basketOnDragMove() {
         if (this.dragging) {
+            // @ts-ignore
             var newPosition = this.data.getLocalPosition(this.parent);
 
             gameInfo.objRequestBasket.visible = true;
