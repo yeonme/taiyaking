@@ -96,11 +96,11 @@ class Taiyaki {
                 if (this.cookTime() > this._minCookStep[CookStage.DOUBLEFLIP] && this.cookTime() < this._maxCookStep[CookStage.DOUBLEFLIP]) {
                     // Put into basket
                     this.cookStage = CookStage.EMPTY;
-                    gameInfo.takiyakiCount++;
-                    gameInfo.objBasket.texture = gameInfo.textureBaseket[Math.min(gameInfo.textureBaseket.length - 1, gameInfo.takiyakiCount)];
+                    gameInfo.basket.add(new Taiyaki());
+                    gameInfo.objBasket.texture = gameInfo.textureBaseket[Math.min(gameInfo.textureBaseket.length - 1, gameInfo.basket.count())];
                     gameInfo.taiyakiCountBoard.visible = true;
                     gameInfo.taiyakiCountText.visible = true;
-                    gameInfo.taiyakiCountText.text = gameInfo.takiyakiCount;
+                    gameInfo.taiyakiCountText.text = gameInfo.basket.count();
                     this.resetCookTime();
                 } else if (this.cookTime() > this._maxCookStep[CookStage.DOUBLEFLIP]) {
                     // Too late

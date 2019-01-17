@@ -44,7 +44,7 @@ class TaiyakiHashMap {
      * @param {Number} type Taiyaki type to get
      */
     get(type) {
-        if(typeof type === "number" && this._taiyakis.hasOwnProperty(type)) {
+        if(this._taiyakis.hasOwnProperty(type)) {
             return this._taiyakis[type];
         }
         return -1;
@@ -58,12 +58,10 @@ class TaiyakiHashMap {
     /**
      * Get all Taiyaki counts registered here.
      */
-    get count() {
+    count() {
         let sum = 0;
         for(var property in this._taiyakis) {
-            if(typeof property === 'number') {
-                sum += this._taiyakis[property];
-            }
+            sum += this._taiyakis[property];
         }
         return sum;
     }
@@ -77,10 +75,8 @@ class TaiyakiHashMap {
             return false;
         }
         for(var property in this._taiyakis) {
-            if(typeof property === 'number') {
-                if(!otherHashMap._taiyakis.hasOwnProperty(property) || otherHashMap._taiyakis[property] !== this._taiyakis[property]){
-                    return false;
-                }
+            if(!otherHashMap._taiyakis.hasOwnProperty(property) || otherHashMap._taiyakis[property] !== this._taiyakis[property]){
+                return false;
             }
         }
         return true;
