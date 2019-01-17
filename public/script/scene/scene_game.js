@@ -211,6 +211,6 @@ function showMonitor() {
     if (typeof gameInfo.objScore != "undefined" && gameInfo.objScore != null) {
         app.stage.removeChild(gameInfo.objScore);
         gameInfo.objScore.destroy();
-    } 
+    }
     gameInfo.objScore = TornadoUtil.textOut(gameInfo.score.toString(), 550, 160, app.stage, new PIXI.TextStyle({ align: 'center', fontWeight: 'bold' }));
 }
