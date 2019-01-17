@@ -208,9 +208,9 @@ function showMonitor() {
     }
 
     //Score (TEST BY GAMETIMER)
-    /* if (typeof gameInfo.objScore != "undefined" && gameInfo.objScore != null) {
+    if (typeof gameInfo.objScore != "undefined" && gameInfo.objScore != null) {
         app.stage.removeChild(gameInfo.objScore);
         gameInfo.objScore.destroy();
-    } */
-    // gameInfo.objScore = TornadoUtil.textOut((Math.round(gameTimer / 1000.0 * 100) / 100).toString(), 550, 160, app.stage, new PIXI.TextStyle({ align: 'center', fontWeight: 'bold' }));
+    } 
+    gameInfo.objScore = TornadoUtil.textOut(gameInfo.score.toString(), 550, 160, app.stage, new PIXI.TextStyle({ align: 'center', fontWeight: 'bold' }));
 }

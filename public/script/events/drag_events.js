@@ -213,12 +213,23 @@ class DragEvents {
 
     static basketOnDragEnd() {
         let guest = DragEvents.findNearGuest();
-        if(guest) {
+        if (guest) {
             console.log(guest);
-
-            if(gameInfo.basket.similar(guest.order)) {
+            if (gameInfo.basket.similar(guest.order)) {
                 console.log("Correct!");
+                gameInfo.score += (guest.guestType == GuestType.VIP) ? 300 : 100;
                 gameInfo.basket.clear();
+                gameInfo.objBasket.texture = gameInfo.textureBaseket[Math.min(gameInfo.textureBaseket.length - 1, gameInfo.basket.count())];
+                gameInfo.taiyakiCountText.text = gameInfo.basket.count();
+                gameInfo.taiyakiCountBoard.visible = false;
+                gameInfo.taiyakiCountText.visible = false;
+            } else {
+                gameInfo.life--;
+                gameInfo.basket.clear();
+                gameInfo.objBasket.texture = gameInfo.textureBaseket[Math.min(gameInfo.textureBaseket.length - 1, gameInfo.basket.count())];
+                gameInfo.taiyakiCountText.text = gameInfo.basket.count();
+                gameInfo.taiyakiCountBoard.visible = false;
+                gameInfo.taiyakiCountText.visible = false;
             }
         }
 
@@ -257,15 +268,15 @@ class DragEvents {
      */
     static findNearGuest() {
         let isGuest = false;
-        gameInfo.guestman.guests.every(function(guest, index) {
+        gameInfo.guestman.guests.every(function (guest, index) {
             if (TornadoLogic.hitTestRectangle(gameInfo.objRequestBasket, guest.objGuest)) {
                 isGuest = true;
                 return false;
             }
             return true;
         });
-        
-        if(isGuest) {
+
+        if (isGuest) {
             console.log("Collison!");
 
             let kvIdxSprite = [];
