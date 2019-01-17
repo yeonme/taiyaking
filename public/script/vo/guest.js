@@ -78,12 +78,8 @@ class Guest {
     newOrder() {
         this.order = new TaiyakiHashMap();
         let quantity = Math.floor((Math.random() * 6) + 1);
-        for (let i = 0; i < quantity; i++) {
-            let taiyaki = new Taiyaki();
-            taiyaki.type = TaiyakiType.ANKO;
-            this.order.add(new Taiyaki());
-        };
-        this.builtText = "I want\n"+quantity+" Taiyakis!";
+        this.order.setQuantity(TaiyakiType.ANKO, quantity);
+        this.builtText = "I want\n"+quantity+" Taiyaki"+(quantity>1?"s":"")+"!";
     }
     /**
      * Leave from the store.
