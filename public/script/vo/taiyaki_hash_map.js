@@ -16,6 +16,17 @@ class TaiyakiHashMap {
         return false;
     }
     /**
+     * Set each types of quantities
+     * @param {Number} type 
+     * @param {Number} count 
+     */
+    setQuantity(type, count) {
+        if(this._taiyakis.hasOwnProperty(type)){
+            this._taiyakis[type] = count;
+            return true;
+        }
+    }
+    /**
      * Update the key value with specified Taiyaki deleted.
      * @param {Taiyaki} item Item to be deleted Taiyaki
      */

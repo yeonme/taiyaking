@@ -22,9 +22,10 @@ class TornadoUtil {
      * @param {String} spriteType Reserved. (Default: "Sprite")
      * @param {Number} x Left X
      * @param {Number} y Top Y
+     * @param {Number} z Z-order (Default: targetObj.children.length)
      * @returns {PIXI.Sprite} Sprite Object
      */
-    static createObjUsingTexture(fileName, scale, targetObj, spriteType, x, y){
+    static createObjUsingTexture(fileName, scale, targetObj, spriteType, x, y, z = targetObj.children.length){
         let texture = PIXI.Texture.fromImage(fileName);
         let sprite = new PIXI.Sprite(texture); 
         sprite.scale.set(scale,scale);
@@ -34,7 +35,7 @@ class TornadoUtil {
         if(y >= 0){
             sprite.y = y;
         }
-        targetObj.addChild(sprite);
+        targetObj.addChildAt(sprite, z);
         return sprite;
     }
 
@@ -97,6 +98,9 @@ class TornadoUtil {
      * @param {Number} y Top Y
      * @param {Number} radius radius
      * @param {PIXI.Container} targetObj Target stage to be changed
+     * @param {Number} lineStylePixelWide Line style pixel wide
+     * @param {Number} lineColor Line color
+     * @param {Number} lineAlpha Line alpha
      * @returns {PIXI.Graphics} Graphics object
      */
     static fillCircle(color, x, y, radius, targetObj, lineStylePixelWide, lineColor, lineAlpha) {

@@ -47,6 +47,7 @@ class Guest {
      * @param {Number} slotNum Where to be created from the left side.
      */
     display(slotNum = 0, guestType = GuestType.BOY) {
+        let zorder = 11; // Upper than background stage of Guests
         if(this.objGuest != null) {
             console.log("Guest object is not initialized.");
             return;
@@ -63,7 +64,7 @@ class Guest {
 
         if(this.objBubble == null) {
             this.objBubble = TornadoUtil.createObjUsingTexture("assets/speech_bubble_left.png", 0.3,
-            app.stage, "Sprite", 145 + 235*slotNum, 15);
+            app.stage, "Sprite", 145 + 235*slotNum, 15, zorder);
             this.objBubble.alpha = 0;
             this.objBubble.height = 100;
             this.objText = TornadoUtil.textOut(this.builtText, 168 + 237*slotNum, 50, app.stage, this.textStyleDefault);
@@ -78,12 +79,8 @@ class Guest {
     newOrder() {
         this.order = new TaiyakiHashMap();
         let quantity = Math.floor((Math.random() * 6) + 1);
-        for (let i = 0; i < quantity; i++) {
-            let taiyaki = new Taiyaki();
-            taiyaki.type = TaiyakiType.ANKO;
-            this.order.add(new Taiyaki());
-        };
-        this.builtText = "I want\n"+quantity+" Taiyakis!";
+        this.order.setQuantity(TaiyakiType.ANKO, quantity);
+        this.builtText = "I want\n"+quantity+" Taiyaki"+(quantity>1?"s":"")+"!";
     }
     /**
      * Leave from the store.

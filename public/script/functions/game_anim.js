@@ -21,6 +21,9 @@ class AnimManager {
         let idx = 0;
         while(idx < this.timelines.length) {
             const item = this.timelines[idx];
+            if(item.target === null) {
+                continue;
+            }
             if(item.isActive()){
                 let x = item.getCurrent1();
                 let y = item.getCurrent2();
