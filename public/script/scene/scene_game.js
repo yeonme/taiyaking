@@ -86,7 +86,16 @@ function loadGameScene() {
     gameInfo.textureBaseket[4] = PIXI.Texture.fromImage('assets/basket4.png', undefined, 0.4);
     gameInfo.textureBaseket[5] = PIXI.Texture.fromImage('assets/basket5.png', undefined, 0.4);
 
-    gameInfo.objBasket.texture = gameInfo.textureBaseket[0];
+    // requestBasket
+    gameInfo.objRequestBasket = TornadoUtil.createObjUsingTexture('assets/basket1.png', 0.2, app.stage, "Sprite", 0, 0);
+    gameInfo.objRequestBasket.visible = false;
+
+    gameInfo.textureRequestBaseket[0] = PIXI.Texture.fromImage('assets/basket.png', undefined, 0.2);
+    gameInfo.textureRequestBaseket[1] = PIXI.Texture.fromImage('assets/basket1.png', undefined, 0.2);
+    gameInfo.textureRequestBaseket[2] = PIXI.Texture.fromImage('assets/basket2.png', undefined, 0.2);
+    gameInfo.textureRequestBaseket[3] = PIXI.Texture.fromImage('assets/basket3.png', undefined, 0.2);
+    gameInfo.textureRequestBaseket[4] = PIXI.Texture.fromImage('assets/basket4.png', undefined, 0.2);
+    gameInfo.textureRequestBaseket[5] = PIXI.Texture.fromImage('assets/basket5.png', undefined, 0.2);
 
     // Cooking tools
     let kiji = TornadoUtil.createObjUsingTexture('assets/ingredients1.png', 0.22, app.stage, "Sprite", 640, 303);
@@ -115,7 +124,7 @@ function loadGameScene() {
     });
     gameInfo.taiyakiCountText = TornadoUtil.textOut("0", 659, 510, app.stage, style);
     gameInfo.taiyakiCountText.visible = false;
-    
+
     // Kiji Drag event
     kiji.interactive = true;
     kiji.buttonMode = true;
@@ -142,6 +151,15 @@ function loadGameScene() {
         .on('mousemove', DragEvents.handOnMouseMove)
         .on('mouseupoutside', DragEvents.handOnMouseUp)
         .on('mouseup', DragEvents.handOnMouseUp);
+
+    // Busket Drag Event
+    gameInfo.objBasket.interactive = true;
+    gameInfo.objBasket.buttonMode = true;
+    gameInfo.objBasket
+        .on('mousedown', DragEvents.basketOnDragStart)
+        .on('mouseup', DragEvents.basketOnDragEnd)
+        .on('mouseupoutside', DragEvents.basketOnDragEnd)
+        .on('mousemove', DragEvents.basketOnDragMove);
 }
 
 var gameInfo = new GameInfo();

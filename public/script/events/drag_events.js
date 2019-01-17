@@ -117,7 +117,7 @@ class DragEvents {
         this.data = null;
     }
 
-    static handOnMouseDown(event) { 
+    static handOnMouseDown(event) {
         gameInfo.handClickCount++;
 
         if (gameInfo.handClickCount == 1) {
@@ -141,7 +141,7 @@ class DragEvents {
             }
         } else if (gameInfo.handClickCount > 1 && typeof taiyaki === 'undefined') {
             this.alpha = 1;
-            this.anchor.set(0,0);
+            this.anchor.set(0, 0);
             this.x = 580;
             this.y = 403;
             gameInfo.handClick = false;
@@ -156,9 +156,9 @@ class DragEvents {
         if (gameInfo.handClick) {
             var mousePosition = app.renderer.plugins.interaction.mouse.global;
             this.alpha = 1.0;
-            
+
             gameInfo.objPointer.visible = true;
-            this.anchor.set(0.5,0.5);
+            this.anchor.set(0.5, 0.5);
             gameInfo.objPointer.x = mousePosition.x - 25;
             gameInfo.objPointer.y = mousePosition.y + 25;
             this.x = mousePosition.x;
@@ -177,6 +177,67 @@ class DragEvents {
                 this.cursor = "none";
             }
         }
+    }
+
+    /**
+     * Basket event
+     *
+     */
+
+    /**
+    * onDragStart 
+    * @param {PIXI.interaction.InteractionEvent} event Event variable
+    */
+    static basketOnDragStart(event) {
+        this.data = event.data;
+        this.dragging = true;
+    }
+    static basketOnDragMove() {
+        if (this.dragging) {
+            var newPosition = this.data.getLocalPosition(this.parent);
+
+            gameInfo.objRequestBasket.visible = true;
+            gameInfo.objRequestBasket.texture = gameInfo.textureRequestBaseket[Math.min(gameInfo.textureBaseket.length -1, gameInfo.takiyakiCount)];    
+
+            gameInfo.objRequestBasket.anchor.set(0.5, 0.5);
+
+            gameInfo.objRequestBasket.x = newPosition.x;
+            gameInfo.objRequestBasket.y = newPosition.y;
+        }
+    }
+
+    static basketOnDragEnd() {
+
+
+        // if (TornadoLogic.hitTestRectangle(gameInfo.objAnkoSpoon, gameInfo.objBack)) {
+        //     let kvIdxSprite = [];
+        //     for (let idx = 0; idx < gameInfo.taiyakis.length; idx++) {
+        //         var newitem = {};
+        //         newitem.key = idx;
+        //         newitem.val = TornadoLogic.checkNearestPoint(gameInfo.objPointer, gameInfo.taiyakis[idx].objKiji);
+        //         kvIdxSprite.push(newitem);
+        //     }
+        //     console.log(kvIdxSprite);
+        //     kvIdxSprite.sort(function (a, b) {
+        //         var dflt = Number.MAX_VALUE;
+
+        //         var aVal = (a == null ? dflt : a.val);
+        //         var bVal = (b == null ? dflt : b.val);
+        //         return aVal - bVal;
+        //     });
+        //     console.log(kvIdxSprite);
+
+        //     if (gameInfo.taiyakis[kvIdxSprite[0].key].cookStage == CookStage.KIJI) {
+        //         gameInfo.taiyakis[kvIdxSprite[0].key].cookStage = CookStage.INSIDE;
+        //         gameInfo.taiyakis[kvIdxSprite[0].key].resetCookTime();
+        //         gameInfo.taiyakis[kvIdxSprite[0].key].updateVisual();
+        //     }
+        // }
+
+        gameInfo.objRequestBasket.visible = false;
+
+        this.dragging = false;
+        this.data = null;
     }
 
     /**

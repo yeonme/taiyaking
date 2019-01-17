@@ -32,5 +32,9 @@ class GameInfo {
          /** @type {PIXI.Graphics} */
         this.taiyakiCountBoard = null;
         this.taiyakiCountText = null;
+         /** @type {PIXI.Sprite} **/
+         this.objRequestBasket = null;
+         /** @type {Array<PIXI.Texture>} **/
+        this.textureRequestBaseket = new Array(6);
     }
 }
