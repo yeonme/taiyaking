@@ -10,8 +10,9 @@ class AnimItem {
      * @param {Number} fromParam2 Smoothly changes value starts from (Y)
      * @param {Number} toParam1 Smoothly changes value starts from (X)
      * @param {Number} toParam2 Smoothly changes value starts from (Y)
+     * @param {Boolean} removeOnFinish To remove or not after animation
      */
-    constructor(begin, duration, animationType, target, easingType = 0, fromParam1 = 0, fromParam2 = 0, toParam1 = 0, toParam2 = 0) {
+    constructor(begin, duration, animationType, target, easingType = 0, fromParam1 = 0, fromParam2 = 0, toParam1 = 0, toParam2 = 0, removeOnFinish = false) {
         /** @type {Number} */
         this.beginTime = begin;
         /** @type {Number} */
@@ -27,9 +28,11 @@ class AnimItem {
         /** @type {Number} */
         this.toParam2 = toParam2;
         this.easingType = easingType;
+        this.animationType = animationType;
         /** @type {PIXI.DisplayObject} */
         this.target = target;
         this._dismissed = false;
+        this.removeOnFinish = removeOnFinish;
     }
 
     isActive() {
@@ -37,16 +40,21 @@ class AnimItem {
     }
 
     isDismissed() {
-        if(this._dismissed) {
+        if (this._dismissed) {
             return true;
         }
-        if(gameTimer > this.beginTime + this.duration) {
+        if (gameTimer > this.beginTime + this.duration + 3000) {
+            if(this.removeOnFinish){
+                app.stage.removeChild(this.target);
+                // console.log("app.stage.children.length: "+app.stage.children.length);
+                // console.log(this.target.texture);
+                this.target.destroy();
+            }
             this._dismissed = true;
             return true;
         }
         return false;
     }
-
     /**
      * 
      * @param {Number} from start value
@@ -54,15 +62,20 @@ class AnimItem {
      * @param {Number} duration how long lasts
      * @param {Number} pos current time (less than or same as duration)
      */
-    _xyCurrent(from, to, duration, pos){
-        return from + (to - from) * Math.max(0,Math.min(1,(pos / duration)));
+    _xyCurrent(from, to, duration, pos) {
+        if (this.easingType == EasingType.DEFAULT) {
+            // return from + (to - from) * Math.max(0, Math.min(1, (pos / duration)));
+            return from + (to - from) * EasingFunctions.linear(Math.max(0,Math.min(1,pos / duration)));
+        } else if (this.easingType == EasingType.EASING) {
+            return from + (to - from) * EasingFunctions.easeInOutQuad(Math.max(0,Math.min(1,pos / duration)));
+        }
     }
 
-    getCurrent1(){
+    getCurrent1() {
         return this._xyCurrent(this.fromParam1, this.toParam1, this.duration, gameTimer - this.beginTime);
     }
 
-    getCurrent2(){
+    getCurrent2() {
         return this._xyCurrent(this.fromParam2, this.fromParam2, this.duration, gameTimer - this.beginTime);
     }
 }

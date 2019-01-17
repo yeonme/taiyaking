@@ -8,7 +8,10 @@ class TornadoUtil {
      */
     static clearStage(stage) {
         while(stage.children[0])
-        { stage.removeChild(stage.children[0]); }
+        {
+            stage.children[0].destroy();
+            stage.removeChild(stage.children[0]); 
+        }
     }
 
     /**
