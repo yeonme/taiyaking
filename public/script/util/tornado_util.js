@@ -16,18 +16,24 @@ class TornadoUtil {
 
     /**
      * Create PIXI Object on the stage with specified texture.
-     * @param {String} fileName Sprite texture fileName
+     * @param {any} fileName String fileName or string[] texture frame fileName
      * @param {Number} scale Float to zoom in or out (Default: 1.0)
      * @param {PIXI.Container} targetObj Target stage to be changed
-     * @param {String} spriteType Reserved. (Default: "Sprite")
+     * @param {String} spriteType (Default: "Sprite")
      * @param {Number} x Left X
      * @param {Number} y Top Y
      * @param {Number} z Z-order (Default: targetObj.children.length)
-     * @returns {PIXI.Sprite} Sprite Object
+     * @param {Number} delayTime For AnimatedSprite only. Delay for each frames.
+     * @returns {PIXI.Sprite | PIXI.extras.AnimatedSprite} Sprite Object
      */
-    static createObjUsingTexture(fileName, scale, targetObj, spriteType, x, y, z = targetObj.children.length){
+    static createObjUsingTexture(fileName, scale, targetObj, spriteType, x, y, z = targetObj.children.length, delayTime = 0){
         let texture = PIXI.Texture.fromImage(fileName);
-        let sprite = new PIXI.Sprite(texture); 
+        let sprite = null;
+        if (spriteType == "Sprite") {
+            sprite = new PIXI.Sprite(texture);
+        } else if (spriteType == "AnimatedSprite") {
+            sprite = new PIXI.extras.AnimatedSprite(fileName);
+        }
         sprite.scale.set(scale,scale);
         if(x >= 0) {
             sprite.x = x;
