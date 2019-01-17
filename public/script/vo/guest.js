@@ -11,11 +11,11 @@
 class Guest {
     constructor() {
         this.timeAppeared = new Date().getTime();
-        /** @type {PIXI.Sprite} **/
+        /** @type {PIXI.extras.AnimatedSprite} **/
         this.objGuest = null;
         /** @type {PIXI.Sprite} */
         this.objBubble = null;
-        /** @type {PIXI.Text} */
+        /** @type {PIXI.Sprite} */
         this.objText = null;
         this.builtText = "";
         this.slotNumber = -1;
@@ -25,14 +25,22 @@ class Guest {
         /** @type {TaiyakiHashMap} The order of taiyakis */
         this.order = new TaiyakiHashMap();
 
+        this._requiredTime = 0;
+        this.enduranceTime = 0;
+
         this.active = true;
 
-        /** @type {Array<PIXI.Texture>} */
-        this.texturesBoy = [PIXI.Texture.fromImage("assets/character/boy_waiting.png", undefined, 0.5)];
-        /** @type {Array<PIXI.Texture>} */
-        this.texturesGirl = [PIXI.Texture.fromImage("assets/character/girl_waiting.png", undefined, 0.5)];
-        /** @type {Array<PIXI.Texture>} */
-        this.texturesVIP = [PIXI.Texture.fromImage("assets/character/vip_waiting.png", undefined, 0.5)];
+        /** @type {Array<Array<PIXI.Texture>>} */
+        this.texturesBoy = [[PIXI.Texture.fromImage("assets/character/boy_waiting.png", undefined, 0.5)]];
+        /** @type {Array<Array<PIXI.Texture>>} */
+        this.texturesGirl = [[PIXI.Texture.fromImage("assets/character/girl_waiting.png", undefined, 0.5)]];
+        /** @type {Array<Array<any>>} */
+        this.texturesVIP = [[
+        {texture:PIXI.Texture.fromImage("assets/character/vip_waiting_1.png", undefined, 0.5),time:700},
+        {texture:PIXI.Texture.fromImage("assets/character/vip_waiting_2.png", undefined, 0.5),time:700},
+        {texture:PIXI.Texture.fromImage("assets/character/vip_waiting_3.png", undefined, 0.5),time:700},
+        {texture:PIXI.Texture.fromImage("assets/character/vip_waiting_4.png", undefined, 0.5),time:700},
+        {texture:PIXI.Texture.fromImage("assets/character/vip_waiting_5.png", undefined, 0.5),time:700}]];
         this.textStyleDefault = new PIXI.TextStyle({
             align: 'center',
             fontWeight: 'bold',
@@ -47,14 +55,15 @@ class Guest {
      * @param {Number} slotNum Where to be created from the left side.
      */
     display(slotNum = 0, guestType = GuestType.BOY) {
-        let zorder = 11; // Upper than background stage of Guests
+        let zorder = 10; // Upper than background stage of Guests
         if(this.objGuest != null) {
             console.log("Guest object is not initialized.");
             return;
         }
         this.guestType = guestType;
         this.slotNumber = slotNum;
-        this.objGuest = TornadoUtil.createObjUsingTexture("assets/character/boy_waiting.png", 0.5, app.stage, "Sprite", 30000, 30000, zorder);
+        // @ts-ignore
+        this.objGuest = TornadoUtil.createObjUsingTexture("assets/character/boy_waiting.png", 0.5, app.stage, "AnimatedSprite", 30000, 30000, zorder);
         this.objGuest.anchor.set(0.5, 0.5);
         this.objGuest.scale.set(0.5);
         //this.objGuest.position.set(20+240*slotNum,57);
@@ -80,6 +89,10 @@ class Guest {
         this.order = new TaiyakiHashMap();
         let quantity = Math.floor((Math.random() * 6) + 1);
         this.order.setQuantity(TaiyakiType.ANKO, quantity);
+        // this._requiredTime = 20000 + 4500*quantity;
+        this._requiredTime = 0;
+        // this.enduranceTime = this._requiredTime + Math.random()*10000 + 10000;
+        this.enduranceTime = 3000;
         this.builtText = "I want\n"+quantity+" Taiyaki"+(quantity>1?"s":"")+"!";
     }
     /**
@@ -106,7 +119,7 @@ class Guest {
         if(this.objGuest == null) {
             return;
         }
-        /** @type {Array<PIXI.Texture>} */
+        /** @type {Array<Array<PIXI.Texture>>} */
         let textures = null;
         switch(this.guestType) {
             case GuestType.BOY: 
@@ -119,18 +132,22 @@ class Guest {
                 textures = this.texturesVIP;
             break;
         }
-        this.objGuest.texture = textures[Math.min(textures.length-1,this.angryStage)];
+        this.objGuest.textures = textures[Math.min(textures.length-1,this.angryStage)];
+        this.objGuest.gotoAndPlay(Math.random()*this.objGuest.textures.length);
     }
     lifecycle() {
         // 0 - 10000 Normal
         // 10000 - 20000 Angry
         // 20000 - 25000 Angry2
         let waitingTime = new Date().getTime() - this.timeAppeared;
-        if(waitingTime < 1000) {
+        if(waitingTime < this.enduranceTime * 0.6) {
+            console.log("normal: "+waitingTime);
             this.angryStage = AngryStage.A_NORMAL;
-        } else if(waitingTime < 2000) {
+        } else if(waitingTime < this.enduranceTime * 0.8) {
+            console.log("nervous: "+waitingTime);
             this.angryStage = AngryStage.B_NERVOUS;
-        } else if(waitingTime < 5000) {
+        } else if(waitingTime < this.enduranceTime) {
+            console.log("raged: "+waitingTime);
             this.angryStage = AngryStage.C_RAGED;
         } else {
             this.active = false;
