@@ -54,7 +54,7 @@ class Guest {
         }
         this.guestType = guestType;
         this.slotNumber = slotNum;
-        this.objGuest = TornadoUtil.createObjUsingTexture("assets/character/boy_waiting.png", 0.5, app.stage, "Sprite", 30000, 30000);
+        this.objGuest = TornadoUtil.createObjUsingTexture("assets/character/boy_waiting.png", 0.5, app.stage, "Sprite", 30000, 30000, zorder);
         this.objGuest.anchor.set(0.5, 0.5);
         this.objGuest.scale.set(0.5);
         //this.objGuest.position.set(20+240*slotNum,57);
