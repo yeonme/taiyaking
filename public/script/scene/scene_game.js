@@ -32,6 +32,12 @@ function loadGameScene() {
     greenSpace.x = 550;
     greenSpace.y = 245;
 
+    // fish cook (Background)
+    let container = new PIXI.Container();
+    app.stage.addChild(container);
+    gameInfo.objBack = TornadoUtil.createObjUsingTexture('assets/fishcook_background.png', 1.0, container, "Sprite", 0, 230);
+    gameInfo.objBack.width = 550;
+
     //Serve counter background
     TornadoUtil.fillRect(0xE84C09, 0, 220, 690, 25, app.stage);
 
@@ -45,12 +51,6 @@ function loadGameScene() {
     gameInfo.objLifes[4] = TornadoUtil.createObjUsingTexture('assets/life.gif', 1.7, app.stage, "Sprite", 630, 110);
 
     gameInfo.objScore = TornadoUtil.textOut("0", 550, 160, app.stage, new PIXI.TextStyle({ align: 'center', fontWeight: 'bold' }));
-
-    // fish cook (Background)
-    let container = new PIXI.Container();
-    app.stage.addChild(container);
-    gameInfo.objBack = TornadoUtil.createObjUsingTexture('assets/fishcook_background.png', 1.0, container, "Sprite", 0, 230);
-    gameInfo.objBack.width = 550;
 
     // Fish_empty
     TornadoUtil.createObjUsingTexture('assets/fish_empty1.png', 0.25, app.stage, "Sprite", 20, 240);

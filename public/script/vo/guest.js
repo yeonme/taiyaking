@@ -89,10 +89,10 @@ class Guest {
         this.order = new TaiyakiHashMap();
         let quantity = Math.floor((Math.random() * 6) + 1);
         this.order.setQuantity(TaiyakiType.ANKO, quantity);
-        // this._requiredTime = 20000 + 4500*quantity;
-        this._requiredTime = 0;
-        // this.enduranceTime = this._requiredTime + Math.random()*10000 + 10000;
-        this.enduranceTime = 3000;
+        this._requiredTime = 20000 + 4500*quantity;
+        // this._requiredTime = 0;
+        this.enduranceTime = this._requiredTime + Math.random()*10000 + 10000;
+        // this.enduranceTime = 3000;
         this.builtText = "I want\n"+quantity+" Taiyaki"+(quantity>1?"s":"")+"!";
     }
     /**
