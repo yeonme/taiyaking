@@ -129,37 +129,37 @@ function loadGameScene() {
     kiji.interactive = true;
     kiji.buttonMode = true;
     kiji
-        .on('mousedown', DragEvents.onDragStart)
-        .on('mouseup', DragEvents.kijiOnDragEnd)
-        .on('mouseupoutside', DragEvents.kijiOnDragEnd)
-        .on('mousemove', DragEvents.kijiOnDragMove);
+        .on('pointerdown', DragEvents.onDragStart)
+        .on('pointerup', DragEvents.kijiOnDragEnd)
+        .on('pointerupoutside', DragEvents.kijiOnDragEnd)
+        .on('pointermove', DragEvents.kijiOnDragMove);
 
     // Anko Drag event
     anko.interactive = true;
     anko.buttonMode = true;
     anko
-        .on('mousedown', DragEvents.onDragStart)
-        .on('mouseup', DragEvents.ankoOnDragEnd)
-        .on('mouseupoutside', DragEvents.ankoOnDragEnd)
-        .on('mousemove', DragEvents.ankoOnDragMove);
+        .on('pointerdown', DragEvents.onDragStart)
+        .on('pointerup', DragEvents.ankoOnDragEnd)
+        .on('pointerupoutside', DragEvents.ankoOnDragEnd)
+        .on('pointermove', DragEvents.ankoOnDragMove);
 
     // Hand Drag event
     hand.interactive = true;
     hand.buttonMode = true;
     hand
-        .on('mousedown', DragEvents.handOnMouseDown)
-        .on('mousemove', DragEvents.handOnMouseMove)
-        .on('mouseupoutside', DragEvents.handOnMouseUp)
-        .on('mouseup', DragEvents.handOnMouseUp);
+        .on('pointerdown', DragEvents.handOnMouseDown)
+        .on('pointermove', DragEvents.handOnMouseMove)
+        .on('pointerupoutside', DragEvents.handOnMouseUp)
+        .on('pointerup', DragEvents.handOnMouseUp);
 
     // Busket Drag Event
     gameInfo.objBasket.interactive = true;
     gameInfo.objBasket.buttonMode = true;
     gameInfo.objBasket
-        .on('mousedown', DragEvents.basketOnDragStart)
-        .on('mouseup', DragEvents.basketOnDragEnd)
-        .on('mouseupoutside', DragEvents.basketOnDragEnd)
-        .on('mousemove', DragEvents.basketOnDragMove);
+        .on('pointerdown', DragEvents.basketOnDragStart)
+        .on('pointerup', DragEvents.basketOnDragEnd)
+        .on('pointerupoutside', DragEvents.basketOnDragEnd)
+        .on('pointermove', DragEvents.basketOnDragMove);
 }
 
 var gameInfo = new GameInfo();
@@ -169,11 +169,13 @@ function tickGameScene() {
         //fires every 500ms or first time entered
         lazyTick();
     }
+    gameInfo.animman.tick();
 }
 
 function lazyTick() {
     lastFrameTime = new Date().getTime();
     // console.log("lazyTick: " + gameTimer);
+
     lifeCheck();
     gameInfo.guests.tickGuest();
 }
@@ -204,8 +206,9 @@ function showMonitor() {
     }
 
     //Score (TEST BY GAMETIMER)
-    if (typeof gameInfo.objScore != "undefined" && gameInfo.objScore != null) {
+    /* if (typeof gameInfo.objScore != "undefined" && gameInfo.objScore != null) {
         app.stage.removeChild(gameInfo.objScore);
-    }
-    gameInfo.objScore = TornadoUtil.textOut((Math.round(gameTimer / 1000.0 * 100) / 100).toString(), 550, 160, app.stage, new PIXI.TextStyle({ align: 'center', fontWeight: 'bold' }));
+        gameInfo.objScore.destroy();
+    } */
+    // gameInfo.objScore = TornadoUtil.textOut((Math.round(gameTimer / 1000.0 * 100) / 100).toString(), 550, 160, app.stage, new PIXI.TextStyle({ align: 'center', fontWeight: 'bold' }));
 }

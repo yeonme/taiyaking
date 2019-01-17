@@ -53,17 +53,22 @@ class Guest {
         }
         this.guestType = guestType;
         this.slotNumber = slotNum;
-        this.objGuest = TornadoUtil.createObjUsingTexture("assets/character/boy_waiting.png", 0.5, app.stage, "Sprite", 0, 0);
+        this.objGuest = TornadoUtil.createObjUsingTexture("assets/character/boy_waiting.png", 0.5, app.stage, "Sprite", 30000, 30000);
         this.objGuest.scale.set(0.5);
-        this.objGuest.position.set(20+240*slotNum,57);
+        //this.objGuest.position.set(20+240*slotNum,57);
+        gameInfo.animman.add(new AnimItem(gameTimer, 300+(slotNum*300), AnimationType.TRANSITION, this.objGuest, EasingType.EASING, slotNum % 2 == 0 ? -100 : 690, 58, 20+240*slotNum, 58));
         this.update();
         //Skip animation this time as not implemented.
 
         if(this.objBubble == null) {
             this.objBubble = TornadoUtil.createObjUsingTexture("assets/speech_bubble_left.png", 0.3,
             app.stage, "Sprite", 145 + 235*slotNum, 15);
+            this.objBubble.alpha = 0;
             this.objBubble.height = 100;
             this.objText = TornadoUtil.textOut(this.builtText, 168 + 237*slotNum, 50, app.stage, this.textStyleDefault);
+            this.objText.alpha = 0;
+            gameInfo.animman.add(new AnimItem(gameTimer+450, 600, AnimationType.ALPHA, this.objBubble, EasingType.DEFAULT, 0.0, 0.0, 1.0, 0.0));
+            gameInfo.animman.add(new AnimItem(gameTimer+450, 600, AnimationType.ALPHA, this.objText, EasingType.DEFAULT, 0.0, 0.0, 1.0, 0.0));
         }
     }
     /**
@@ -83,11 +88,18 @@ class Guest {
      * Leave from the store.
      */
     away() {
-        // TODO: Push animation to AnimManager
-
-        if(this.objText !== null) { this.objText.destroy(); }
-        if(this.objBubble !== null) { this.objBubble.destroy(); }
-        if(this.objGuest !== null) { this.objGuest.destroy(); }
+        if(this.objGuest !== null) {
+            gameInfo.animman.add(new AnimItem(gameTimer, 300+(this.slotNumber*300), AnimationType.TRANSITION, this.objGuest, EasingType.EASING, 20+240*this.slotNumber, 58,
+            this.slotNumber % 2 == 0 ? -900 : 1090, 58, true));
+        }
+        if(this.objBubble !== null) {
+            gameInfo.animman.add(new AnimItem(gameTimer, 100, AnimationType.ALPHA, this.objBubble, EasingType.DEFAULT, 1, undefined,
+                0, undefined, true));
+        }
+        if(this.objText !== null) {
+            gameInfo.animman.add(new AnimItem(gameTimer, 100, AnimationType.ALPHA, this.objText, EasingType.DEFAULT, 1, undefined,
+                0, undefined, true));
+        }
     }
     /**
      * Update the texture using current status.
