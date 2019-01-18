@@ -189,14 +189,10 @@ var lifeMinus = 0; //Test Val
 let other;
 
 function lifeCheck() {
-    let newlifeMinus = Math.floor(gameTimer / 5000);
-    //console.log(newlifeMinus);
-    if (newlifeMinus > lifeMinus) {
-        lifeMinus = newlifeMinus;
-        // gameInfo.life--;
-        // console.log(gameInfo.life);
-    }
     showMonitor();
+    if(gameInfo.life <= 0) {
+        console.log("game over");
+    }
 }
 
 function showMonitor() {
