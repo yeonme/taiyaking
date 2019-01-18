@@ -223,6 +223,7 @@ class DragEvents {
                 gameInfo.taiyakiCountText.text = gameInfo.basket.count();
                 gameInfo.taiyakiCountBoard.visible = false;
                 gameInfo.taiyakiCountText.visible = false;
+                guest.active = false;
             } else {
                 gameInfo.life--;
                 gameInfo.basket.clear();
