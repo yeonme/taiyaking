@@ -30,7 +30,9 @@ class GuestManager {
         while(idx < this.count()) {
             this.guests[idx].lifecycle();
             if(this.guests[idx] instanceof Guest && this.guests[idx].active === false) {
-                this.guests[idx].away();
+                let guest = idx == 0 ? this.guests.shift() : this.guests.pop();
+                this.nextPos = guest.slotNumber;
+                guest.away();
             } else {
                 idx++;
             }

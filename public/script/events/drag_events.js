@@ -234,12 +234,13 @@ class DragEvents {
                 gameInfo.taiyakiCountText.visible = false;
                 guest.got = true;
             } else {
-                gameInfo.life--;
+                // gameInfo.life--;
                 gameInfo.basket.clear();
                 gameInfo.objBasket.texture = gameInfo.textureBaseket[Math.min(gameInfo.textureBaseket.length - 1, gameInfo.basket.count())];
                 gameInfo.taiyakiCountText.text = gameInfo.basket.count();
                 gameInfo.taiyakiCountBoard.visible = false;
                 gameInfo.taiyakiCountText.visible = false;
+                guest.active = false;
             }
         }
 

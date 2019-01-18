@@ -182,7 +182,7 @@ class Guest {
         }
         this.active = false;
 
-        if(this.got === true) {
+        if(this.got === false) {
             console.log("life minus from "+gameInfo.life);
             gameInfo.life--;
         }
@@ -222,9 +222,6 @@ class Guest {
         }
     }
     lifecycle() {
-        // 0 - 10000 Normal
-        // 10000 - 20000 Angry
-        // 20000 - 25000 Angry2
         let waitingTime = new Date().getTime() - this.timeAppeared;
         let lastAngryStage = this.angryStage;
         if(this.got) {
