@@ -29,13 +29,8 @@ class GuestManager {
         let idx = 0;
         while(idx < this.count()) {
             this.guests[idx].lifecycle();
-            if(this.guests[idx] instanceof Guest && !this.guests[idx].active) {
-                let guest = this.guests.shift();
-                if(this.guests[idx] instanceof Guest && !this.guests[idx].got) {
-                    console.log("life minus from "+gameInfo.life);
-                    gameInfo.life--;
-                }
-                guest.away();
+            if(this.guests[idx] instanceof Guest && this.guests[idx].active === false) {
+                this.guests[idx].away();
             } else {
                 idx++;
             }
