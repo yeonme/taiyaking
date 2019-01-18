@@ -5,7 +5,9 @@
  */
 class TornadoLogic {
     static hitTestRectangle(r1, r2) {
-
+        if(r1 == null || r2 == null) {
+            return false;
+        }
         //Define the variables we'll need to calculate
         let hit, combinedHalfWidths, combinedHalfHeights, vx, vy;
 
@@ -56,6 +58,10 @@ class TornadoLogic {
     }
 
     static checkNearestPoint(r1, r2) {
+        if(r1 == null || r2 == null) {
+            return Number.MAX_VALUE;
+        }
+
         //Define the variables we'll need to calculate
         let vx, vy;
 

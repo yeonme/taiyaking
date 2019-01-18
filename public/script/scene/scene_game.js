@@ -25,7 +25,8 @@ function loadGameScene() {
     roof.width = 345;
     roof.height = 80;
 
-    console.log(app.stage.children.length);
+    gameInfo.objGuestContainer = new PIXI.Container();
+    app.stage.addChild(gameInfo.objGuestContainer);
 
     // Ingredient space (Green zone);
     let greenSpace = TornadoUtil.fillRect(0x7ED824, 0, 0, 140, 280, app.stage);
@@ -188,14 +189,10 @@ var lifeMinus = 0; //Test Val
 let other;
 
 function lifeCheck() {
-    let newlifeMinus = Math.floor(gameTimer / 5000);
-    //console.log(newlifeMinus);
-    if (newlifeMinus > lifeMinus) {
-        lifeMinus = newlifeMinus;
-        // gameInfo.life--;
-        // console.log(gameInfo.life);
-    }
     showMonitor();
+    if(gameInfo.life <= 0) {
+        console.log("game over");
+    }
 }
 
 function showMonitor() {

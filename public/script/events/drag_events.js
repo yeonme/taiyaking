@@ -217,13 +217,22 @@ class DragEvents {
             console.log(guest);
             if (gameInfo.basket.similar(guest.order)) {
                 console.log("Correct!");
-                gameInfo.score += (guest.guestType == GuestType.VIP) ? 300 : 100;
+                let sumScore = (guest.guestType == GuestType.VIP) ? 300 : 100;
+                switch(guest.angryStage){
+                    case AngryStage.B_NERVOUS:
+                    sumScore = Math.round(sumScore*0.8/10)*10;
+                    break;
+                    case AngryStage.C_RAGED:
+                    sumScore = Math.round(sumScore*0.6/10)*10;
+                    break;
+                }
+                gameInfo.score += sumScore;
                 gameInfo.basket.clear();
                 gameInfo.objBasket.texture = gameInfo.textureBaseket[Math.min(gameInfo.textureBaseket.length - 1, gameInfo.basket.count())];
                 gameInfo.taiyakiCountText.text = gameInfo.basket.count();
                 gameInfo.taiyakiCountBoard.visible = false;
                 gameInfo.taiyakiCountText.visible = false;
-                guest.active = false;
+                guest.got = true;
             } else {
                 gameInfo.life--;
                 gameInfo.basket.clear();
@@ -252,14 +261,14 @@ class DragEvents {
                 newitem.val = TornadoLogic.checkNearestPoint(gameInfo.objPointer, gameInfo.taiyakis[idx].objKiji);
                 kvIdxSprite.push(newitem);
             }
-            console.log(kvIdxSprite);
+            // console.log(kvIdxSprite);
             kvIdxSprite.sort(function (a, b) {
                 var dflt = Number.MAX_VALUE;
                 var aVal = (a == null ? dflt : a.val);
                 var bVal = (b == null ? dflt : b.val);
                 return aVal - bVal;
             });
-            console.log(kvIdxSprite);
+            // console.log(kvIdxSprite);
             return gameInfo.taiyakis[kvIdxSprite[0].key];
         }
     }
@@ -285,7 +294,7 @@ class DragEvents {
                 var newitem = {};
                 newitem.key = idx;
                 newitem.val = TornadoLogic.checkNearestPoint(gameInfo.objRequestBasket, gameInfo.guestman.guests[idx].objGuest);
-                console.log(newitem.val);
+                // console.log(newitem.val);
                 kvIdxSprite.push(newitem);
             }
             // console.log(kvIdxSprite);

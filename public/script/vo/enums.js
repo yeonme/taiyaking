@@ -7,7 +7,8 @@ const GuestType = Object.freeze({
 const AngryStage = Object.freeze({
     A_NORMAL: 0,
     B_NERVOUS: 1,
-    C_RAGED: 2
+    C_RAGED: 2,
+    HEART: 3
 });
 
 const CookStage = Object.freeze({
