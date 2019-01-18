@@ -43,18 +43,18 @@ class Guest {
         {texture:PIXI.Texture.fromImage("assets/character/boy_waiting_raged_1.png", undefined, 0.5),time:700},
         {texture:PIXI.Texture.fromImage("assets/character/boy_waiting_raged_2.png", undefined, 0.5),time:700}
         ],[
-        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_01.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_02.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_03.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_04.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_05.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_06.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_07.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_08.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_09.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_10.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_11.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_12.png", undefined, 0.5),time:400}
+        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_01.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_02.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_03.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_04.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_05.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_06.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_07.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_08.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_09.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_10.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_11.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/boy_heart_12.png", undefined, 0.5),time:90}
         ]];
 
         /** @type {Array<Array<any>>} */
@@ -68,18 +68,18 @@ class Guest {
         {texture:PIXI.Texture.fromImage("assets/character/girl_waiting_raged_1.png", undefined, 0.5),time:700},
         {texture:PIXI.Texture.fromImage("assets/character/girl_waiting_raged_2.png", undefined, 0.5),time:700}
         ],[
-        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_01.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_02.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_03.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_04.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_05.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_06.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_07.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_08.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_09.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_10.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_11.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_12.png", undefined, 0.5),time:400}
+        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_01.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_02.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_03.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_04.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_05.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_06.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_07.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_08.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_09.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_10.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_11.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/girl_heart_12.png", undefined, 0.5),time:90}
         ]];
 
         /** @type {Array<Array<any>>} */
@@ -98,18 +98,18 @@ class Guest {
         {texture:PIXI.Texture.fromImage("assets/character/vip_waiting_raged_1.png", undefined, 0.5),time:700},
         {texture:PIXI.Texture.fromImage("assets/character/vip_waiting_raged_2.png", undefined, 0.5),time:700}
         ],[
-        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_01.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_02.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_03.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_04.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_05.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_06.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_07.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_08.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_09.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_10.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_11.png", undefined, 0.5),time:400},
-        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_12.png", undefined, 0.5),time:400}
+        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_01.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_02.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_03.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_04.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_05.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_06.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_07.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_08.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_09.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_10.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_11.png", undefined, 0.5),time:90},
+        {texture:PIXI.Texture.fromImage("assets/character/vip_heart_12.png", undefined, 0.5),time:90}
         ]];
         this.textStyleDefault = new PIXI.TextStyle({
             align: 'center',
@@ -125,7 +125,6 @@ class Guest {
      * @param {Number} slotNum Where to be created from the left side.
      */
     display(slotNum = 0, guestType = GuestType.BOY) {
-        let zorder = 10; // Upper than background stage of Guests
         if(this.objGuest != null) {
             console.log("Guest object is not initialized.");
             return;
@@ -133,7 +132,7 @@ class Guest {
         this.guestType = guestType;
         this.slotNumber = slotNum;
         // @ts-ignore
-        this.objGuest = TornadoUtil.createObjUsingTexture("assets/character/boy_waiting.png", 0.5, app.stage, "AnimatedSprite", 30000, 30000, zorder);
+        this.objGuest = TornadoUtil.createObjUsingTexture("assets/character/boy_waiting.png", 0.5, gameInfo.objGuestContainer, "AnimatedSprite", 30000, 30000);
         this.objGuest.anchor.set(0.5, 0.5);
         this.objGuest.scale.set(0.5);
         //this.objGuest.position.set(20+240*slotNum,57);
@@ -143,10 +142,10 @@ class Guest {
 
         if(this.objBubble == null) {
             this.objBubble = TornadoUtil.createObjUsingTexture("assets/speech_bubble_left.png", 0.3,
-            app.stage, "Sprite", 145 + 235*slotNum, 15, zorder);
+            gameInfo.objGuestContainer, "Sprite", 145 + 235*slotNum, 15);
             this.objBubble.alpha = 0;
             this.objBubble.height = 100;
-            this.objText = TornadoUtil.textOut(this.builtText, 168 + 237*slotNum, 50, app.stage, this.textStyleDefault);
+            this.objText = TornadoUtil.textOut(this.builtText, 168 + 237*slotNum, 50, gameInfo.objGuestContainer, this.textStyleDefault);
             this.objText.alpha = 0;
             gameInfo.animman.add(new AnimItem(gameTimer+450, 600, AnimationType.ALPHA, this.objBubble, EasingType.DEFAULT, 0.0, 0.0, 1.0, 0.0));
             gameInfo.animman.add(new AnimItem(gameTimer+450, 600, AnimationType.ALPHA, this.objText, EasingType.DEFAULT, 0.0, 0.0, 1.0, 0.0));
@@ -205,11 +204,17 @@ class Guest {
         }
         this.objGuest.textures = textures[Math.min(textures.length-1,this.angryStage)];
         if(this.angryStage == AngryStage.HEART) {
-            this.objGuest.on('complete', function(){
-                console.log('on heart end');
-            });
+            this.objGuest.onLoop = () => {
+                console.log("fired OnLoop");
+                this.active = false;
+                this.objGuest.onLoop = null;
+            };
         }
-        this.objGuest.gotoAndPlay(Math.random()*this.objGuest.textures.length);
+        if(this.guestType == GuestType.VIP && this.angryStage == AngryStage.A_NORMAL) {
+            this.objGuest.gotoAndPlay(Math.random()*this.objGuest.textures.length);
+        } else {
+            this.objGuest.play();
+        }
     }
     lifecycle() {
         // 0 - 10000 Normal

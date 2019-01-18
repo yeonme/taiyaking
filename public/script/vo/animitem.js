@@ -45,9 +45,11 @@ class AnimItem {
         }
         if (gameTimer > this.beginTime + this.duration + 3000) {
             if(this.removeOnFinish){
-                app.stage.removeChild(this.target);
-                // console.log("app.stage.children.length: "+app.stage.children.length);
-                // console.log(this.target.texture);
+                gameInfo.objGuestContainer.removeChild(this.target);
+                console.log("gameInfo.objGuestContainer.children.length: "+gameInfo.objGuestContainer.children.length);
+                console.log(this.target);
+                this.target.removeAllListeners();
+                // @ts-ignore
                 this.target.destroy();
             }
             this._dismissed = true;

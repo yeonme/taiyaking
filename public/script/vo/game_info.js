@@ -18,6 +18,8 @@ class GameInfo {
         this.objLifes = new Array(5);
         /** @type {PIXI.Sprite} */
         this.objBack = null;
+        /** @type {PIXI.Container} */
+        this.objGuestContainer = null;
         /** @type {PIXI.Graphics} */
         this.objPointer = null;
         /** @type {PIXI.Sprite} */
