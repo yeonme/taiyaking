@@ -181,6 +181,11 @@ class Guest {
                 0, undefined, true));
         }
         this.active = false;
+
+        if(this.got === true) {
+            console.log("life minus from "+gameInfo.life);
+            gameInfo.life--;
+        }
     }
     /**
      * Update the texture using current status.
