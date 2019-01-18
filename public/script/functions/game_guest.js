@@ -22,7 +22,7 @@ class GuestManager {
     }
     tickGuest() {
         let elapsed = new Date().getTime() - this.lastGenerated;
-        if(elapsed > 1000) {
+        if(elapsed > 3000) {
             this.createGuest();
         }
 

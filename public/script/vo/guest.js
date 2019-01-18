@@ -111,6 +111,7 @@ class Guest {
             gameInfo.animman.add(new AnimItem(gameTimer, 100, AnimationType.ALPHA, this.objText, EasingType.DEFAULT, 1, undefined,
                 0, undefined, true));
         }
+        this.active = false;
     }
     /**
      * Update the texture using current status.
