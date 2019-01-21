@@ -4,13 +4,13 @@ class GuestManager {
         /** @type {Array<Guest>} */
         this.guests = [];
         this.nextPos = 0;
-        this.lastGenerated = new Date().getTime();
+        this.lastGenerated = gameTimer;
     }
     createGuest() {
         if(this.guests.length >= 2) {
             return;
         }
-        this.lastGenerated = new Date().getTime();
+        this.lastGenerated = gameTimer;
         let guest = new Guest();
         guest.newOrder();
         let randomValue = Math.random();
@@ -21,7 +21,7 @@ class GuestManager {
         //console.log(guest);
     }
     tickGuest() {
-        let elapsed = new Date().getTime() - this.lastGenerated;
+        let elapsed = gameTimer - this.lastGenerated;
         if(elapsed > 3000) {
             this.createGuest();
         }
