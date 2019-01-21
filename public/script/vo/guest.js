@@ -10,7 +10,7 @@
  */
 class Guest {
     constructor() {
-        this.timeAppeared = 0;
+        this.timeAppeared = new Date().getTime();
         /** @type {PIXI.extras.AnimatedSprite} **/
         this.objGuest = null;
         /** @type {PIXI.Sprite} */
@@ -31,6 +31,7 @@ class Guest {
         this.active = true;
         /** @type {Boolean} The switch for checking Taiyaki get or not */
         this.got = false;
+        this.releasing = false;
 
         /** @type {Array<Array<any>>} */
         this.texturesBoy = [[PIXI.Texture.fromImage("assets/character/boy_waiting.png", undefined, 0.5)
@@ -168,6 +169,10 @@ class Guest {
      * Leave from the store.
      */
     away() {
+        if(this.releasing) {
+            return;
+        }
+        this.releasing = true;
         if(this.objGuest !== null) {
             gameInfo.animman.add(new AnimItem(gameTimer, 300+(this.slotNumber*300), AnimationType.TRANSITION, this.objGuest, EasingType.EASING, 80+240*this.slotNumber, 140,
             this.slotNumber % 2 == 0 ? -900 : 1090, 140, true));
@@ -194,7 +199,7 @@ class Guest {
             let heartEffect = null;
             if(typeof lastLife !== "undefined" || lastLife != null) {
                 // @ts-ignore
-                heartEffect = TornadoUtil.textOut("-❤️",lastLife.getBounds().left, lastLife.getBounds().top, app.stage, new PIXI.TextStyle({
+                heartEffect = TornadoUtil.textOut("-❤️",lastLife.getBounds().left+lastLife.getBounds().width, lastLife.getBounds().top, app.stage, new PIXI.TextStyle({
                     fill: [
                         "#cb6c6a",
                         "#97dd5d"
@@ -206,9 +211,10 @@ class Guest {
                     miterLimit: 40,
                     strokeThickness: 6
                 }));
-                let boundLife = heartEffect.getBounds();
-                gameInfo.animman.add(new AnimItem(gameTimer, 1000, AnimationType.TRANSITION, heartEffect, EasingType.DEFAULT, boundLife.x, boundLife.y,
-                    boundLife.x, boundLife.y-50));
+                heartEffect.rotation = -0.45;
+                let boundLife = lastLife.getBounds();
+                gameInfo.animman.add(new AnimItem(gameTimer, 1000, AnimationType.TRANSITION, heartEffect, EasingType.EASING, boundLife.left+boundLife.width, boundLife.top,
+                    boundLife.left+boundLife.width+10, boundLife.top));
                 gameInfo.animman.add(new AnimItem(gameTimer, 1200, AnimationType.ALPHA, heartEffect, EasingType.EASING, 1.0, undefined, 0.0, undefined, true));
             }
             gameInfo.life--;
@@ -249,7 +255,7 @@ class Guest {
         }
     }
     lifecycle() {
-        let waitingTime = gameTimer - this.timeAppeared;
+        let waitingTime = new Date().getTime() - this.timeAppeared;
         let lastAngryStage = this.angryStage;
         if(this.got) {
             this.angryStage = AngryStage.HEART;

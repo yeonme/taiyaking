@@ -4,7 +4,7 @@ class GuestManager {
         /** @type {Array<Guest>} */
         this.guests = [];
         this.nextPos = 0;
-        this.lastGenerated = 0;
+        this.lastGenerated = new Date().getTime();
     }
     createGuest() {
         if(this.guests.length >= 2) {
@@ -21,7 +21,7 @@ class GuestManager {
         //console.log(guest);
     }
     tickGuest() {
-        let elapsed = gameTimer - this.lastGenerated;
+        let elapsed = new Date().getTime() - this.lastGenerated;
         if(elapsed > 3000) {
             this.createGuest();
         }
@@ -29,7 +29,7 @@ class GuestManager {
         let idx = 0;
         while(idx < this.count()) {
             this.guests[idx].lifecycle();
-            if(this.guests[idx] instanceof Guest && this.guests[idx].active === false) {
+            if(this.guests[idx] instanceof Guest && this.guests[idx].active === false && this.guests[idx].releasing === false) {
                 let guest = idx == 0 ? this.guests.shift() : this.guests.pop();
                 this.nextPos = guest.slotNumber;
                 guest.away();

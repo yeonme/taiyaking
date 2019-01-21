@@ -30,7 +30,9 @@ function loadScoreScene() {
     logo.anchor.set(0.5, 0.5);
 
     // btnClose
-    let btnClose = TornadoUtil.createObjButton("assets/btnclose.png", "assets/btnclose1.png", "assets/btnclose1.png", 0.6, app.stage, 345, 475, null);
+    let btnClose = TornadoUtil.createObjButton("assets/btnclose.png", "assets/btnclose1.png", "assets/btnclose1.png", 0.6, app.stage, 345, 475, function() {
+        sceneNumber = 0;
+    });
 
     // Rank text background
     TornadoUtil.fillRoundedRect(0x0064CD, 120, 130, 65, 30, 10, app.stage, 2, 0x282828, 1);
@@ -42,7 +44,7 @@ function loadScoreScene() {
         fontSize: 16,
         fill: '0xFFFFFF'
     });
-    TornadoUtil.textOut("RANK", 129, 135, app.stage, style);
+    let rankHeaderItem = TornadoUtil.textOut("RANK", 129, 135, app.stage, style);
 
     // Name text  & background
     TornadoUtil.fillRoundedRect(0x0064CD, 220, 130, 65, 30, 10, app.stage, 2, 0x282828, 1);
@@ -56,7 +58,58 @@ function loadScoreScene() {
     TornadoUtil.fillRoundedRect(0x0064CD, 480, 130, 65, 30, 10, app.stage, 2, 0x282828, 1);
     TornadoUtil.textOut("DATE", 489, 135, app.stage, style);
 
+    var innerStyle = new PIXI.TextStyle({
+        align: 'center',
+        fontWeight: '900',
+        fontSize: 18
+    });
+    var rankData = [
+        {user:"AAA",score:100,posted:new Date()},
+        {user:"BBB",score:90,posted:new Date()},
+        {user:"CCC",score:80,posted:new Date()},
+        {user:"DDD",score:70,posted:new Date()},
+        {user:"EEE",score:60,posted:new Date()},
+        {user:"FFF",score:50,posted:new Date()},
+        {user:"GGG",score:40,posted:new Date()},
+        {user:"HHH",score:30,posted:new Date()},
+        {user:"III",score:20,posted:new Date()},
+        {user:"JJJ",score:10,posted:new Date()}
+    ];
+    let lineHeight = rankHeaderItem.getBounds().height + 15;
+    let number = 0;
+    db.collection("highscores").orderBy("score","desc").limit(10).get().then(function(querySnapshot){
+        querySnapshot.forEach(function(doc){
+            rankData.push(doc.data());
+            if(doc.data()) {
+                number++;
+                TornadoUtil.textOut(number.toString(), 129, 135 + lineHeight, app.stage, innerStyle);
+                let rankItem = TornadoUtil.textOut(doc.data().user, 220, 135 + lineHeight, app.stage, innerStyle);
+                TornadoUtil.textOut(doc.data().score, 340, 135 + lineHeight, app.stage, innerStyle);
+                if(typeof doc.data().posted !== "undefined") {
+                    /** @type {Date} */
+                    let dateTime = doc.data().posted.toDate();
+                    TornadoUtil.textOut(TornadoUtil.formatDate(dateTime), 480, 135 + lineHeight, app.stage, innerStyle);
+                }
+                lineHeight += rankItem.getBounds().height + 7;
+            }
+        });
+    });
 
+    // rankData.forEach(function(item){
+    //             //rankData.push(doc.data());
+    //             if(typeof item !== "undefined") {
+    //                 number++;
+    //                 TornadoUtil.textOut(number.toString(), 129, 135 + lineHeight, app.stage, innerStyle);
+    //                 let rankItem = TornadoUtil.textOut(item.user, 220, 135 + lineHeight, app.stage, innerStyle);
+    //                 TornadoUtil.textOut(item.score, 340, 135 + lineHeight, app.stage, innerStyle);
+    //                 if(typeof item.posted !== "undefined") {
+    //                     /** @type {Date} */
+    //                     let dateTime = item.posted;
+    //                     TornadoUtil.textOut(TornadoUtil.formatDate(dateTime), 480, 135 + lineHeight, app.stage, innerStyle);
+    //                 }
+    //                 lineHeight += rankItem.getBounds().height + 7;
+    //             }
+    //         });
 
 
 

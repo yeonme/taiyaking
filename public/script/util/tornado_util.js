@@ -150,14 +150,32 @@ class TornadoUtil {
      * @returns {PIXI.Text} Text Object
      */
     static textOut(text, x, y, targetObj, textStyle) {
-    /*if(typeof textStyle == "undefined") {
-        textStyle = new PIXI.TextStyle({
-            //Set default text style here
-        });
-    }*/
-    let txtObj = new PIXI.Text(text, textStyle);
-    txtObj.position.set(x, y);
-    targetObj.addChild(txtObj);
-    return txtObj;
-}
+        /*if(typeof textStyle == "undefined") {
+            textStyle = new PIXI.TextStyle({
+                //Set default text style here
+            });
+        }*/
+        let txtObj = new PIXI.Text(text, textStyle);
+        txtObj.position.set(x, y);
+        targetObj.addChild(txtObj);
+        return txtObj;
+    }
+
+    /**
+     * Output yyyy/MM/dd
+     * @param {Date} d 
+     */
+    static formatDate(d) {
+        var month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+    
+        var sYear = year.toString();
+        sYear = sYear.substr(sYear.length-2,2);
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+    
+        return [sYear, month, day].join('/');
+    }
 }
