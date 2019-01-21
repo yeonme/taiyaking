@@ -10,7 +10,7 @@ class GuestManager {
         if(this.guests.length >= 2) {
             return;
         }
-        this.lastGenerated = new Date().getTime();
+        this.lastGenerated = gameTimer;
         let guest = new Guest();
         guest.newOrder();
         let randomValue = Math.random();
@@ -29,7 +29,7 @@ class GuestManager {
         let idx = 0;
         while(idx < this.count()) {
             this.guests[idx].lifecycle();
-            if(this.guests[idx] instanceof Guest && this.guests[idx].active === false) {
+            if(this.guests[idx] instanceof Guest && this.guests[idx].active === false && this.guests[idx].releasing === false) {
                 let guest = idx == 0 ? this.guests.shift() : this.guests.pop();
                 this.nextPos = guest.slotNumber;
                 guest.away();

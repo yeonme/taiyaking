@@ -26,7 +26,7 @@ class Taiyaki {
     constructor(kiji = null, inside = null, single = null, double = null, burned = null) {
         this.cookStage = CookStage.EMPTY;
         this.type = TaiyakiType.ANKO;
-        this.timeStarted = new Date().getTime();
+        this.timeStarted = 0;
         /** @type {PIXI.Sprite} */
         this.objKiji = null;
         /** @type {PIXI.Sprite} */
@@ -61,11 +61,11 @@ class Taiyaki {
     }
 
     cookTime() {
-        return new Date().getTime() - this.timeStarted;
+        return gameTimer - this.timeStarted;
     }
 
     resetCookTime() {
-        this.timeStarted = new Date().getTime();
+        this.timeStarted = gameTimer;
     }
 
     flipOverIfCan() {

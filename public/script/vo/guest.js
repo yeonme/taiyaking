@@ -31,6 +31,7 @@ class Guest {
         this.active = true;
         /** @type {Boolean} The switch for checking Taiyaki get or not */
         this.got = false;
+        this.releasing = false;
 
         /** @type {Array<Array<any>>} */
         this.texturesBoy = [[PIXI.Texture.fromImage("assets/character/boy_waiting.png", undefined, 0.5)
@@ -168,6 +169,10 @@ class Guest {
      * Leave from the store.
      */
     away() {
+        if(this.releasing) {
+            return;
+        }
+        this.releasing = true;
         if(this.objGuest !== null) {
             gameInfo.animman.add(new AnimItem(gameTimer, 300+(this.slotNumber*300), AnimationType.TRANSITION, this.objGuest, EasingType.EASING, 80+240*this.slotNumber, 140,
             this.slotNumber % 2 == 0 ? -900 : 1090, 140, true));
@@ -184,6 +189,34 @@ class Guest {
 
         if(this.got === false) {
             console.log("life minus from "+gameInfo.life);
+            let idx = gameInfo.objLifes.length-1;
+            let lastLife = gameInfo.objLifes[idx];
+            while(idx >= 0 && (typeof lastLife == "undefined" || lastLife == null || !lastLife.visible)){
+                console.log(lastLife+", "+idx);
+                idx--;
+                lastLife = gameInfo.objLifes[idx];
+            }
+            let heartEffect = null;
+            if(typeof lastLife !== "undefined" || lastLife != null) {
+                // @ts-ignore
+                heartEffect = TornadoUtil.textOut("-❤️",lastLife.getBounds().left+lastLife.getBounds().width, lastLife.getBounds().top, app.stage, new PIXI.TextStyle({
+                    fill: [
+                        "#cb6c6a",
+                        "#97dd5d"
+                    ],
+                    fontFamily: "Courier New",
+                    fontWeight: "900",
+                    letterSpacing: 2,
+                    lineJoin: "round",
+                    miterLimit: 40,
+                    strokeThickness: 6
+                }));
+                heartEffect.rotation = -0.45;
+                let boundLife = lastLife.getBounds();
+                gameInfo.animman.add(new AnimItem(gameTimer, 1000, AnimationType.TRANSITION, heartEffect, EasingType.EASING, boundLife.left+boundLife.width, boundLife.top,
+                    boundLife.left+boundLife.width+10, boundLife.top));
+                gameInfo.animman.add(new AnimItem(gameTimer, 1200, AnimationType.ALPHA, heartEffect, EasingType.EASING, 1.0, undefined, 0.0, undefined, true));
+            }
             gameInfo.life--;
         }
     }

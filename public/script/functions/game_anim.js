@@ -29,9 +29,19 @@ class AnimManager {
                 let y = item.getCurrent2();
                 // console.log("anim: "+x+", "+y);
                 if(item.animationType == AnimationType.TRANSITION) {
-                    item.target.position.set(x, y);
+                    try{
+                        item.target.position.set(x, y);
+                    }catch(e){
+                        //don't stop even fail!
+                        console.log(e);
+                    }
                 } else if(item.animationType == AnimationType.ALPHA) {
-                    item.target.alpha = x;
+                    try{
+                        item.target.alpha = x;
+                    }catch(e){
+                        //don't stop even fail!
+                        console.log(e);
+                    }
                 }
             }
                 
