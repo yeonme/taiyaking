@@ -226,6 +226,7 @@ class DragEvents {
                     sumScore = Math.round(sumScore*0.6/10)*10;
                     break;
                 }
+                sumScore *= guest.order.count();
                 gameInfo.score += sumScore;
                 gameInfo.basket.clear();
                 gameInfo.objBasket.texture = gameInfo.textureBaseket[Math.min(gameInfo.textureBaseket.length - 1, gameInfo.basket.count())];
