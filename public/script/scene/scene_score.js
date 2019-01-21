@@ -30,7 +30,9 @@ function loadScoreScene() {
     logo.anchor.set(0.5, 0.5);
 
     // btnClose
-    let btnClose = TornadoUtil.createObjButton("assets/btnclose.png", "assets/btnclose1.png", "assets/btnclose1.png", 0.6, app.stage, 345, 475, null);
+    let btnClose = TornadoUtil.createObjButton("assets/btnclose.png", "assets/btnclose1.png", "assets/btnclose1.png", 0.6, app.stage, 345, 475, function () {
+        sceneNumber = 0;
+    });
 
     // Rank text background
     TornadoUtil.fillRoundedRect(0x0064CD, 120, 130, 65, 30, 10, app.stage, 2, 0x282828, 1);
@@ -55,22 +57,6 @@ function loadScoreScene() {
     // Date text  & background
     TornadoUtil.fillRoundedRect(0x0064CD, 480, 130, 65, 30, 10, app.stage, 2, 0x282828, 1);
     TornadoUtil.textOut("DATE", 489, 135, app.stage, style);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 function tickScoreScene() {
