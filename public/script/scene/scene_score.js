@@ -63,18 +63,7 @@ function loadScoreScene() {
         fontWeight: '900',
         fontSize: 18
     });
-    var rankData = [
-        {user:"AAA",score:100,posted:new Date()},
-        {user:"BBB",score:90,posted:new Date()},
-        {user:"CCC",score:80,posted:new Date()},
-        {user:"DDD",score:70,posted:new Date()},
-        {user:"EEE",score:60,posted:new Date()},
-        {user:"FFF",score:50,posted:new Date()},
-        {user:"GGG",score:40,posted:new Date()},
-        {user:"HHH",score:30,posted:new Date()},
-        {user:"III",score:20,posted:new Date()},
-        {user:"JJJ",score:10,posted:new Date()}
-    ];
+    var rankData = [];
     let lineHeight = rankHeaderItem.getBounds().height + 15;
     let number = 0;
     db.collection("highscores").orderBy("score","desc").limit(10).get().then(function(querySnapshot){

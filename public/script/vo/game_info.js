@@ -37,6 +37,9 @@ class GameInfo {
          this.objRequestBasket = null;
          /** @type {Array<PIXI.Texture>} **/
         this.textureRequestBaseket = new Array(6);
+        /** @type {PIXI.Text} */
+        this.objNickName = null;
+        this.nickName = new String("").toString();
         
         this.animman = new AnimManager();
     }
