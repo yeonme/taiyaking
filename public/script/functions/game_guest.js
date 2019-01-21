@@ -4,7 +4,7 @@ class GuestManager {
         /** @type {Array<Guest>} */
         this.guests = [];
         this.nextPos = 0;
-        this.lastGenerated = gameTimer;
+        this.lastGenerated = 0;
     }
     createGuest() {
         if(this.guests.length >= 2) {
