@@ -10,7 +10,7 @@
  */
 class Guest {
     constructor() {
-        this.timeAppeared = new Date().getTime();
+        this.timeAppeared = 0;
         /** @type {PIXI.extras.AnimatedSprite} **/
         this.objGuest = null;
         /** @type {PIXI.Sprite} */
@@ -184,6 +184,33 @@ class Guest {
 
         if(this.got === false) {
             console.log("life minus from "+gameInfo.life);
+            let idx = gameInfo.objLifes.length-1;
+            let lastLife = gameInfo.objLifes[idx];
+            while(idx >= 0 && (typeof lastLife == "undefined" || lastLife == null || !lastLife.visible)){
+                console.log(lastLife+", "+idx);
+                idx--;
+                lastLife = gameInfo.objLifes[idx];
+            }
+            let heartEffect = null;
+            if(typeof lastLife !== "undefined" || lastLife != null) {
+                // @ts-ignore
+                heartEffect = TornadoUtil.textOut("-❤️",lastLife.getBounds().left, lastLife.getBounds().top, app.stage, new PIXI.TextStyle({
+                    fill: [
+                        "#cb6c6a",
+                        "#97dd5d"
+                    ],
+                    fontFamily: "Courier New",
+                    fontWeight: "900",
+                    letterSpacing: 2,
+                    lineJoin: "round",
+                    miterLimit: 40,
+                    strokeThickness: 6
+                }));
+                let boundLife = heartEffect.getBounds();
+                gameInfo.animman.add(new AnimItem(gameTimer, 1000, AnimationType.TRANSITION, heartEffect, EasingType.DEFAULT, boundLife.x, boundLife.y,
+                    boundLife.x, boundLife.y-50));
+                gameInfo.animman.add(new AnimItem(gameTimer, 1200, AnimationType.ALPHA, heartEffect, EasingType.EASING, 1.0, undefined, 0.0, undefined, true));
+            }
             gameInfo.life--;
         }
     }
@@ -222,7 +249,7 @@ class Guest {
         }
     }
     lifecycle() {
-        let waitingTime = new Date().getTime() - this.timeAppeared;
+        let waitingTime = gameTimer - this.timeAppeared;
         let lastAngryStage = this.angryStage;
         if(this.got) {
             this.angryStage = AngryStage.HEART;
