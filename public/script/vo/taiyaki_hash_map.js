@@ -67,6 +67,7 @@ class TaiyakiHashMap {
     }
     /**
      * Compare other object if it has same value.
+     * Changed: Returns true if greater than the parameter.
      * @param {TaiyakiHashMap} otherHashMap Other object to be compared.
      */
     similar(otherHashMap) {
@@ -75,7 +76,8 @@ class TaiyakiHashMap {
             return false;
         }
         for(var property in this._taiyakis) {
-            if(!otherHashMap._taiyakis.hasOwnProperty(property) || otherHashMap._taiyakis[property] !== this._taiyakis[property]){
+            //if(!otherHashMap._taiyakis.hasOwnProperty(property) || otherHashMap._taiyakis[property] !== this._taiyakis[property]){
+            if(!otherHashMap._taiyakis.hasOwnProperty(property) || otherHashMap._taiyakis[property] > this._taiyakis[property]){
                 return false;
             }
         }

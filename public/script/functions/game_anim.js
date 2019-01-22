@@ -25,20 +25,28 @@ class AnimManager {
                 continue;
             }
             if(item.isActive()){
+                // Called many times here (Before expiring)
                 let x = item.getCurrent1();
                 let y = item.getCurrent2();
                 // console.log("anim: "+x+", "+y);
                 if(item.animationType == AnimationType.TRANSITION) {
                     try{
                         item.target.position.set(x, y);
-                    }catch(e){
+                    } catch(e) {
                         //don't stop even fail!
                         console.log(e);
                     }
                 } else if(item.animationType == AnimationType.ALPHA) {
                     try{
                         item.target.alpha = x;
-                    }catch(e){
+                    } catch(e) {
+                        //don't stop even fail!
+                        console.log(e);
+                    }
+                } else if(item.animationType == AnimationType.SCALE) {
+                    try {
+                        item.target.scale.set(x, x);
+                    } catch(e) {
                         //don't stop even fail!
                         console.log(e);
                     }
@@ -46,14 +54,21 @@ class AnimManager {
             }
                 
             if(item.isDismissed()) {
-                let x = item.toParam1;
-                let y = item.toParam2;
-                if(item.animationType == AnimationType.TRANSITION) {
-                    item.target.position.set(x, y);
-                } else if(item.animationType == AnimationType.ALPHA) {
-                    item.target.alpha = x;
+                //Called last time (After once expired)
+                try {
+                    let x = item.toParam1;
+                    let y = item.toParam2;
+                    if(item.animationType == AnimationType.TRANSITION) {
+                        item.target.position.set(x, y);
+                    } else if(item.animationType == AnimationType.ALPHA) {
+                        item.target.alpha = x;
+                    } else if(item.animationType == AnimationType.SCALE) {
+                        item.target.scale.set(x, x);
+                    }
+                    this.timelines.shift();
+                } catch(e) {
+                    //Don't throw anything!
                 }
-                this.timelines.shift();
             }
             idx++;
         }

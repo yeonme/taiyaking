@@ -133,12 +133,14 @@ class Guest {
         this.guestType = guestType;
         this.slotNumber = slotNum;
         // @ts-ignore
-        this.objGuest = TornadoUtil.createObjUsingTexture("assets/character/boy_waiting.png", 0.5, gameInfo.objGuestContainer, "AnimatedSprite", 30000, 30000);
+        this.objGuest = TornadoUtil.createObjUsingTexture("assets/character/boy_waiting.png", 0.5, gameInfo.objGuestContainer, "AnimatedSprite", 30000, 0);
+        this.objGuest.visible = false;
         this.objGuest.anchor.set(0.5, 0.5);
         this.objGuest.scale.set(0.5);
         //this.objGuest.position.set(20+240*slotNum,57);
         gameInfo.animman.add(new AnimItem(gameTimer, 300+(slotNum*300), AnimationType.TRANSITION, this.objGuest, EasingType.EASING, slotNum % 2 == 0 ? -100 : 690, 140, 80+240*slotNum, 140));
         this.update();
+        this.objGuest.visible = true;
         //Skip animation this time as not implemented.
 
         if(this.objBubble == null) {

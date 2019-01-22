@@ -4,6 +4,7 @@ function loadGameScene() {
 
     //GameInfo contains all informations of the game
     gameInfo = new GameInfo();
+    triggeredOver = false;
     //Arranging Scene here
     TornadoUtil.clearStage(app.stage);
 
@@ -163,6 +164,15 @@ function loadGameScene() {
         .on('pointerup', DragEvents.basketOnDragEnd)
         .on('pointerupoutside', DragEvents.basketOnDragEnd)
         .on('pointermove', DragEvents.basketOnDragMove);
+
+    let startCall = TornadoUtil.createObjUsingTexture("assets/start.png",
+    0.5, app.stage, "Sprite", 30000, 30000);
+    startCall.anchor.set(0.5,0.5);
+    startCall.position.set(app.screen.width / 2, app.screen.height / 2);
+    gameInfo.animman.add(new AnimItem(gameTimer+500, 500, AnimationType.SCALE,
+        startCall, EasingType.EASING, 0.5, undefined, 1.0));
+    gameInfo.animman.add(new AnimItem(gameTimer+1000, 500, AnimationType.SCALE,
+        startCall, EasingType.EASING, 1.0, undefined, 0.5, undefined, true));
 }
 
 var gameInfo = new GameInfo();
@@ -191,10 +201,24 @@ function lazyTick() {
 var lifeMinus = 0; //Test Val
 let other;
 
+let triggeredOver = false;
 function lifeCheck() {
     showMonitor();
-    if(gameInfo.life <= 0) {
-        sceneNumber = 3;
+    if(!triggeredOver && gameInfo.life <= 0) {
+        triggeredOver = true;
+        let size = 0;
+        // GAME OVER
+        db.collection('highscores').where('score','>',gameInfo.score).get().then(snap => {
+            size = snap.size // will return the collection size
+            console.log("highscores: "+size);
+        });
+        if(size >= 10) {
+            // Game Over Simple
+            sceneNumber = 3;
+        } else {
+            // Game Over New Record
+            sceneNumber = 4;
+        }
         //Game Over
     }
 }

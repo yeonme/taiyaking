@@ -65,7 +65,6 @@ class Taiyaki {
                 {texture:PIXI.Texture.fromImage("assets/smoke/smoke8.png", undefined, 0.5),time:90},
                 {texture:PIXI.Texture.fromImage("assets/smoke/smoke9.png", undefined, 0.5),time:90}
             ], 0.25, app.stage, "AnimatedSprite", kiji.position.x, kiji.position.y);
-            this.objSmoke.play();
         }
 
         this._minCookStep = [0, 0, 5000, 4500, 5000, 0]; // 2->3, 3->4
@@ -190,8 +189,10 @@ class Taiyaki {
     tickTaiyaki() {
         if(this._warnCookStep.length > this.cookStage && this._warnCookStep[this.cookStage] > 0 && this._warnCookStep[this.cookStage] < this.cookTime()) {
             this.objSmoke.visible = true;
+            this.objSmoke.gotoAndPlay(0);
         } else {
             this.objSmoke.visible = false;
+            this.objSmoke.stop();
         }
     }
 }
