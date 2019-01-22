@@ -30,8 +30,7 @@ function loadScoreScene() {
     logo.anchor.set(0.5, 0.5);
 
     // btnClose
-    // @ts-ignore
-    let btnClose = TornadoUtil.createObjButton("assets/btnclose.png", "assets/btnclose1.png", "assets/btnclose1.png", 0.6, app.stage, 345, 475, function() {
+    let btnClose = TornadoUtil.createObjButton("assets/btns/exit.png", "assets/btns/exit_highlight.png", "assets/btns/exit_pressed.png", 0.8, app.stage, 345, 475, function () {
         sceneNumber = 0;
     });
 
