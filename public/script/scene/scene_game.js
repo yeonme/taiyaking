@@ -191,7 +191,8 @@ let other;
 function lifeCheck() {
     showMonitor();
     if(gameInfo.life <= 0) {
-        console.log("game over");
+        sceneNumber = 3;
+        //Game Over
     }
 }
 

@@ -199,7 +199,7 @@ class Guest {
             let heartEffect = null;
             if(typeof lastLife !== "undefined" || lastLife != null) {
                 // @ts-ignore
-                heartEffect = TornadoUtil.textOut("-❤️",lastLife.getBounds().left+lastLife.getBounds().width, lastLife.getBounds().top, app.stage, new PIXI.TextStyle({
+                heartEffect = TornadoUtil.textOut("-❤️",lastLife.getBounds().left, lastLife.getBounds().top, app.stage, new PIXI.TextStyle({
                     fill: [
                         "#cb6c6a",
                         "#97dd5d"
@@ -213,8 +213,8 @@ class Guest {
                 }));
                 heartEffect.rotation = -0.45;
                 let boundLife = lastLife.getBounds();
-                gameInfo.animman.add(new AnimItem(gameTimer, 1000, AnimationType.TRANSITION, heartEffect, EasingType.EASING, boundLife.left+boundLife.width, boundLife.top,
-                    boundLife.left+boundLife.width+10, boundLife.top));
+                gameInfo.animman.add(new AnimItem(gameTimer, 1000, AnimationType.TRANSITION, heartEffect, EasingType.EASING, boundLife.left, boundLife.top,
+                    boundLife.left, boundLife.top-boundLife.height-30));
                 gameInfo.animman.add(new AnimItem(gameTimer, 1200, AnimationType.ALPHA, heartEffect, EasingType.EASING, 1.0, undefined, 0.0, undefined, true));
             }
             gameInfo.life--;

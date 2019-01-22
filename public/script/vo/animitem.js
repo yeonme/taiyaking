@@ -78,6 +78,6 @@ class AnimItem {
     }
 
     getCurrent2() {
-        return this._xyCurrent(this.fromParam2, this.fromParam2, this.duration, gameTimer - this.beginTime);
+        return this._xyCurrent(this.fromParam2, this.toParam2, this.duration, gameTimer - this.beginTime);
     }
 }
