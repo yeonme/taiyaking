@@ -157,7 +157,7 @@ class Guest {
      */
     newOrder() {
         this.order = new TaiyakiHashMap();
-        let quantity = Math.floor((Math.random() * 6) + 1);
+        let quantity = Math.floor((Math.random() * 5) + 1);
         this.order.setQuantity(TaiyakiType.ANKO, quantity);
         this._requiredTime = 20000 + 4500*quantity;
         // this._requiredTime = 0;

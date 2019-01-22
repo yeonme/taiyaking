@@ -215,7 +215,7 @@ class DragEvents {
         let guest = DragEvents.findNearGuest();
         if (guest) {
             console.log(guest);
-            if (gameInfo.basket.similar(guest.order)) {
+            if (!guest.got && gameInfo.basket.similar(guest.order)) {
                 console.log("Correct!");
                 let sumScore = (guest.guestType == GuestType.VIP) ? 300 : 100;
                 switch(guest.angryStage){
@@ -238,9 +238,9 @@ class DragEvents {
                 if(typeof lastScore !== "undefined" || lastScore != null) {
                     let boundScore = lastScore.getBounds();
                     // @ts-ignore
-                    let scoreEffect = TornadoUtil.textOut("+"+sumScore,boundScore.left+boundScore.width, boundScore.top, app.stage, new PIXI.TextStyle({
+                    let scoreEffect = TornadoUtil.textOut("+"+sumScore,boundScore.left+50, boundScore.top, app.stage, new PIXI.TextStyle({
                         fill: [
-                            "#cb6c6a",
+                            "#6c6acb",
                             "#97dd5d"
                         ],
                         fontFamily: "Courier New",
@@ -250,9 +250,8 @@ class DragEvents {
                         miterLimit: 40,
                         strokeThickness: 6
                     }));
-                    gameInfo.animman.add(new AnimItem(gameTimer, 1200, AnimationType.ALPHA, scoreEffect, EasingType.EASING, 1.0, undefined, 0.0, undefined, true));
+                    gameInfo.animman.add(new AnimItem(gameTimer, 3000, AnimationType.ALPHA, scoreEffect, EasingType.EASING, 1.0, undefined, 0.0, undefined, true));
                 }
-                gameInfo.life--;
                 guest.got = true;
             } else {
                 // gameInfo.life--;

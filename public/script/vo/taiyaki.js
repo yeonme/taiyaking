@@ -39,6 +39,8 @@ class Taiyaki {
         this.objBurned = null;
         /** @type {PIXI.Sprite} */
         this.objGrab = null;
+        /** @type {PIXI.extras.AnimatedSprite} */
+        this.objSmoke = null;
 
         this.x = 0;
         this.y = 0;
@@ -51,11 +53,28 @@ class Taiyaki {
         if(kiji != null) {
             this.objGrab = TornadoUtil.createObjUsingTexture("assets/graphand.png", 1.0, app.stage, "Sprite", kiji.position.x, kiji.position.y);
             this.objGrab.visible = false;
+            // @ts-ignore
+            this.objSmoke = TornadoUtil.createObjUsingTexture([
+                {texture:PIXI.Texture.fromImage("assets/smoke/smoke1.png", undefined, 0.5),time:90},
+                {texture:PIXI.Texture.fromImage("assets/smoke/smoke2.png", undefined, 0.5),time:90},
+                {texture:PIXI.Texture.fromImage("assets/smoke/smoke3.png", undefined, 0.5),time:90},
+                {texture:PIXI.Texture.fromImage("assets/smoke/smoke4.png", undefined, 0.5),time:90},
+                {texture:PIXI.Texture.fromImage("assets/smoke/smoke5.png", undefined, 0.5),time:90},
+                {texture:PIXI.Texture.fromImage("assets/smoke/smoke6.png", undefined, 0.5),time:90},
+                {texture:PIXI.Texture.fromImage("assets/smoke/smoke7.png", undefined, 0.5),time:90},
+                {texture:PIXI.Texture.fromImage("assets/smoke/smoke8.png", undefined, 0.5),time:90},
+                {texture:PIXI.Texture.fromImage("assets/smoke/smoke9.png", undefined, 0.5),time:90}
+            ], 0.25, app.stage, "AnimatedSprite", kiji.position.x, kiji.position.y);
+            this.objSmoke.play();
         }
 
         this._minCookStep = [0, 0, 5000, 4500, 5000, 0]; // 2->3, 3->4
-        this._warnCookStep = [0, 0, 7000, 6500, 7000, 0];
-        this._maxCookStep = [0, 0, 0, 0, 11000, 0];
+        /** 
+         * @readonly
+         * @type {Array<Number>} smokeTime
+         */
+        this._warnCookStep = [0, 0, 7500, 7000, 7500, 0];
+        this._maxCookStep = [0, 0, 13000, 12500, 13000, 0];
 
         this.updateVisual();
     }
@@ -82,15 +101,21 @@ class Taiyaki {
 
         switch (this.cookStage) {
             case CookStage.INSIDE:
-                if (this.cookTime() > this._minCookStep[CookStage.INSIDE]) {
+                if (this.cookTime() > this._minCookStep[CookStage.INSIDE] && this.cookTime() < this._maxCookStep[CookStage.INSIDE]) {
                     this.cookStage++;
                     this.resetCookTime();
+                } else if (this.cookTime() > this._maxCookStep[CookStage.INSIDE]) {
+                    // Too late
+                    this.cookStage = CookStage.BURNED;
                 }
                 break;
             case CookStage.SINGLEFLIP:
-                if (this.cookTime() > this._minCookStep[CookStage.SINGLEFLIP]) {
+                if (this.cookTime() > this._minCookStep[CookStage.SINGLEFLIP] && this.cookTime() < this._maxCookStep[CookStage.SINGLEFLIP]) {
                     this.cookStage++;
                     this.resetCookTime();
+                } else if (this.cookTime() > this._maxCookStep[CookStage.SINGLEFLIP]) {
+                    // Too late
+                    this.cookStage = CookStage.BURNED;
                 }
                 break;
             case CookStage.DOUBLEFLIP:
@@ -156,6 +181,17 @@ class Taiyaki {
             this.objGrab.visible = false;
             this.flipOverIfCan();
             this.updateVisual();
+        }
+    }
+
+    /**
+     * Update Appearance without interacting such as smoking.
+     */
+    tickTaiyaki() {
+        if(this._warnCookStep.length > this.cookStage && this._warnCookStep[this.cookStage] > 0 && this._warnCookStep[this.cookStage] < this.cookTime()) {
+            this.objSmoke.visible = true;
+        } else {
+            this.objSmoke.visible = false;
         }
     }
 }

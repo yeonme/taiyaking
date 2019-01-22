@@ -4,6 +4,7 @@ class GuestManager {
         /** @type {Array<Guest>} */
         this.guests = [];
         this.nextPos = 0;
+        /** @type {Number} When the last guest entered. */
         this.lastGenerated = new Date().getTime();
     }
     createGuest() {
