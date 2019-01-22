@@ -137,6 +137,7 @@ class DragEvents {
             if (!(taiyaki.cookStage == CookStage.EMPTY || taiyaki.cookStage == CookStage.BURNED || taiyaki.cookStage == CookStage.KIJI)) {
                 this.alpha = 0.0;
                 gameInfo.objPointer.visible = false;
+                gameInfo.targetTaiyaki = taiyaki;
                 taiyaki.grab(true);
                 //app.stage.cursor = "none";
                 this.cursor = "none";
@@ -149,6 +150,7 @@ class DragEvents {
             this.y = 403;
             gameInfo.handClick = false;
             gameInfo.objPointer.visible = false;
+            gameInfo.targetTaiyaki = undefined;
             gameInfo.handClickCount = 0; // reset handClickCount
             //app.stage.cursor = "inherit";
             this.cursor = "inherit";
@@ -173,7 +175,8 @@ class DragEvents {
     }
 
     static handOnMouseUp() {
-        let taiyaki = DragEvents.findNearTaiyaki();
+        //let taiyaki = DragEvents.findNearTaiyaki();
+        let taiyaki = gameInfo.targetTaiyaki;
         if (gameInfo.handClick && gameInfo.handClickCount > 1 && !(typeof taiyaki === 'undefined')) {
             if (taiyaki instanceof Taiyaki) {
                 taiyaki.grab(false);
