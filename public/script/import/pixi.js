@@ -1,3 +1,4 @@
+//@ts-nocheck
 /*!
  * pixi.js - v4.8.5
  * Compiled Mon, 07 Jan 2019 15:50:28 UTC
