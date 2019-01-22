@@ -2,7 +2,7 @@
 /**
  * @type {Number} sceneNumber sceneNumber want to show from now.
 */
-var sceneNumber = 1;
+var sceneNumber = 0;
 
 /**
  * @type {Number} visibleScene current sceneNumber showing actually.
