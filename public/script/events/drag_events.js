@@ -253,7 +253,7 @@ class DragEvents {
                     gameInfo.animman.add(new AnimItem(gameTimer, 3000, AnimationType.ALPHA, scoreEffect, EasingType.EASING, 1.0, undefined, 0.0, undefined, true));
                 }
                 guest.got = true;
-            } else {
+            } else if(!guest.got) {
                 // gameInfo.life--;
                 gameInfo.basket.clear();
                 gameInfo.objBasket.texture = gameInfo.textureBaseket[Math.min(gameInfo.textureBaseket.length - 1, gameInfo.basket.count())];

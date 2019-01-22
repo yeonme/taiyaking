@@ -163,6 +163,15 @@ function loadGameScene() {
         .on('pointerup', DragEvents.basketOnDragEnd)
         .on('pointerupoutside', DragEvents.basketOnDragEnd)
         .on('pointermove', DragEvents.basketOnDragMove);
+
+    let startCall = TornadoUtil.createObjUsingTexture("assets/start.png",
+    0.5, app.stage, "Sprite", 30000, 30000);
+    startCall.anchor.set(0.5,0.5);
+    startCall.position.set(app.screen.width / 2, app.screen.height / 2);
+    gameInfo.animman.add(new AnimItem(gameTimer+500, 500, AnimationType.SCALE,
+        startCall, EasingType.EASING, 0.5, undefined, 1.0));
+    gameInfo.animman.add(new AnimItem(gameTimer+1000, 500, AnimationType.SCALE,
+        startCall, EasingType.EASING, 1.0, undefined, 0.5, undefined, true));
 }
 
 var gameInfo = new GameInfo();

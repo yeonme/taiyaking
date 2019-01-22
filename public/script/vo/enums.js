@@ -53,7 +53,8 @@ const TaiyakiType = Object.freeze({
  */
 const AnimationType = Object.freeze({
     TRANSITION: 0,
-    ALPHA: 1
+    ALPHA: 1,
+    SCALE: 2
 });
 
 /**

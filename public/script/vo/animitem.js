@@ -43,14 +43,20 @@ class AnimItem {
         if (this._dismissed) {
             return true;
         }
+        if (this.removeOnFinish && gameTimer > this.beginTime + this.duration + 1000) {
+            this.target.visible = false;
+        }
         if (gameTimer > this.beginTime + this.duration + 3000) {
             if(this.removeOnFinish){
-                gameInfo.objGuestContainer.removeChild(this.target);
-                console.log("gameInfo.objGuestContainer.children.length: "+gameInfo.objGuestContainer.children.length);
-                console.log(this.target);
+                this.target.visible = false;
                 this.target.removeAllListeners();
-                // @ts-ignore
+                let papa = this.target.parent;
+                let lastchild = papa.children.length;
+                this.target.parent.removeChild(this.target);
                 this.target.destroy();
+                if(lastchild <= papa.children.length) {
+                    console.log("failed delete child");
+                }
             }
             this._dismissed = true;
             return true;
