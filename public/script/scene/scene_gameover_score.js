@@ -38,34 +38,36 @@ function loadGameOverScoreScene() {
         fill: '0x464646'
     });
 
-    TornadoUtil.textOut("Congratulation!!", 220, 150, app.stage, style1);
-    TornadoUtil.textOut("You made Top 10", 220, 190, app.stage, style1);
-    TornadoUtil.textOut("Please insert your name", 240, 237, app.stage, style);
+    TornadoUtil.textOut("Congratulation!!", 225, 150, app.stage, style1);
+    TornadoUtil.textOut("You made Top 10", 225, 190, app.stage, style1);
+    TornadoUtil.textOut("Please insert your name", 245, 237, app.stage, style);
 
     // Insert bar and text
     TornadoUtil.fillRoundedRect(0xFFFFFF, 125, 280, 280, 45, 20, app.stage, null, null, null);
     gameInfo.objNickName = TornadoUtil.textOut("", 140, 287, app.stage, null);
 
-    // <-
-    TornadoUtil.fillRoundedRect(0x0064CD, 410, 280, 45, 45, 10, app.stage, 2, 0x282828, 1);
-    TornadoUtil.textOut("<-", 229, 135, app.stage, new PIXI.TextStyle({
-        align: 'center',
-        fontWeight: 'bold',
-        fontSize: 18,
-        fill: '0xFFFFFF'
-    }));
+    // bksp
+    TornadoUtil.createObjButton("assets/btns/bksp.png", "assets/btns/bksp_highlight.png", "assets/btns/bksp_pressed.png", 0.9, app.stage, 430, 300, function () {
+        gameInfo.nickName =  gameInfo.nickName.slice(0, gameInfo.nickName.length-1);
+        gameInfo.objNickName.text = gameInfo.nickName;
+    });
+
+    // Submit
+    let submit = TornadoUtil.createObjButton("assets/btns/submit.png", "assets/btns/submit_highlight.png", "assets/btns/submit_pressed.png", 0.9, app.stage, 510, 300, function () {
+        alert('Completed! Go to ranking page');
+        sceneNumber = 2;
+    });
 
     // VIP
     TornadoUtil.createObjUsingTexture('assets/vip_waiting.png', 0.42, app.stage, "Sprite", 470, 130);
 
-    let alphapet = new Array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
+    let alphapet = new Array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
 
     // Alphabet Btns - first row
     for (let i = 1; i < 14; i++) {
         TornadoUtil.createObjButton('assets/alphabets/alphabet' + i + '.png', 'assets/alphabets/alphabet' + i + '_pressed.png'
-            // @ts-ignore
             , 'assets/alphabets/alphabet' + i + '_pressed.png', 1.0, app.stage, 100 + (35 * i), 370, function () {
-                if(!gameInfo.nickName || gameInfo.nickName.length < 15) {
+                if (!gameInfo.nickName || gameInfo.nickName.length < 11) {
                     gameInfo.nickName += alphapet[i - 1];
                     gameInfo.objNickName.text = gameInfo.nickName;
                 }
@@ -76,9 +78,8 @@ function loadGameOverScoreScene() {
     var idx = 0;
     for (let i = 14; i < 27; i++) {
         TornadoUtil.createObjButton('assets/alphabets/alphabet' + i + '.png', 'assets/alphabets/alphabet' + i + '_pressed.png'
-            // @ts-ignore
             , 'assets/alphabets/alphabet' + i + '_pressed.png', 1.0, app.stage, 135 + (35 * idx), 410, function () {
-                if(!gameInfo.nickName || gameInfo.nickName.length < 15) {
+                if (!gameInfo.nickName || gameInfo.nickName.length < 11) {
                     gameInfo.nickName += alphapet[i - 1];
                     gameInfo.objNickName.text = gameInfo.nickName;
                 }
@@ -87,8 +88,7 @@ function loadGameOverScoreScene() {
     };
 
     // btnClose
-    // @ts-ignore
-    let btnClose = TornadoUtil.createObjButton("assets/btnclose.png", "assets/btnclose1.png", "assets/btnclose1.png", 0.6, app.stage, 345, 475, function () {
+    let btnClose = TornadoUtil.createObjButton("assets/btns/exit.png", "assets/btns/exit_highlight.png", "assets/btns/exit_pressed.png", 0.8, app.stage, 345, 475, function () {
         sceneNumber = 0;
     });
 

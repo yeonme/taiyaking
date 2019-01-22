@@ -35,7 +35,15 @@ function loadGameOverScene() {
     TornadoUtil.textOut("Do you want to", 180, 230, app.stage, style);
     TornadoUtil.textOut("play again?", 180, 280, app.stage, style);
 
-    // Btn
+    // Yes btn
+    TornadoUtil.createObjButton("assets/btns/yes.png","assets/btns/yes_highlight.png","assets/btns/yes_pressed.png",1.0,app.stage,270,430,function(){
+        sceneNumber = 1;
+    });
+
+    // No btn
+    TornadoUtil.createObjButton("assets/btns/no.png","assets/btns/no_highlight.png","assets/btns/no_pressed.png",1.0,app.stage,420,430,function(){
+        sceneNumber = 0;
+    });
 
 
 }
