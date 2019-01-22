@@ -22,13 +22,12 @@ class TornadoUtil {
      * @param {Number} x Left X
      * @param {Number} y Top Y
      * @param {Number} z Z-order (Default: targetObj.children.length)
-     * @param {Number} delayTime For AnimatedSprite only. Delay for each frames.
      * @returns {PIXI.Sprite | PIXI.extras.AnimatedSprite} Sprite Object
      */
-    static createObjUsingTexture(fileName, scale, targetObj, spriteType, x, y, z = targetObj.children.length, delayTime = 0) {
-        let texture = PIXI.Texture.fromImage(fileName);
+    static createObjUsingTexture(fileName, scale, targetObj, spriteType, x, y, z = targetObj.children.length) {
         let sprite = null;
         if (spriteType == "Sprite") {
+            let texture = PIXI.Texture.fromImage(fileName);
             sprite = new PIXI.Sprite(texture);
         } else if (spriteType == "AnimatedSprite") {
             sprite = new PIXI.extras.AnimatedSprite(fileName);
@@ -147,9 +146,10 @@ class TornadoUtil {
      * @param {Number} y Top Y
      * @param {PIXI.Container} targetObj Target stage to be changed
      * @param {PIXI.TextStyle?} textStyle Default: 'center'
+     * @param {Number} zOrder Z-Order z (default = targetObj.children.length)
      * @returns {PIXI.Text} Text Object
      */
-    static textOut(text, x, y, targetObj, textStyle) {
+    static textOut(text, x, y, targetObj, textStyle, zOrder = targetObj.children.length) {
         /*if(typeof textStyle == "undefined") {
             textStyle = new PIXI.TextStyle({
                 //Set default text style here
@@ -157,7 +157,7 @@ class TornadoUtil {
         }*/
         let txtObj = new PIXI.Text(text, textStyle);
         txtObj.position.set(x, y);
-        targetObj.addChild(txtObj);
+        targetObj.addChildAt(txtObj, zOrder);
         return txtObj;
     }
 

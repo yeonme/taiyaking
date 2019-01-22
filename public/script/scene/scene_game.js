@@ -180,6 +180,9 @@ function lazyTick() {
     // console.log("lazyTick: " + gameTimer);
 
     lifeCheck();
+    gameInfo.taiyakis.forEach(taiyaki => {
+        taiyaki.tickTaiyaki();
+    });
     gameInfo.guestman.tickGuest();
 }
 
@@ -191,7 +194,8 @@ let other;
 function lifeCheck() {
     showMonitor();
     if(gameInfo.life <= 0) {
-        console.log("game over");
+        sceneNumber = 3;
+        //Game Over
     }
 }
 
@@ -209,5 +213,5 @@ function showMonitor() {
         app.stage.removeChild(gameInfo.objScore);
         gameInfo.objScore.destroy();
     }
-    gameInfo.objScore = TornadoUtil.textOut(gameInfo.score.toString(), 550, 160, app.stage, new PIXI.TextStyle({ align: 'center', fontWeight: 'bold' }));
+    gameInfo.objScore = TornadoUtil.textOut(gameInfo.score.toString(), 550, 160, app.stage, new PIXI.TextStyle({ align: 'center', fontWeight: 'bold' }), 101);
 }

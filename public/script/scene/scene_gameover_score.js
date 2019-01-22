@@ -63,6 +63,7 @@ function loadGameOverScoreScene() {
     // Alphabet Btns - first row
     for (let i = 1; i < 14; i++) {
         TornadoUtil.createObjButton('assets/alphabets/alphabet' + i + '.png', 'assets/alphabets/alphabet' + i + '_pressed.png'
+            // @ts-ignore
             , 'assets/alphabets/alphabet' + i + '_pressed.png', 1.0, app.stage, 100 + (35 * i), 370, function () {
                 if(!gameInfo.nickName || gameInfo.nickName.length < 15) {
                     gameInfo.nickName += alphapet[i - 1];
@@ -75,6 +76,7 @@ function loadGameOverScoreScene() {
     var idx = 0;
     for (let i = 14; i < 27; i++) {
         TornadoUtil.createObjButton('assets/alphabets/alphabet' + i + '.png', 'assets/alphabets/alphabet' + i + '_pressed.png'
+            // @ts-ignore
             , 'assets/alphabets/alphabet' + i + '_pressed.png', 1.0, app.stage, 135 + (35 * idx), 410, function () {
                 if(!gameInfo.nickName || gameInfo.nickName.length < 15) {
                     gameInfo.nickName += alphapet[i - 1];
@@ -85,6 +87,7 @@ function loadGameOverScoreScene() {
     };
 
     // btnClose
+    // @ts-ignore
     let btnClose = TornadoUtil.createObjButton("assets/btnclose.png", "assets/btnclose1.png", "assets/btnclose1.png", 0.6, app.stage, 345, 475, function () {
         sceneNumber = 0;
     });
