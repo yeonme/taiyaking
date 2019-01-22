@@ -4,6 +4,7 @@ function loadGameScene() {
 
     //GameInfo contains all informations of the game
     gameInfo = new GameInfo();
+    triggeredOver = false;
     //Arranging Scene here
     TornadoUtil.clearStage(app.stage);
 
@@ -200,10 +201,24 @@ function lazyTick() {
 var lifeMinus = 0; //Test Val
 let other;
 
+let triggeredOver = false;
 function lifeCheck() {
     showMonitor();
-    if(gameInfo.life <= 0) {
-        sceneNumber = 3;
+    if(!triggeredOver && gameInfo.life <= 0) {
+        triggeredOver = true;
+        let size = 0;
+        // GAME OVER
+        db.collection('highscores').where('score','>',gameInfo.score).get().then(snap => {
+            size = snap.size // will return the collection size
+            console.log("highscores: "+size);
+        });
+        if(size >= 10) {
+            // Game Over Simple
+            sceneNumber = 3;
+        } else {
+            // Game Over New Record
+            sceneNumber = 4;
+        }
         //Game Over
     }
 }

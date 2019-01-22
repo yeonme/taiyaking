@@ -54,6 +54,24 @@ function loadGameOverScoreScene() {
 
     // Submit
     let submit = TornadoUtil.createObjButton("assets/btns/submit.png", "assets/btns/submit_highlight.png", "assets/btns/submit_pressed.png", 0.9, app.stage, 510, 300, function () {
+        if(!gameInfo.nickName){
+            alert("Please insert your name!");
+            return;
+        }
+
+        // Add a new document in collection "cities"
+        db.collection("highscores").add({
+            user: gameInfo.nickName,
+            score: gameInfo.score,
+            // @ts-ignore
+            posted: new Date()
+        })
+        .then(function() {
+            console.log("New world record!");
+        })
+        .catch(function(error) {
+            console.error("Error writing rank: ", error);
+        });
         alert('Completed! Go to ranking page');
         sceneNumber = 2;
     });
