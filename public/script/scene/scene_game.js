@@ -165,6 +165,10 @@ function loadGameScene() {
         .on('pointerupoutside', DragEvents.basketOnDragEnd)
         .on('pointermove', DragEvents.basketOnDragMove);
 
+    var backBtn = TornadoUtil.createObjButton("assets/btns/back.png", "assets/btns/back_highlight.png", "assets/btns/back_pressed.png", 0.7, app.stage, 60, 20, function() {
+        sceneNumber = 0;
+    });
+
     let startCall = TornadoUtil.createObjUsingTexture("assets/start.png",
     0.5, app.stage, "Sprite", 30000, 30000);
     startCall.anchor.set(0.5,0.5);
