@@ -40,6 +40,12 @@ function goToProperScene(){
     } else if(sceneNumber == 4){ // Game Over High Score Recorded
         isNewScene ? loadGameOverScoreScene() :
             tickScoreScene();
+    } else if(sceneNumber == 5){ // How_To_1
+        isNewScene ? loadHowTo1Scene() :
+            tickScoreScene();
+    } else if(sceneNumber == 6){ // How_To_2
+        isNewScene ? loadHowTo2Scene() :
+            tickScoreScene();
     } 
 }
 
