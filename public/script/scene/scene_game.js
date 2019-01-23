@@ -227,6 +227,7 @@ function lifeCheck() {
     }
 }
 
+var lastScore = 0;
 function showMonitor() {
     //Life
     for (let lifeIndex = 0; lifeIndex < 5; lifeIndex++) {
@@ -237,9 +238,12 @@ function showMonitor() {
     }
 
     //Score (TEST BY GAMETIMER)
-    if (typeof gameInfo.objScore != "undefined" && gameInfo.objScore != null) {
-        app.stage.removeChild(gameInfo.objScore);
-        gameInfo.objScore.destroy();
+    if(lastScore != gameInfo.score) {
+        lastScore = gameInfo.score;
+        if (typeof gameInfo.objScore != "undefined" && gameInfo.objScore != null) {
+            app.stage.removeChild(gameInfo.objScore);
+            gameInfo.objScore.destroy();
+        }
+        gameInfo.objScore = TornadoUtil.textOut(gameInfo.score.toString(), 550, 160, app.stage, new PIXI.TextStyle({ align: 'center', fontWeight: 'bold' }), 101)
     }
-    gameInfo.objScore = TornadoUtil.textOut(gameInfo.score.toString(), 550, 160, app.stage, new PIXI.TextStyle({ align: 'center', fontWeight: 'bold' }), 101);
 }

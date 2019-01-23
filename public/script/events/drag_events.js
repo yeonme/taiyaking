@@ -233,6 +233,12 @@ class DragEvents {
                 }
                 sumScore *= guest.order.count();
                 gameInfo.score += sumScore;
+                
+                /** @type {HTMLAudioElement} */
+                // @ts-ignore
+                var audio = document.getElementById('score');
+                audio.play();
+
                 gameInfo.basket.clear();
                 gameInfo.objBasket.texture = gameInfo.textureBaseket[Math.min(gameInfo.textureBaseket.length - 1, gameInfo.basket.count())];
                 gameInfo.taiyakiCountText.text = gameInfo.basket.count();

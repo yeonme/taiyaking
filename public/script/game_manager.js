@@ -60,6 +60,7 @@ function goToProperScene(delta){
 function fireEachFrame(delta){
     if(sceneNumber == 1){ 
         gameTimer += app.ticker.elapsedMS;
+        document.getElementById('timer').innerText = Math.floor(gameTimer).toString();
     }
     //console.log(app.ticker.FPS);
     goToProperScene(delta);
