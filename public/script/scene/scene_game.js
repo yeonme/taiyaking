@@ -177,7 +177,11 @@ function loadGameScene() {
 
 var gameInfo = new GameInfo();
 
-function tickGameScene() {
+/**
+ * tickGame
+ * @param {Number?} delta 
+ */
+function tickGameScene(delta) {
     if (typeof lastFrameTime == "undefined" || (new Date().getTime() - lastFrameTime) > 500) {
         //fires every 500ms or first time entered
         lazyTick();
