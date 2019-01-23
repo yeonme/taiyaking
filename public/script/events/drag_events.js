@@ -141,6 +141,8 @@ class DragEvents {
                 taiyaki.grab(true);
                 //app.stage.cursor = "none";
                 this.cursor = "none";
+            } else if(!(taiyaki.cookStage == CookStage.EMPTY)) {
+                gameInfo.targetTaiyaki = taiyaki;
             }
         } else if (gameInfo.handClickCount > 1 && typeof taiyaki === 'undefined') {
             this.alpha = 1;
