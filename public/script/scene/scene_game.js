@@ -202,6 +202,7 @@ function lazyTick() {
         taiyaki.tickTaiyaki();
     });
     gameInfo.guestman.tickGuest();
+    document.getElementById('timer').innerText = (Math.floor(gameTimer/1000/60)>0?Math.floor(gameTimer/1000/60).toString()+"m ":"")+(Math.floor(gameTimer/1000)-(Math.floor(gameTimer/1000/60)*60)).toString()+"s";
 }
 
 /* Game Functions */

@@ -52,10 +52,11 @@ class DragEvents {
                 return aVal - bVal;
             });
             console.log(kvIdxSprite);
-            gameInfo.taiyakis[kvIdxSprite[0].key].cookStage = CookStage.KIJI;
-            gameInfo.taiyakis[kvIdxSprite[0].key].updateVisual();
-            TornadoUtil.playSE('kiji');
-            
+            if(gameInfo.taiyakis[kvIdxSprite[0].key].cookStage === CookStage.EMPTY) {
+                gameInfo.taiyakis[kvIdxSprite[0].key].cookStage = CookStage.KIJI;
+                gameInfo.taiyakis[kvIdxSprite[0].key].updateVisual();
+                TornadoUtil.playSE('kiji');
+            }
         }
 
         gameInfo.objPointer.visible = false;
@@ -224,6 +225,7 @@ class DragEvents {
             console.log(guest);
             if (!guest.got && gameInfo.basket.similar(guest.order)) {
                 console.log("Correct!");
+                gameInfo.accumulateTaiyaki += 1;
                 let sumScore = (guest.guestType == GuestType.VIP) ? 300 : 100;
                 switch(guest.angryStage){
                     case AngryStage.B_NERVOUS:

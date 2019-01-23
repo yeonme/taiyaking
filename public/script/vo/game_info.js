@@ -44,6 +44,8 @@ class GameInfo {
         /** save HandMouseDown target and use on HandMouseUp
          * @type {Taiyaki} */
         this.targetTaiyaki = undefined;
+
+        this.accumulateTaiyaki = 0;
         
         this.animman = new AnimManager();
     }

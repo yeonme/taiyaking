@@ -8,7 +8,7 @@ class GuestManager {
         this.lastGenerated = new Date().getTime();
     }
     createGuest() {
-        if(this.guests.length >= 2) {
+        if(this.guests.length >= 2 || (gameTimer < 30000 && this.guests.length >= 1) ) {
             return;
         }
         this.lastGenerated = new Date().getTime();
@@ -21,9 +21,24 @@ class GuestManager {
         this.guests.push(guest);
         //console.log(guest);
     }
+    getGuestFrequency() {
+        //gameTimer
+        //0-30000 : length 1
+        //30001-60000 : 10000
+        //60001-90000 : 5000
+        if(gameTimer < 30000) {
+            return 3000; //it will be blocked on createGuest() length 1
+        } else if(gameTimer < 60000) {
+            return 10000;
+        } else if(gameTimer < 90000) {
+            return 5000;
+        } else {
+            return 3000;
+        }
+    }
     tickGuest() {
         let elapsed = new Date().getTime() - this.lastGenerated;
-        if(elapsed > 3000) {
+        if(elapsed > Math.max(this.getGuestFrequency(),3000)) {
             this.createGuest();
         }
 

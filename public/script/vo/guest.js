@@ -154,16 +154,32 @@ class Guest {
             gameInfo.animman.add(new AnimItem(gameTimer+450, 600, AnimationType.ALPHA, this.objText, EasingType.DEFAULT, 0.0, 0.0, 1.0, 0.0));
         }
     }
+    maxTaiyakiOrder(){
+        // gameInfo.accumulateTaiyaki
+        // 0-5: 1-3
+        // 6-10: 1-4
+        // 11-15: 1-5
+        // 16-: 1-6
+        switch(gameInfo.accumulateTaiyaki){
+            case 0: case 1: case 2: case 3: case 4: case 5:
+            return 3;
+            case 6: case 7: case 8: case 9: case 10:
+            return 4;
+            case 11: case 12: case 13: case 14: case 15:
+            return 5;
+        }
+        return 6;
+    }
     /**
      * Set the order randomly.
      */
     newOrder() {
         this.order = new TaiyakiHashMap();
-        let quantity = Math.floor((Math.random() * 5) + 1);
+        let quantity = Math.floor((Math.random() * this.maxTaiyakiOrder()) + 1);
         this.order.setQuantity(TaiyakiType.ANKO, quantity);
-        this._requiredTime = 20000 + 4500*quantity;
+        this._requiredTime = 23000 + 4500*quantity;
         // this._requiredTime = 0;
-        this.enduranceTime = this._requiredTime + Math.random()*10000 + 10000;
+        this.enduranceTime = this._requiredTime + Math.random()*10000 + 15000;
         // this.enduranceTime = 3000;
         this.builtText = "I want\n"+quantity+" Taiyaki"+(quantity>1?"s":"")+"!";
     }
