@@ -165,6 +165,10 @@ function loadGameScene() {
         .on('pointerupoutside', DragEvents.basketOnDragEnd)
         .on('pointermove', DragEvents.basketOnDragMove);
 
+    var backBtn = TornadoUtil.createObjButton("assets/btns/back.png", "assets/btns/back_highlight.png", "assets/btns/back_pressed.png", 0.7, app.stage, 60, 20, function() {
+        sceneNumber = 0;
+    });
+
     let startCall = TornadoUtil.createObjUsingTexture("assets/start.png",
     0.5, app.stage, "Sprite", 30000, 30000);
     startCall.anchor.set(0.5,0.5);
@@ -177,7 +181,11 @@ function loadGameScene() {
 
 var gameInfo = new GameInfo();
 
-function tickGameScene() {
+/**
+ * tickGame
+ * @param {Number?} delta 
+ */
+function tickGameScene(delta) {
     if (typeof lastFrameTime == "undefined" || (new Date().getTime() - lastFrameTime) > 500) {
         //fires every 500ms or first time entered
         lazyTick();
@@ -223,6 +231,7 @@ function lifeCheck() {
     }
 }
 
+var lastScore = 0;
 function showMonitor() {
     //Life
     for (let lifeIndex = 0; lifeIndex < 5; lifeIndex++) {
@@ -233,9 +242,12 @@ function showMonitor() {
     }
 
     //Score (TEST BY GAMETIMER)
-    if (typeof gameInfo.objScore != "undefined" && gameInfo.objScore != null) {
-        app.stage.removeChild(gameInfo.objScore);
-        gameInfo.objScore.destroy();
+    if(lastScore != gameInfo.score) {
+        lastScore = gameInfo.score;
+        if (typeof gameInfo.objScore != "undefined" && gameInfo.objScore != null) {
+            app.stage.removeChild(gameInfo.objScore);
+            gameInfo.objScore.destroy();
+        }
+        gameInfo.objScore = TornadoUtil.textOut(gameInfo.score.toString(), 550, 160, app.stage, new PIXI.TextStyle({ align: 'center', fontWeight: 'bold' }), 101)
     }
-    gameInfo.objScore = TornadoUtil.textOut(gameInfo.score.toString(), 550, 160, app.stage, new PIXI.TextStyle({ align: 'center', fontWeight: 'bold' }), 101);
 }

@@ -54,6 +54,8 @@ class DragEvents {
             console.log(kvIdxSprite);
             gameInfo.taiyakis[kvIdxSprite[0].key].cookStage = CookStage.KIJI;
             gameInfo.taiyakis[kvIdxSprite[0].key].updateVisual();
+            TornadoUtil.playSE('kiji');
+            
         }
 
         gameInfo.objPointer.visible = false;
@@ -141,6 +143,8 @@ class DragEvents {
                 taiyaki.grab(true);
                 //app.stage.cursor = "none";
                 this.cursor = "none";
+            } else if(!(taiyaki.cookStage == CookStage.EMPTY)) {
+                gameInfo.targetTaiyaki = taiyaki;
             }
         } else if (gameInfo.handClickCount > 1 && typeof taiyaki === 'undefined') {
             this.alpha = 1;
@@ -231,6 +235,9 @@ class DragEvents {
                 }
                 sumScore *= guest.order.count();
                 gameInfo.score += sumScore;
+
+                TornadoUtil.playSE('score');
+
                 gameInfo.basket.clear();
                 gameInfo.objBasket.texture = gameInfo.textureBaseket[Math.min(gameInfo.textureBaseket.length - 1, gameInfo.basket.count())];
                 gameInfo.taiyakiCountText.text = gameInfo.basket.count();

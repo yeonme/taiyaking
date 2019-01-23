@@ -68,6 +68,10 @@ function loadScoreScene() {
     var rankData = [];
     let lineHeight = rankHeaderItem.getBounds().height + 15;
     let number = 0;
+    /** @type {PIXI.Text} */
+    var objLoading = TornadoUtil.textOut("Loading...", 229, 195, app.stage, new PIXI.TextStyle({
+        fontSize:30
+    }));
     db.collection("highscores").orderBy("score","desc").limit(10).get().then(function(querySnapshot){
         querySnapshot.forEach(function(doc){
             rankData.push(doc.data());
@@ -84,6 +88,17 @@ function loadScoreScene() {
                 lineHeight += rankItem.getBounds().height + 7;
             }
         });
+        console.log(rankData);
+        if(rankData.length > 0) {
+            if(typeof objLoading !== "undefined"){
+                objLoading.visible = false;
+                app.stage.removeChild(objLoading);
+            }
+        } else {
+            if(typeof objLoading !== "undefined"){
+                objLoading.text = "No records yet.";
+            }
+        }
     });
 
     // rankData.forEach(function(item){
@@ -102,21 +117,12 @@ function loadScoreScene() {
     //             }
     //         });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
-function tickScoreScene() {
+/**
+ * tickScore
+ * @param {Number?} delta 
+ */
+function tickScoreScene(delta) {
 
 }

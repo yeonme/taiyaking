@@ -39,6 +39,10 @@ function loadMenuScene(){
     });
 }
 
-function tickMenuScene(){
+/**
+ * tickMenu
+ * @param {Number?} delta 
+ */
+function tickMenuScene(delta){
     //doNothing
 }

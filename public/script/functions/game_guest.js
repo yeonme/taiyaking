@@ -11,7 +11,7 @@ class GuestManager {
         if(this.guests.length >= 2) {
             return;
         }
-        this.lastGenerated = gameTimer;
+        this.lastGenerated = new Date().getTime();
         let guest = new Guest();
         guest.newOrder();
         let randomValue = Math.random();
