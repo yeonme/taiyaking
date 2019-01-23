@@ -178,4 +178,20 @@ class TornadoUtil {
     
         return [sYear, month, day].join('/');
     }
+
+    /**
+     * Play Sound Effect
+     * @param {String} targetId media player selector id
+     * @param {Boolean} stopAndPlay stop before playing
+     */
+    static playSE(targetId, stopAndPlay = true) {
+        /** @type {HTMLAudioElement} */
+        // @ts-ignore
+        var audio = document.getElementById(targetId);
+        if(stopAndPlay) {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+        var playPromise = audio.play();
+    }
 }

@@ -4,19 +4,7 @@
 class ButtonEvents {
     static onButtonDown() {
         this.isdown = true;
-        /** @type {HTMLAudioElement} */
-        // @ts-ignore
-        var audio = document.getElementById('buttonOver');
-        var playPromise = audio.play();
-
-        if(playPromise !== undefined) {
-            playPromise.then(_ => {
-                console.log("playPromise! "+_);
-            })
-            .catch(error => {
-                console.log("catch! "+error);
-            });
-        }
+        TornadoUtil.playSE('buttonOver');
 
         this.texture = this["textureButtonDown"];
         this.alpha = 1;

@@ -54,6 +54,8 @@ class DragEvents {
             console.log(kvIdxSprite);
             gameInfo.taiyakis[kvIdxSprite[0].key].cookStage = CookStage.KIJI;
             gameInfo.taiyakis[kvIdxSprite[0].key].updateVisual();
+            TornadoUtil.playSE('kiji');
+            
         }
 
         gameInfo.objPointer.visible = false;
@@ -233,11 +235,8 @@ class DragEvents {
                 }
                 sumScore *= guest.order.count();
                 gameInfo.score += sumScore;
-                
-                /** @type {HTMLAudioElement} */
-                // @ts-ignore
-                var audio = document.getElementById('score');
-                audio.play();
+
+                TornadoUtil.playSE('score');
 
                 gameInfo.basket.clear();
                 gameInfo.objBasket.texture = gameInfo.textureBaseket[Math.min(gameInfo.textureBaseket.length - 1, gameInfo.basket.count())];
