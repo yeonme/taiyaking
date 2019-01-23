@@ -29,7 +29,7 @@ function loadMenuScene(){
 
     // TornadoUtil.createObjUsingTexture("assets/title.png", 0.60, app.stage, "Sprite", 20, 30);
     TornadoUtil.createObjButton("assets/btn_howto.png","assets/btn_howto_highlight.png","assets/btn_howto_pressed.png",0.20,app.stage,110,170,function(){
-        sceneNumber = 1;
+        sceneNumber = 5;
     });
     TornadoUtil.createObjButton("assets/btn_play.png","assets/btn_play_highlight.png","assets/btn_play_pressed.png",0.20,app.stage,345,170,function(){
         sceneNumber = 1;

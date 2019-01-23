@@ -49,8 +49,14 @@ function goToProperScene(delta){
             tickScoreScene(delta);
     } else if(sceneNumber == 4){ // Game Over High Score Recorded
         isNewScene ? loadGameOverScoreScene() :
-            tickScoreScene(delta);
-    } else if(sceneNumber == 5) { // Reject Mobile Phone
+            tickScoreScene();
+    } else if(sceneNumber == 5){ // How_To_1
+        isNewScene ? loadHowTo1Scene() :
+            tickScoreScene();
+    } else if(sceneNumber == 6){ // How_To_2
+        isNewScene ? loadHowTo2Scene() :
+            tickScoreScene();
+    } else if(sceneNumber == 7) { // Reject Mobile Phone
         isNewScene ? loadRejectMobileScene() :
             tickRejectMobileScene(delta);
     }

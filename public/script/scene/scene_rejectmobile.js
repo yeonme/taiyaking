@@ -1,7 +1,7 @@
 /** @type {PIXI.Sprite} */
 var heart;
 function loadRejectMobileScene() {
-    visibleScene = 5;
+    visibleScene = 7;
     TornadoUtil.clearStage(app.stage);
 
     heart = TornadoUtil.createObjUsingTexture("assets/heart.png", 1.0, app.stage, "Sprite", 300, 100);
