@@ -277,7 +277,7 @@ class Guest {
         let lastAngryStage = this.angryStage;
         if(this.got) {
             this.angryStage = AngryStage.HEART;
-        } else if(waitingTime < this.enduranceTime * 0.5) {
+        } else if(waitingTime < this.enduranceTime * 0.6) {
             this.angryStage = AngryStage.A_NORMAL;
         } else if(waitingTime < this.enduranceTime * 0.8) {
             this.angryStage = AngryStage.B_NERVOUS;

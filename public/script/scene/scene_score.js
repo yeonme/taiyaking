@@ -49,12 +49,12 @@ function loadScoreScene() {
     let rankHeaderItem = TornadoUtil.textOut("RANK", 129, 135, app.stage, style);
 
     // Name text  & background
-    TornadoUtil.fillRoundedRect(0x0064CD, 220, 130, 65, 30, 10, app.stage, 2, 0x282828, 1);
-    TornadoUtil.textOut("NAME", 229, 135, app.stage, style);
+    TornadoUtil.fillRoundedRect(0x0064CD, 190, 130, 65, 30, 10, app.stage, 2, 0x282828, 1);
+    TornadoUtil.textOut("NAME", 199, 135, app.stage, style);
 
     // Score text & background
-    TornadoUtil.fillRoundedRect(0x0064CD, 340, 130, 75, 30, 10, app.stage, 2, 0x282828, 1);
-    TornadoUtil.textOut("SCORE", 348, 135, app.stage, style);
+    TornadoUtil.fillRoundedRect(0x0064CD, 370, 130, 75, 30, 10, app.stage, 2, 0x282828, 1);
+    TornadoUtil.textOut("SCORE", 378, 135, app.stage, style);
 
     // Date text  & background
     TornadoUtil.fillRoundedRect(0x0064CD, 480, 130, 65, 30, 10, app.stage, 2, 0x282828, 1);
@@ -78,8 +78,8 @@ function loadScoreScene() {
             if(doc.data()) {
                 number++;
                 TornadoUtil.textOut(number.toString(), 129, 135 + lineHeight, app.stage, innerStyle);
-                let rankItem = TornadoUtil.textOut(doc.data().user, 220, 135 + lineHeight, app.stage, innerStyle);
-                TornadoUtil.textOut(doc.data().score, 340, 135 + lineHeight, app.stage, innerStyle);
+                let rankItem = TornadoUtil.textOut(doc.data().user, 190, 135 + lineHeight, app.stage, innerStyle);
+                TornadoUtil.textOut(doc.data().score, 370, 135 + lineHeight, app.stage, innerStyle);
                 if(typeof doc.data().posted !== "undefined") {
                     /** @type {Date} */
                     let dateTime = doc.data().posted.toDate();

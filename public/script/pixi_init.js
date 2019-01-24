@@ -16,6 +16,8 @@ document.body.appendChild(app.view);
 document.body.addEventListener('touchmove', function(e){ e.preventDefault(); }, { passive: false });
 app.renderer.plugins.interaction.cursorStyles["none"] = "none";
 app.ticker.add(function(delta){
-    fireEachFrame(delta);
+    if(fireEachFrame){
+        fireEachFrame(delta);
+    }
     //located on game_manager.js
 });
