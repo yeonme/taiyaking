@@ -72,8 +72,8 @@ class Taiyaki {
          * @readonly
          * @type {Array<Number>} smokeTime
          */
-        this._warnCookStep = [0, 0, 7500, 7000, 7500, 0];
-        this._maxCookStep = [0, 0, 13000, 12500, 13000, 0];
+        this._warnCookStep = [0, 8500, 8500, 7000, 7500, 0];
+        this._maxCookStep = [0, 13000, 16000, 12500, 13000, 0];
 
         this.updateVisual();
     }

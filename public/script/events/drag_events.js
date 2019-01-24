@@ -54,6 +54,7 @@ class DragEvents {
             console.log(kvIdxSprite);
             if(gameInfo.taiyakis[kvIdxSprite[0].key].cookStage === CookStage.EMPTY) {
                 gameInfo.taiyakis[kvIdxSprite[0].key].cookStage = CookStage.KIJI;
+                gameInfo.taiyakis[kvIdxSprite[0].key].resetCookTime();
                 gameInfo.taiyakis[kvIdxSprite[0].key].updateVisual();
                 TornadoUtil.playSE('kiji');
             }
@@ -98,7 +99,7 @@ class DragEvents {
                 newitem.val = TornadoLogic.checkNearestPoint(gameInfo.objPointer, gameInfo.taiyakis[idx].objKiji);
                 kvIdxSprite.push(newitem);
             }
-            console.log(kvIdxSprite);
+            // console.log(kvIdxSprite);
             kvIdxSprite.sort(function (a, b) {
                 var dflt = Number.MAX_VALUE;
 
@@ -106,11 +107,15 @@ class DragEvents {
                 var bVal = (b == null ? dflt : b.val);
                 return aVal - bVal;
             });
-            console.log(kvIdxSprite);
+            // console.log(kvIdxSprite);
 
             if (gameInfo.taiyakis[kvIdxSprite[0].key].cookStage == CookStage.KIJI) {
-                gameInfo.taiyakis[kvIdxSprite[0].key].cookStage = CookStage.INSIDE;
-                gameInfo.taiyakis[kvIdxSprite[0].key].resetCookTime();
+                if(gameInfo.taiyakis[kvIdxSprite[0].key].cookTime() > gameInfo.taiyakis[kvIdxSprite[0].key]._maxCookStep[CookStage.KIJI]) {
+                    gameInfo.taiyakis[kvIdxSprite[0].key].cookStage = CookStage.BURNED;
+                } else {
+                    gameInfo.taiyakis[kvIdxSprite[0].key].cookStage = CookStage.INSIDE;
+                }
+                // gameInfo.taiyakis[kvIdxSprite[0].key].resetCookTime(); // Not reset becasue we don't flip it!
                 gameInfo.taiyakis[kvIdxSprite[0].key].updateVisual();
             }
         }
