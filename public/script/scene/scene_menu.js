@@ -28,13 +28,13 @@ function loadMenuScene(){
     let heart1 = TornadoUtil.createObjUsingTexture('assets/heart.png', 0.4, app.stage, "Sprite", 30, 230);
 
     // TornadoUtil.createObjUsingTexture("assets/title.png", 0.60, app.stage, "Sprite", 20, 30);
-    TornadoUtil.createObjButton("assets/btn_howto.png","assets/btn_howto_highlight.png","assets/btn_howto_pressed.png",0.20,app.stage,110,170,function(){
+    TornadoUtil.createObjButton("assets/btns/btn_howto.png","assets/btns/btn_howto_highlight.png","assets/btns/btn_howto_pressed.png",0.20,app.stage,110,170,function(){
         sceneNumber = 5;
     });
-    TornadoUtil.createObjButton("assets/btn_play.png","assets/btn_play_highlight.png","assets/btn_play_pressed.png",0.20,app.stage,345,170,function(){
+    TornadoUtil.createObjButton("assets/btns/btn_play.png","assets/btns/btn_play_highlight.png","assets/btns/btn_play_pressed.png",0.20,app.stage,345,170,function(){
         sceneNumber = 1;
     });
-    TornadoUtil.createObjButton("assets/btn_score.png","assets/btn_score_highlight.png","assets/btn_score_pressed.png",0.20,app.stage,580,170,function(){
+    TornadoUtil.createObjButton("assets/btns/btn_score.png","assets/btns/btn_score_highlight.png","assets/btns/btn_score_pressed.png",0.20,app.stage,580,170,function(){
         sceneNumber = 2;
     });
 }

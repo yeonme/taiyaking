@@ -74,6 +74,35 @@ class TornadoUtil {
     }
 
     /**
+     * 
+     * @param {string} fileNameOff 
+     * @param {string} fileNameOn 
+     * @param {string} fileNameHoverToOn 
+     * @param {string} fileNameHoverToOff 
+     * @param {number} scale 
+     * @param {PIXI.Container} targetObj 
+     * @param {number} x 
+     * @param {number} y 
+     * @param {boolean} currentValue 
+     * @param {Function} onChanged 
+     */
+    static createToggleButton(fileNameOff, fileNameOn, fileNameHoverToOn, fileNameHoverToOff, scale, targetObj, x, y, currentValue, onChanged) {
+        let sprite = this.createObjUsingTexture(currentValue ? fileNameOn : fileNameOff, scale, targetObj, "Sprite", x, y);
+        sprite.anchor.set(0.5, 0.5);
+        sprite.interactive = true;
+        sprite.buttonMode = true;
+        sprite["textureButtonOn"] = PIXI.Texture.fromImage(fileNameOn);
+        sprite["textureButtonOff"] = PIXI.Texture.fromImage(fileNameOff);
+        sprite["tap"] = onChanged;
+        sprite["click"] = onChanged;
+        sprite.on('pointerdown', ButtonEvents.onButtonDown)
+            .on('pointerup', ButtonEvents.onButtonUp)
+            .on('pointerupoutside', ButtonEvents.onButtonUp)
+            .on('pointerover', ButtonEvents.onButtonOver)
+            .on('pointerout', ButtonEvents.onButtonOut);
+    }
+
+    /**
      * Fill the rect by specified color.
      * @param {Number} color Color to fill
      * @param {Number} x Left X
