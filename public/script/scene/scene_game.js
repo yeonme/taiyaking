@@ -217,17 +217,18 @@ function lifeCheck() {
         triggeredOver = true;
         let size = 0;
         // GAME OVER
-        db.collection('highscores').where('score','>',gameInfo.score).get().then(snap => {
+        db.collection('highscores').where('score','>=',gameInfo.score).get().then(snap => {
             size = snap.size // will return the collection size
             console.log("highscores: "+size);
+
+            if(size >= 10) {
+                // Game Over Simple
+                sceneNumber = 3;
+            } else {
+                // Game Over New Record
+                sceneNumber = 4;
+            }
         });
-        if(size >= 10) {
-            // Game Over Simple
-            sceneNumber = 3;
-        } else {
-            // Game Over New Record
-            sceneNumber = 4;
-        }
         //Game Over
     }
 }

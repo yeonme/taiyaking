@@ -32,8 +32,7 @@ function loadGameOverScene() {
         fontSize: 34,
         fill: '0x464646'
     });
-    TornadoUtil.textOut("Do you want to", 180, 230, app.stage, style);
-    TornadoUtil.textOut("play again?", 180, 280, app.stage, style);
+    TornadoUtil.textOut("Do you want to\nplay again?", 180, 230, app.stage, style);
 
     // Yes btn
     TornadoUtil.createObjButton("assets/btns/yes.png","assets/btns/yes_highlight.png","assets/btns/yes_pressed.png",1.0,app.stage,270,430,function(){

@@ -29,7 +29,7 @@ var mobileAndTabletcheck = function() {
     return check;
   };
 if(mobileAndTabletcheck()) { // true when mobile mode
-    sceneNumber = 5;
+    sceneNumber = 7;
 }
 
 function goToProperScene(delta){
