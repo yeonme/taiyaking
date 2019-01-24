@@ -47,6 +47,11 @@ function loadHowTo1Scene() {
 
     TornadoUtil.textOut("Use mouse", 507, 385, app.stage, style2);
     TornadoUtil.textOut("click", 529, 402, app.stage, style3);
+
+    // Play btn
+    TornadoUtil.createObjButton("assets/btns/btn_next.png", "assets/btns/btn_next_highlight.png", "assets/btns/btn_next_pressed.png", 0.12, app.stage, 565, 472, function () {
+        sceneNumber = 6;
+    });
 }
 
 function tickScoreScene() {

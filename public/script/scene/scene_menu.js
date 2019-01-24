@@ -1,9 +1,11 @@
 //@ts-nocheck
 function loadMenuScene(){
-    visibleScene = 0;
-    console.log(sceneNumber);
+    if(visibleScene != 2 && visibleScene != 5 && visibleScene != 6) {
+        //Score / Guide -> Menu: non-stop bgm!
+        TornadoUtil.stopSE();
+    }
 
-    TornadoUtil.stopSE();
+    visibleScene = 0;
 
     // Background
     TornadoUtil.fillRect(0xCA931C, 0, 0, 690, 550, app.stage, 1);
@@ -20,6 +22,9 @@ function loadMenuScene(){
     roof.width = 690;
     roof.height = 250;
 
+    // title
+    TornadoUtil.createObjUsingTexture('assets/title.png', 1.0, app.stage, "Sprite", 0, 0);
+
     // Girl
     let girl = TornadoUtil.createObjUsingTexture('assets/girl_taiyaki.png', 1.1, app.stage, "Sprite", 40, 190);
 
@@ -30,13 +35,13 @@ function loadMenuScene(){
     let heart1 = TornadoUtil.createObjUsingTexture('assets/heart.png', 0.4, app.stage, "Sprite", 30, 230);
 
     // TornadoUtil.createObjUsingTexture("assets/title.png", 0.60, app.stage, "Sprite", 20, 30);
-    var btnHowto = TornadoUtil.createObjButton("assets/btns/btn_howto.png","assets/btns/btn_howto_highlight.png","assets/btns/btn_howto_pressed.png",0.20,app.stage,110,170,function(){
+    var btnHowto = TornadoUtil.createObjButton("assets/btns/btn_howto.png","assets/btns/btn_howto_highlight.png","assets/btns/btn_howto_pressed.png",0.18,app.stage,590,90,function(){
         sceneNumber = 5;
     });
-    var btnPlay = TornadoUtil.createObjButton("assets/btns/btn_play.png","assets/btns/btn_play_highlight.png","assets/btns/btn_play_pressed.png",0.20,app.stage,345,170,function(){
+    var btnPlay = TornadoUtil.createObjButton("assets/btns/btn_play.png","assets/btns/btn_play_highlight.png","assets/btns/btn_play_pressed.png",0.18,app.stage,590,150,function(){
         sceneNumber = 1;
     });
-    var btnScore = TornadoUtil.createObjButton("assets/btns/btn_score.png","assets/btns/btn_score_highlight.png","assets/btns/btn_score_pressed.png",0.20,app.stage,580,170,function(){
+    var btnScore = TornadoUtil.createObjButton("assets/btns/btn_score.png","assets/btns/btn_score_highlight.png","assets/btns/btn_score_pressed.png",0.18,app.stage,590,210,function(){
         sceneNumber = 2;
     });
 
