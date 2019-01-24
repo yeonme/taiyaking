@@ -53,6 +53,7 @@ class TornadoUtil {
      * @param {Number} x Left x
      * @param {Number} y Top y
      * @param {Function} onClick EventHandler to fire on click (or tap)
+     * @returns {PIXI.Sprite}
      */
     static createObjButton(fileNameDef, fileNameHover, fileNamePressed, scale, targetObj, x, y, onClick) {
         // let textureButtonDown = PIXI.Texture.fromImage(fileNamePressed);
@@ -71,6 +72,7 @@ class TornadoUtil {
             .on('pointerupoutside', ButtonEvents.onButtonUp)
             .on('pointerover', ButtonEvents.onButtonOver)
             .on('pointerout', ButtonEvents.onButtonOut);
+        return sprite;
     }
 
     /**
@@ -222,5 +224,33 @@ class TornadoUtil {
             audio.currentTime = 0;
         }
         var playPromise = audio.play();
+    }
+
+    /**
+     * Stop Sound Effect
+     * @param {String?} targetId media player selector id
+     */
+    static stopSE(targetId = undefined) {
+        /** @type {HTMLAudioElement} */
+        var audio = null;
+        if(typeof targetId === "undefined") {
+            /** @type {HTMLCollectionOf<HTMLAudioElement>} */
+            //@ts-ignore
+            let audios = document.getElementsByTagName('audio');
+            for (let idx = 0; idx < audios.length; idx++) {
+                const player = audios.item(idx);
+                if(player !== null && player.pause) {
+                    player.pause();
+                    player.currentTime = 0;
+                }
+            }
+        } else {
+            //@ts-ignore
+            audio = document.getElementById(targetId);
+            if(audio !== null && typeof audio.pause === "function") {
+                audio.pause();
+                audio.currentTime = 0;
+            }
+        }
     }
 }

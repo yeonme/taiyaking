@@ -2,6 +2,8 @@ function loadGameScene() {
     visibleScene = 1;
     gameTimer = 0;
 
+    TornadoUtil.stopSE();
+
     //GameInfo contains all informations of the game
     gameInfo = new GameInfo();
     triggeredOver = false;
@@ -177,6 +179,8 @@ function loadGameScene() {
         startCall, EasingType.EASING, 0.5, undefined, 1.0));
     gameInfo.animman.add(new AnimItem(gameTimer+1000, 500, AnimationType.SCALE,
         startCall, EasingType.EASING, 1.0, undefined, 0.5, undefined, true));
+    
+    TornadoUtil.playSE('bgmGame');
 }
 
 var gameInfo = new GameInfo();

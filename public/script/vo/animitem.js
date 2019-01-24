@@ -65,10 +65,11 @@ class AnimItem {
     }
     /**
      * 
-     * @param {Number} from start value
-     * @param {Number} to end value
-     * @param {Number} duration how long lasts
-     * @param {Number} pos current time (less than or same as duration)
+     * @param {number} from start value
+     * @param {number} to end value
+     * @param {number} duration how long lasts
+     * @param {number} pos current time (less than or same as duration)
+     * @returns {number}
      */
     _xyCurrent(from, to, duration, pos) {
         if (this.easingType == EasingType.DEFAULT) {

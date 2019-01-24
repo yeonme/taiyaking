@@ -22,6 +22,11 @@ var lastFrameTime;
 //lastFrameTime: Used for lazyTick()
 //alert('I\'m alive!');
 
+/**
+ * @type {Boolean} dismissedClick is the first time running?
+ */
+var dismissedClick = false;
+
 var mobileAndTabletcheck = function() {
     var check = false;
     //@ts-ignore
