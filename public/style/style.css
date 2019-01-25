@@ -25,8 +25,12 @@ div#btnSound {
     height: 50px;
     float:left;
     left: 90%;
+    left: -webkit-calc(50% + 290px); 
+    left: -moz-calc(50% - 270px);
     left: calc(50% + 290px); 
     top: 10%;
+    top: -webkit-calc(50% - 270px);
+    top: -moz-calc(50% - 270px);
     top: calc(50% - 270px);
     position: absolute;
     background-size: 100% 100%;
@@ -54,6 +58,8 @@ div.btnSoundOff:hover {
     width: auto;
     float:left;
     left: 44.333%;
+    left: -webkit-calc(50% - 230px);
+    left: -moz-calc(50% - 230px);
     left: calc(50% - 230px);
     top: 0px;
     zoom: 0.3;
