@@ -24,9 +24,15 @@ div#btnSound {
     width: 50px;
     height: 50px;
     float:left;
+    left: 90%;
+    left: -webkit-calc(50% + 290px); 
+    left: -moz-calc(50% - 270px);
     left: calc(50% + 290px); 
-    top: calc(50% - 340px);
-    position: relative;
+    top: 10%;
+    top: -webkit-calc(50% - 270px);
+    top: -moz-calc(50% - 270px);
+    top: calc(50% - 270px);
+    position: absolute;
     background-size: 100% 100%;
     cursor: pointer;
 }
@@ -45,4 +51,18 @@ div.btnSoundOff {
 
 div.btnSoundOff:hover {
     background-image: url('../assets/btns/soundoff_highlight.png');
+}
+
+.tai-time {
+    position: absolute;
+    width: auto;
+    float:left;
+    left: 44.333%;
+    left: -webkit-calc(50% - 230px);
+    left: -moz-calc(50% - 230px);
+    left: calc(50% - 230px);
+    top: 0px;
+    zoom: 0.3;
+    margin: 0px;
+    -moz-transform: scale(0.3);
 }

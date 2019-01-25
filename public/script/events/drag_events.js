@@ -23,11 +23,15 @@ class DragEvents {
 
             gameInfo.objPointer.visible = true;
 
-            gameInfo.objPointer.x = newPosition.x - 80;
+            // @ts-ignore
+            this.anchor.set(0.5);
+            gameInfo.objPointer.x = newPosition.x - 60;
             gameInfo.objPointer.y = newPosition.y + 20;
 
             this.x = newPosition.x;
             this.y = newPosition.y;
+
+            this.cursor = "none";
         }
     }
 
@@ -43,7 +47,7 @@ class DragEvents {
                 newitem.val = TornadoLogic.checkNearestPoint(gameInfo.objPointer, gameInfo.taiyakis[idx].objKiji);
                 kvIdxSprite.push(newitem);
             }
-            console.log(kvIdxSprite);
+            // console.log(kvIdxSprite);
             kvIdxSprite.sort(function (a, b) {
                 var dflt = Number.MAX_VALUE;
 
@@ -51,7 +55,7 @@ class DragEvents {
                 var bVal = (b == null ? dflt : b.val);
                 return aVal - bVal;
             });
-            console.log(kvIdxSprite);
+            // console.log(kvIdxSprite);
             if(gameInfo.taiyakis[kvIdxSprite[0].key].cookStage === CookStage.EMPTY) {
                 gameInfo.taiyakis[kvIdxSprite[0].key].cookStage = CookStage.KIJI;
                 gameInfo.taiyakis[kvIdxSprite[0].key].resetCookTime();
@@ -59,13 +63,16 @@ class DragEvents {
                 TornadoUtil.playSE('kiji');
             }
         }
-
+        // @ts-ignore
+        this.anchor.set(0.7);
         gameInfo.objPointer.visible = false;
 
         this.x = 640;
         this.y = 303;
         this.dragging = false;
         this.data = null;
+
+        this.cursor = "pointer";
     }
 
     /**
@@ -80,11 +87,14 @@ class DragEvents {
             gameInfo.objAnkoSpoon.visible = true;
             gameInfo.objPointer.visible = true;
 
-            gameInfo.objPointer.x = newPosition.x - 10;
-            gameInfo.objPointer.y = newPosition.y + 60;
+            gameInfo.objAnkoSpoon.anchor.set(0.6);
+            gameInfo.objPointer.x = newPosition.x - 30;
+            gameInfo.objPointer.y = newPosition.y + 50;
 
             gameInfo.objAnkoSpoon.x = newPosition.x;
             gameInfo.objAnkoSpoon.y = newPosition.y;
+
+            gameInfo.objAnkoSpoon.cursor = "none";
         }
     }
 
@@ -125,6 +135,8 @@ class DragEvents {
 
         this.dragging = false;
         this.data = null;
+
+        gameInfo.objAnkoSpoon.cursor = "pointer";
     }
 
     static handOnMouseDown(event) {
@@ -137,7 +149,7 @@ class DragEvents {
             //app.stage.cursor = "none";
             this.cursor = "none";
 
-            console.log(this);
+            // console.log(this);
         }
 
         let taiyaki = DragEvents.findNearTaiyaki();
@@ -163,7 +175,7 @@ class DragEvents {
             gameInfo.targetTaiyaki = undefined;
             gameInfo.handClickCount = 0; // reset handClickCount
             //app.stage.cursor = "inherit";
-            this.cursor = "inherit";
+            this.cursor = "pointer";
         }
     }
 
@@ -316,6 +328,7 @@ class DragEvents {
      */
     static findNearGuest() {
         let isGuest = false;
+        // @ts-ignore
         gameInfo.guestman.guests.every(function (guest, index) {
             if (TornadoLogic.hitTestRectangle(gameInfo.objRequestBasket, guest.objGuest)) {
                 isGuest = true;

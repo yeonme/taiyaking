@@ -18,6 +18,10 @@ function loadHowTo2Scene() {
     TornadoUtil.createObjUsingTexture('assets/how_to/howto_2.png', 1.0, app.stage, "Sprite", 0, 0);
 
     // Play btn
+    TornadoUtil.createObjButton("assets/btns/btn_back.png", "assets/btns/btn_back_highlight.png", "assets/btns/btn_back_pressed.png", 0.12, app.stage, 365, 472, function () {
+        sceneNumber = 5;
+    });
+    // Play btn
     TornadoUtil.createObjButton("assets/btns/btn_play.png", "assets/btns/btn_play_highlight.png", "assets/btns/btn_play_pressed.png", 0.12, app.stage, 565, 472, function () {
         sceneNumber = 1;
     });

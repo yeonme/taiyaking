@@ -35,13 +35,13 @@ function loadMenuScene(){
     let heart1 = TornadoUtil.createObjUsingTexture('assets/heart.png', 0.4, app.stage, "Sprite", 30, 230);
 
     // TornadoUtil.createObjUsingTexture("assets/title.png", 0.60, app.stage, "Sprite", 20, 30);
-    var btnHowto = TornadoUtil.createObjButton("assets/btns/btn_howto.png","assets/btns/btn_howto_highlight.png","assets/btns/btn_howto_pressed.png",0.18,app.stage,590,90,function(){
+    var btnHowto = TornadoUtil.createObjButton("assets/btns/btn_howto.png","assets/btns/btn_howto_highlight.png","assets/btns/btn_howto_pressed.png",0.18,app.stage,590,80,function(){
         sceneNumber = 5;
     });
-    var btnPlay = TornadoUtil.createObjButton("assets/btns/btn_play.png","assets/btns/btn_play_highlight.png","assets/btns/btn_play_pressed.png",0.18,app.stage,590,150,function(){
+    var btnPlay = TornadoUtil.createObjButton("assets/btns/btn_play.png","assets/btns/btn_play_highlight.png","assets/btns/btn_play_pressed.png",0.18,app.stage,590,140,function(){
         sceneNumber = 1;
     });
-    var btnScore = TornadoUtil.createObjButton("assets/btns/btn_score.png","assets/btns/btn_score_highlight.png","assets/btns/btn_score_pressed.png",0.18,app.stage,590,210,function(){
+    var btnScore = TornadoUtil.createObjButton("assets/btns/btn_score.png","assets/btns/btn_score_highlight.png","assets/btns/btn_score_pressed.png",0.18,app.stage,590,200,function(){
         sceneNumber = 2;
     });
 
@@ -55,7 +55,7 @@ function loadMenuScene(){
         var overlayGraphic = new PIXI.Graphics();
         overlayGraphic.beginFill(0x000000, 0.5);
         overlayGraphic.drawRect(0,0,app.view.width,app.view.height)
-        var txt = TornadoUtil.textOut("Click here to prepare game!",0,0,overlayGraphic,new PIXI.TextStyle({
+        var txt = TornadoUtil.textOut("Click here to get ready to start!",0,0,overlayGraphic,new PIXI.TextStyle({
             fontSize: 20,
             fill: 0xFFFFFF,
             letterSpacing: 3,

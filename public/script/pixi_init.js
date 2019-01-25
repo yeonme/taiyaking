@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function(event){
 });
 app.renderer.plugins.interaction.cursorStyles["none"] = "none";
 app.ticker.add(function(delta){
-    if(fireEachFrame){
+    if(typeof fireEachFrame === "function"){
         fireEachFrame(delta);
     }
     //located on game_manager.js
