@@ -4,17 +4,17 @@
 class ButtonEvents {
     static onButtonDown() {
         this.isdown = true;
-        this.texture = this.textureButtonDown;
+        this.texture = this["textureButtonDown"];
         this.alpha = 1;
     }
 
     static onButtonUp() {
         this.isdown = false;
         if (this.isOver) {
-            this.texture = this.textureButtonOver;
+            this.texture = this["textureButtonOver"];
         }
         else {
-            this.texture = this.textureButton;
+            this.texture = this["textureButton"];
         }
     }
 
@@ -23,7 +23,7 @@ class ButtonEvents {
         if (this.isdown) {
             return;
         }
-        this.texture = this.textureButtonOver;
+        this.texture = this["textureButtonOver"];
     }
 
     static onButtonOut() {
@@ -31,6 +31,6 @@ class ButtonEvents {
         if (this.isdown) {
             return;
         }
-        this.texture = this.textureButton;
+        this.texture = this["textureButton"];
     }
 }

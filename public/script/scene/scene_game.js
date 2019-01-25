@@ -11,7 +11,7 @@ function loadGameScene() {
     let container = new PIXI.Container();
     app.stage.addChild(container);
     gameInfo.objBack = TornadoUtil.createObjUsingTexture('assets/fishcook_background.png', 1.0, container, "Sprite", 0, 230);
-
+    gameInfo.objBack.width = 550;
 
     //Guest part wall (Background)
     TornadoUtil.fillRect(0xEAC067, 0, 0, 690, 220, app.stage);
@@ -67,32 +67,40 @@ function loadGameScene() {
             let placeX = 20 + (170 * x);
             let placeY = 240 + (100 * y);
             let taiyaki = new Taiyaki(TornadoUtil.createObjUsingTexture('assets/fish_01.png', 0.25, app.stage, "Sprite", placeX, placeY),
-            TornadoUtil.createObjUsingTexture('assets/fish_anko.png', 0.25, app.stage, "Sprite", placeX, placeY),
-            TornadoUtil.createObjUsingTexture('assets/fish_02.png', 0.25, app.stage, "Sprite", placeX, placeY),
-            TornadoUtil.createObjUsingTexture('assets/fish_03.png', 0.25, app.stage, "Sprite", placeX, placeY),
-            TornadoUtil.createObjUsingTexture('assets/fish_04.png', 0.25, app.stage, "Sprite", placeX, placeY));
-            taiyaki.setXY(x,y);
+                TornadoUtil.createObjUsingTexture('assets/fish_anko.png', 0.25, app.stage, "Sprite", placeX, placeY),
+                TornadoUtil.createObjUsingTexture('assets/fish_02.png', 0.25, app.stage, "Sprite", placeX, placeY),
+                TornadoUtil.createObjUsingTexture('assets/fish_03.png', 0.25, app.stage, "Sprite", placeX, placeY),
+                TornadoUtil.createObjUsingTexture('assets/fish_04.png', 0.25, app.stage, "Sprite", placeX, placeY));
+            taiyaki.setXY(x, y);
             gameInfo.taiyakis.push(taiyaki);
         }
     }
 
-    // paperbag
-    let paperbag = TornadoUtil.createObjUsingTexture('assets/paperbag.png', 1.0, app.stage, "Sprite", 530, 465);
-    paperbag.width = 200;
+    // basket
+    gameInfo.objBasket = TornadoUtil.createObjUsingTexture('assets/basket.png', 0.4, app.stage, "Sprite", 527, 478);
+    
+    gameInfo.textureBaseket[0] = PIXI.Texture.fromImage('assets/basket.png',undefined,0.4);
+    gameInfo.textureBaseket[1] = PIXI.Texture.fromImage('assets/basket1.png',undefined,0.4);
+    gameInfo.textureBaseket[2] = PIXI.Texture.fromImage('assets/basket2.png',undefined,0.4);
+    gameInfo.textureBaseket[3] = PIXI.Texture.fromImage('assets/basket3.png',undefined,0.4);
+    gameInfo.textureBaseket[4] = PIXI.Texture.fromImage('assets/basket4.png',undefined,0.4);
+    gameInfo.textureBaseket[5] = PIXI.Texture.fromImage('assets/basket5.png',undefined,0.4);
+
+    gameInfo.objBasket.texture = gameInfo.textureBaseket[0];
 
     // Cooking tools
     let kiji = TornadoUtil.createObjUsingTexture('assets/ingredients1.png', 0.22, app.stage, "Sprite", 640, 303);
     kiji.anchor.set(0.7);
-    let anko = TornadoUtil.createObjUsingTexture('assets/ingredients2.png', 0.2, app.stage, "Sprite", 580, 325);
-    let hand = TornadoUtil.createObjUsingTexture('assets/hand.png', 1.2, app.stage, "Sprite", 580, 410);
+    let anko = TornadoUtil.createObjUsingTexture('assets/ingredients2.png', 0.2, app.stage, "Sprite", 580, 320);
+    let hand = TornadoUtil.createObjUsingTexture('assets/hand.png', 1.2, app.stage, "Sprite", 580, 403);
 
     // Cooking tools red pointer
-    gameInfo.pointer = TornadoUtil.fillCircle(0xEB0000, 0, 0, 8, app.stage);
-    gameInfo.pointer.visible = false;
+    gameInfo.objPointer = TornadoUtil.fillCircle(0xEB0000, 0, 0, 8, app.stage);
+    gameInfo.objPointer.visible = false;
 
     // Anko Spoon
-    gameInfo.ankoSpoon = TornadoUtil.createObjUsingTexture('assets/ankospoon.png', 0.5, app.stage, "Sprite", 0, 0);
-    gameInfo.ankoSpoon.visible = false;
+    gameInfo.objAnkoSpoon = TornadoUtil.createObjUsingTexture('assets/ankospoon.png', 0.5, app.stage, "Sprite", 0, 0);
+    gameInfo.objAnkoSpoon.visible = false;
 
     // Kiji Drag event
     kiji.interactive = true;
@@ -112,6 +120,16 @@ function loadGameScene() {
         .on('mouseupoutside', DragEvents.ankoOnDragEnd)
         .on('mousemove', DragEvents.ankoOnDragMove);
 
+    // Hand Drag event
+    hand.interactive = true;
+    hand.buttonMode = true;
+    hand
+        .on('mousedown', DragEvents.handOnMouseDown)
+        .on('mousemove', DragEvents.handOnMouseMove)
+        .on('mouseupoutside', DragEvents.handOnMouseUp)
+        .on('mouseup', DragEvents.handOnMouseUp);
+
+
 }
 
 var gameInfo = new GameInfo();
@@ -125,7 +143,7 @@ function tickGameScene() {
 
 function lazyTick() {
     lastFrameTime = new Date().getTime();
-    console.log("lazyTick: " + gameTimer);
+    // console.log("lazyTick: " + gameTimer);
     lifeCheck();
 }
 
@@ -139,8 +157,8 @@ function lifeCheck() {
     //console.log(newlifeMinus);
     if (newlifeMinus > lifeMinus) {
         lifeMinus = newlifeMinus;
-        gameInfo.life--;
-        console.log(gameInfo.life);
+        // gameInfo.life--;
+        // console.log(gameInfo.life);
     }
     showMonitor();
 }
@@ -158,5 +176,5 @@ function showMonitor() {
     if (typeof gameInfo.objScore != "undefined" && gameInfo.objScore != null) {
         app.stage.removeChild(gameInfo.objScore);
     }
-    gameInfo.objScore = TornadoUtil.textOut((Math.round(gameTimer / 1000.0 * 100) / 100).toString(), 550, 160, app.stage, new PIXI.TextStyle({align: 'center', fontWeight: 'bold'}));
+    gameInfo.objScore = TornadoUtil.textOut((Math.round(gameTimer / 1000.0 * 100) / 100).toString(), 550, 160, app.stage, new PIXI.TextStyle({ align: 'center', fontWeight: 'bold' }));
 }

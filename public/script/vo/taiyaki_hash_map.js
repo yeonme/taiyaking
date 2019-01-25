@@ -72,24 +72,6 @@ class TaiyakiHashMap {
                 }
             }
         }
-    }
-
-/**
- * report() returns counts of each types of edible Taiyaki.
- * @returns types of collection {0: 3, 1: 2, 2: 1} (Anko, Cream, Choco)
- */
-    report(){
-        let keyvalue = {0: 0, 1: 0, 2: 0};
-        keyvalue.forEach(element => {
-            if(element.cookStage < CookStage.KIJI){
-                continue;
-            }
-            if(element.type in keyvalue) {
-                keyvalue[element.type]++;
-            }else{
-                keyvalue[element.type] = 1;
-            }
-        });
-        return keyvalue;
+        return true;
     }
 }
