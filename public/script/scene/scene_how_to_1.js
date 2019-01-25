@@ -49,6 +49,10 @@ function loadHowTo1Scene() {
     TornadoUtil.textOut("click", 529, 402, app.stage, style3);
 
     // Play btn
+    TornadoUtil.createObjButton("assets/btns/btn_back.png", "assets/btns/btn_back_highlight.png", "assets/btns/btn_back_pressed.png", 0.12, app.stage, 365, 472, function () {
+        sceneNumber = 0;
+    });    
+    // Play btn
     TornadoUtil.createObjButton("assets/btns/btn_next.png", "assets/btns/btn_next_highlight.png", "assets/btns/btn_next_pressed.png", 0.12, app.stage, 565, 472, function () {
         sceneNumber = 6;
     });
