@@ -12,8 +12,4 @@ var config = {
 firebase.initializeApp(config);
 // Initialize Cloud Firestore through Firebase
 var db = firebase.firestore();
-db.collection("scores").orderBy("posted").limit(3).get().then(function(querySnapshot){
-    querySnapshot.forEach(function(doc){
-        console.log(doc.data());
-    });
-});
+db.settings({ timestampsInSnapshots: true });

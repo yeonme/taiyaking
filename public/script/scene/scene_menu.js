@@ -55,7 +55,7 @@ function loadMenuScene(){
         var overlayGraphic = new PIXI.Graphics();
         overlayGraphic.beginFill(0x000000, 0.5);
         overlayGraphic.drawRect(0,0,app.view.width,app.view.height)
-        var txt = TornadoUtil.textOut("Click here to prepare game!",0,0,overlayGraphic,new PIXI.TextStyle({
+        var txt = TornadoUtil.textOut("Click here to get ready to start!",0,0,overlayGraphic,new PIXI.TextStyle({
             fontSize: 20,
             fill: 0xFFFFFF,
             letterSpacing: 3,
