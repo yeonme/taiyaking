@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Main Page</title>
+    <link rel="stylesheet" type="text/css" href="style/flipclock.css"/>
     <link rel="stylesheet" type="text/css" href="style/style.css"/>
 </head>
 <body>
@@ -17,8 +18,10 @@
     <!--<script defer src="/__/firebase/5.7.2/firebase-app.js"></script>
     <script defer src="/__/firebase/5.7.2/firebase-database.js"></script>-->
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+    <script src="script/import/jquery-3.3.1.min.js"></script>
     <script src="script/functions/firebase_db.js"></script>
-    <script src="script/import/pixi.js"></script>
+    <script src="script/import/pixi.min.js"></script>
+    <script src="script/import/flipclock.min.js"></script>
     <script src="script/vo/enums.js"></script>
     <script src="script/vo/game_info.js"></script>
     <script src="script/vo/animitem.js"></script>
@@ -41,8 +44,7 @@
     <script src="script/events/drag_events.js"></script>
     <script src="script/logic/tornado_logic.js"></script>
     <script src="script/game_manager.js"></script>
-    <div style="width:690px;">&nbsp;</div>
-    <p>game timer: <span id="timer"></span></p>
+    <div class="tai-time" style="display: none;"></div>
     <div id="btnSound"></div>
 </body>
 </html>

@@ -1,3 +1,4 @@
+var clock;
 function loadGameScene() {
     visibleScene = 1;
     gameTimer = 0;
@@ -181,6 +182,28 @@ function loadGameScene() {
         startCall, EasingType.EASING, 1.0, undefined, 0.5, undefined, true));
     
     TornadoUtil.playSE('bgmGame');
+
+    $('.tai-time').show();
+    // @ts-ignore
+    clock = $('.tai-time').FlipClock(0, {
+        clockFace: 'MinuteCounter',
+        countdown: false,
+        autoStart: false,
+        callbacks: {
+            interval: function() {
+                if(visibleScene != 1) {
+                    clock.stop();
+                    $('.tai-time').hide();
+                }
+                var time = clock.getTime().time;
+                if(Math.floor(gameTimer/1000) - time >= 500) {
+                    console.log("adjust timer");
+                    clock.setTime(Math.floor(gameTimer/1000));
+                }
+            }
+        }
+    });
+    clock.start();
 }
 
 var gameInfo = new GameInfo();
@@ -206,7 +229,7 @@ function lazyTick() {
         taiyaki.tickTaiyaki();
     });
     gameInfo.guestman.tickGuest();
-    document.getElementById('timer').innerText = (Math.floor(gameTimer/1000/60)>0?Math.floor(gameTimer/1000/60).toString()+"m ":"")+(Math.floor(gameTimer/1000)-(Math.floor(gameTimer/1000/60)*60)).toString()+"s";
+    // document.getElementById('timer').innerText = (Math.floor(gameTimer/1000/60)>0?Math.floor(gameTimer/1000/60).toString()+"m ":"")+(Math.floor(gameTimer/1000)-(Math.floor(gameTimer/1000/60)*60)).toString()+"s";
 }
 
 /* Game Functions */
