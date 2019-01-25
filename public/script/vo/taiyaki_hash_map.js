@@ -16,6 +16,17 @@ class TaiyakiHashMap {
         return false;
     }
     /**
+     * Set each types of quantities
+     * @param {Number} type 
+     * @param {Number} count 
+     */
+    setQuantity(type, count) {
+        if(this._taiyakis.hasOwnProperty(type)){
+            this._taiyakis[type] = count;
+            return true;
+        }
+    }
+    /**
      * Update the key value with specified Taiyaki deleted.
      * @param {Taiyaki} item Item to be deleted Taiyaki
      */
@@ -33,7 +44,7 @@ class TaiyakiHashMap {
      * @param {Number} type Taiyaki type to get
      */
     get(type) {
-        if(typeof type === "number" && this._taiyakis.hasOwnProperty(type)) {
+        if(this._taiyakis.hasOwnProperty(type)) {
             return this._taiyakis[type];
         }
         return -1;
@@ -47,17 +58,16 @@ class TaiyakiHashMap {
     /**
      * Get all Taiyaki counts registered here.
      */
-    get count() {
+    count() {
         let sum = 0;
         for(var property in this._taiyakis) {
-            if(typeof property === 'number') {
-                sum += this._taiyakis[property];
-            }
+            sum += this._taiyakis[property];
         }
         return sum;
     }
     /**
      * Compare other object if it has same value.
+     * Changed: Returns true if greater than the parameter.
      * @param {TaiyakiHashMap} otherHashMap Other object to be compared.
      */
     similar(otherHashMap) {
@@ -66,10 +76,9 @@ class TaiyakiHashMap {
             return false;
         }
         for(var property in this._taiyakis) {
-            if(typeof property === 'number') {
-                if(!otherHashMap._taiyakis.hasOwnProperty(property) || otherHashMap._taiyakis[property] !== this._taiyakis[property]){
-                    return false;
-                }
+            //if(!otherHashMap._taiyakis.hasOwnProperty(property) || otherHashMap._taiyakis[property] !== this._taiyakis[property]){
+            if(!otherHashMap._taiyakis.hasOwnProperty(property) || otherHashMap._taiyakis[property] > this._taiyakis[property]){
+                return false;
             }
         }
         return true;

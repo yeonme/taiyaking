@@ -4,6 +4,8 @@
 class ButtonEvents {
     static onButtonDown() {
         this.isdown = true;
+        TornadoUtil.playSE('buttonOver');
+
         this.texture = this["textureButtonDown"];
         this.alpha = 1;
     }

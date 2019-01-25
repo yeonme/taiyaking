@@ -5,23 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Main Page</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css"/>
 </head>
 <body>
+    <audio id="bgmMain" src="assets/sound/theme_menu.mp3" preload="auto" class="sndplay" loop></audio>
+    <audio id="bgmGame" src="assets/sound/theme_game.mp3" preload="auto" class="sndplay" loop></audio>
+    <audio id="bgmCredit" src="assets/sound/theme_credit.mp3" preload="auto" class="sndplay" loop></audio>
+    <audio id="buttonOver" src="assets/sound/button_pip.mp3" preload="auto" class="sndplay"></audio>
+    <audio id="score" src="assets/sound/score_up.mp3" preload="auto" class="sndplay"></audio>
+    <audio id="kiji" src="assets/sound/kiji.mp3" preload="auto" class="sndplay"></audio>
+    <!--<script defer src="/__/firebase/5.7.2/firebase-app.js"></script>
+    <script defer src="/__/firebase/5.7.2/firebase-database.js"></script>-->
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+    <script src="script/functions/firebase_db.js"></script>
     <script src="script/import/pixi.js"></script>
-    <script src="script/static_routine.js"></script>
     <script src="script/vo/enums.js"></script>
     <script src="script/vo/game_info.js"></script>
+    <script src="script/vo/animitem.js"></script>
     <script src="script/vo/guest.js"></script>
     <script src="script/vo/taiyaki.js"></script>
+    <script src="script/functions/game_anim.js"></script>
+    <script src="script/functions/game_guest.js"></script>
     <script src="script/vo/taiyaki_hash_map.js"></script>
     <script src="script/pixi_init.js"></script>
     <script src="script/util/tornado_util.js"></script>
     <script src="script/scene/scene_menu.js"></script>
+    <script src="script/scene/scene_how_to_1.js"></script>
+    <script src="script/scene/scene_how_to_2.js"></script>
     <script src="script/scene/scene_game.js"></script>
     <script src="script/scene/scene_score.js"></script>
+    <script src="script/scene/scene_gameover.js"></script>
+    <script src="script/scene/scene_gameover_score.js"></script>
+    <script src="script/scene/scene_rejectmobile.js"></script>
     <script src="script/events/button_events.js"></script>
     <script src="script/events/drag_events.js"></script>
     <script src="script/logic/tornado_logic.js"></script>
     <script src="script/game_manager.js"></script>
+    <div style="width:690px;">&nbsp;</div>
+    <p>game timer: <span id="timer"></span></p>
+    <div id="btnSound"></div>
 </body>
 </html>
