@@ -72,7 +72,6 @@ function loadGameOverScoreScene() {
         .catch(function(error) {
             console.error("Error writing rank: ", error);
         });
-        alert('Completed! Go to ranking page');
         sceneNumber = 2;
     });
 

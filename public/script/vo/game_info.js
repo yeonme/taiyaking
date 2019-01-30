@@ -40,7 +40,8 @@ class GameInfo {
         /** @type {PIXI.Text} */
         this.objNickName = null;
         this.nickName = new String("").toString();
-
+       /** @type {Array<PIXI.Sprite>} **/
+        this.objredFlags = new Array(2);
         /** save HandMouseDown target and use on HandMouseUp
          * @type {Taiyaki} */
         this.targetTaiyaki = undefined;
