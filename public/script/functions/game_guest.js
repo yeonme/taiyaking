@@ -11,7 +11,7 @@ class GuestManager {
         this.lastGoneTriggered = false;
     }
     createGuest() {
-        if(this.guests.length >= 2 || (gameTimer < 30000 && this.guests.length >= 1) ) {
+        if(this.guests.length >= 2 || (gameInfo.accumulateTaiyaki < 2 && this.guests.length >= 1) ) {
             return;
         }
         let guest = new Guest();
@@ -29,7 +29,7 @@ class GuestManager {
         //0-30000 : length 1
         //30001-60000 : 10000
         //60001-90000 : 5000
-        if(gameTimer < 30000) {
+        if(gameInfo.accumulateTaiyaki < 2) {
             return 3000; //it will be blocked on createGuest() length 1
         } else if(gameInfo.accumulateTaiyaki < 11) {
             return 10000;
@@ -42,7 +42,7 @@ class GuestManager {
         }
     }
     tickGuest() {
-        let elapsed = new Date().getTime() - this.lastGone;
+        let elapsed = new Date().getTime() - this.lastGenerated;
         if(elapsed > Math.max(this.getGuestFrequency(),3000)) {
             this.createGuest();
         }
