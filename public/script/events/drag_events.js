@@ -56,7 +56,7 @@ class DragEvents {
                 return aVal - bVal;
             });
             // console.log(kvIdxSprite);
-            if(gameInfo.taiyakis[kvIdxSprite[0].key].cookStage === CookStage.EMPTY) {
+            if (gameInfo.taiyakis[kvIdxSprite[0].key].cookStage === CookStage.EMPTY) {
                 gameInfo.taiyakis[kvIdxSprite[0].key].cookStage = CookStage.KIJI;
                 gameInfo.taiyakis[kvIdxSprite[0].key].resetCookTime();
                 gameInfo.taiyakis[kvIdxSprite[0].key].updateVisual();
@@ -120,7 +120,7 @@ class DragEvents {
             // console.log(kvIdxSprite);
 
             if (gameInfo.taiyakis[kvIdxSprite[0].key].cookStage == CookStage.KIJI) {
-                if(gameInfo.taiyakis[kvIdxSprite[0].key].cookTime() > gameInfo.taiyakis[kvIdxSprite[0].key]._maxCookStep[CookStage.KIJI]) {
+                if (gameInfo.taiyakis[kvIdxSprite[0].key].cookTime() > gameInfo.taiyakis[kvIdxSprite[0].key]._maxCookStep[CookStage.KIJI]) {
                     gameInfo.taiyakis[kvIdxSprite[0].key].cookStage = CookStage.BURNED;
                 } else {
                     gameInfo.taiyakis[kvIdxSprite[0].key].cookStage = CookStage.INSIDE;
@@ -153,7 +153,10 @@ class DragEvents {
         }
 
         let taiyaki = DragEvents.findNearTaiyaki();
+        //@ts-ignore
+        let xy = event.data.getLocalPosition(this.parent);
         if (gameInfo.handClickCount > 1 && !(typeof taiyaki === 'undefined')) {
+            // Taiyaki clicked
             if (!(taiyaki.cookStage == CookStage.EMPTY || taiyaki.cookStage == CookStage.BURNED || taiyaki.cookStage == CookStage.KIJI)) {
                 this.alpha = 0.0;
                 gameInfo.objPointer.visible = false;
@@ -161,10 +164,14 @@ class DragEvents {
                 taiyaki.grab(true);
                 //app.stage.cursor = "none";
                 this.cursor = "none";
-            } else if(!(taiyaki.cookStage == CookStage.EMPTY)) {
+            } else if (!(taiyaki.cookStage == CookStage.EMPTY)) {
                 gameInfo.targetTaiyaki = taiyaki;
             }
+        } else if (gameInfo.handClickCount > 1 && gameInfo.objBasket.hitArea.contains(xy.x, xy.y)) {
+            // Basket clicked
+            console.log("basket!");
         } else if (gameInfo.handClickCount > 1 && typeof taiyaki === 'undefined') {
+            // Outside of taiyaki clicked
             this.alpha = 1;
             // @ts-ignore
             this.anchor.set(0, 0);
@@ -205,6 +212,8 @@ class DragEvents {
                 //app.stage.cursor = "none";
                 this.cursor = "none";
             }
+        } else if (gameInfo.handClick && gameInfo.handClick) {
+            //
         }
     }
 
@@ -214,15 +223,17 @@ class DragEvents {
      */
 
     /**
-    * onDragStart 
-    * @param {PIXI.interaction.InteractionEvent} event Event variable
-    */
+     * onDragStart 
+     * @param {PIXI.interaction.InteractionEvent} event Event variable
+     */
     static basketOnDragStart(event) {
+        console.log('basketOnDragStart');
         this.data = event.data;
         this.dragging = true;
     }
     static basketOnDragMove() {
         if (this.dragging) {
+            console.log('basketOnDragMove');
             // @ts-ignore
             var newPosition = this.data.getLocalPosition(this.parent);
 
@@ -237,6 +248,7 @@ class DragEvents {
     }
 
     static basketOnDragEnd() {
+        console.log('basketOnDragMove');
         let guest = DragEvents.findNearGuest();
         if (guest) {
             console.log(guest);
@@ -244,13 +256,13 @@ class DragEvents {
                 console.log("Correct!");
                 gameInfo.accumulateTaiyaki += 1;
                 let sumScore = (guest.guestType == GuestType.VIP) ? 300 : 100;
-                switch(guest.angryStage){
+                switch (guest.angryStage) {
                     case AngryStage.B_NERVOUS:
-                    sumScore = Math.round(sumScore*0.8/10)*10;
-                    break;
+                        sumScore = Math.round(sumScore * 0.8 / 10) * 10;
+                        break;
                     case AngryStage.C_RAGED:
-                    sumScore = Math.round(sumScore*0.6/10)*10;
-                    break;
+                        sumScore = Math.round(sumScore * 0.6 / 10) * 10;
+                        break;
                 }
                 sumScore *= guest.order.count();
                 gameInfo.score += sumScore;
@@ -262,12 +274,12 @@ class DragEvents {
                 gameInfo.taiyakiCountText.text = gameInfo.basket.count();
                 gameInfo.taiyakiCountBoard.visible = false;
                 gameInfo.taiyakiCountText.visible = false;
-                console.log("score +"+sumScore+" from "+gameInfo.score);
+                console.log("score +" + sumScore + " from " + gameInfo.score);
                 let lastScore = gameInfo.objScore;
-                if(typeof lastScore !== "undefined" || lastScore != null) {
+                if (typeof lastScore !== "undefined" || lastScore != null) {
                     let boundScore = lastScore.getBounds();
                     // @ts-ignore
-                    let scoreEffect = TornadoUtil.textOut("+"+sumScore,boundScore.left+50, boundScore.top, app.stage, new PIXI.TextStyle({
+                    let scoreEffect = TornadoUtil.textOut("+" + sumScore, boundScore.left + 50, boundScore.top, app.stage, new PIXI.TextStyle({
                         fill: [
                             "#6c6acb",
                             "#97dd5d"
@@ -282,7 +294,7 @@ class DragEvents {
                     gameInfo.animman.add(new AnimItem(gameTimer, 3000, AnimationType.ALPHA, scoreEffect, EasingType.EASING, 1.0, undefined, 0.0, undefined, true));
                 }
                 guest.got = true;
-            } else if(!guest.got) {
+            } else if (!guest.got) {
                 // gameInfo.life--;
                 gameInfo.basket.clear();
                 gameInfo.objBasket.texture = gameInfo.textureBaseket[Math.min(gameInfo.textureBaseket.length - 1, gameInfo.basket.count())];
@@ -332,9 +344,9 @@ class DragEvents {
         gameInfo.guestman.guests.every(function (guest, index) {
             if (TornadoLogic.hitTestRectangle(gameInfo.objRequestBasket, guest.objGuest)) {
                 isGuest = true;
-                return false;
+                return false; //Stop the loop!
             }
-            return true;
+            return true; //Continue the loop!
         });
 
         if (isGuest) {
