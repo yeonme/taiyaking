@@ -1,6 +1,8 @@
 function loadHowTo2Scene() {
     visibleScene = 6;
 
+    TornadoUtil.clearStage(app.stage);
+
     // Background
     TornadoUtil.fillRect(0xCA931C, 0, 0, 690, 550, app.stage, 1);
     TornadoUtil.fillRect(0xAA6A01, 40, 0, 15, 550, app.stage);
