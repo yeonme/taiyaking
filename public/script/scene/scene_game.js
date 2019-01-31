@@ -156,7 +156,7 @@ function loadGameScene() {
         .on('pointerupoutside', DragEvents.ankoOnDragEnd)
         .on('pointermove', DragEvents.ankoOnDragMove);
 
-    // Hand Drag event
+    // Hand event
     hand.interactive = true;
     hand.buttonMode = true;
     hand
