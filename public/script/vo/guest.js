@@ -198,6 +198,8 @@ class Guest {
         if(this.objBubble !== null) {
             gameInfo.animman.add(new AnimItem(gameTimer, 100, AnimationType.ALPHA, this.objBubble, EasingType.DEFAULT, 1, undefined,
                 0, undefined, true));
+            console.log("guest position: " + this.slotNumber);
+            gameInfo.objredFlags[this.slotNumber].visible = false;
         }
         if(this.objText !== null) {
             gameInfo.animman.add(new AnimItem(gameTimer, 100, AnimationType.ALPHA, this.objText, EasingType.DEFAULT, 1, undefined,
@@ -289,5 +291,7 @@ class Guest {
         if(this.angryStage !== lastAngryStage) {
             this.update();
         }
+
+        gameInfo.objredFlags[this.slotNumber].visible = (this.order.count() === gameInfo.basket.count());
     }
 }

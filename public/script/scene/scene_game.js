@@ -132,6 +132,12 @@ function loadGameScene() {
     gameInfo.taiyakiCountText = TornadoUtil.textOut("0", 659, 510, app.stage, style);
     gameInfo.taiyakiCountText.visible = false;
 
+    // Red flag_1, 2
+    gameInfo.objredFlags[0] = TornadoUtil.createObjUsingTexture('assets/red flag.png', 0.02, app.stage, "Sprite", 240, 50);
+    gameInfo.objredFlags[0].visible = false;
+    gameInfo.objredFlags[1] = TornadoUtil.createObjUsingTexture('assets/red flag.png', 0.02, app.stage, "Sprite", 475, 50);
+    gameInfo.objredFlags[1].visible = false;
+
     // Kiji Drag event
     kiji.interactive = true;
     kiji.buttonMode = true;
