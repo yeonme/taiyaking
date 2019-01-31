@@ -195,7 +195,7 @@ class TornadoUtil {
             audio.currentTime = 0;
         }
         if(isBgm) {
-            TornadoUtil._stopBGM(stopAndPlay ? targetId : undefined);
+            TornadoUtil._stopBGM(stopAndPlay ? undefined : targetId);
         }
         var playPromise = audio.play();
     }
