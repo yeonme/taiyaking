@@ -1,5 +1,6 @@
 function loadGameOverScene() {
     visibleScene = 3;
+    TornadoUtil.clearStage(app.stage);
 
     // Background
     TornadoUtil.fillRect(0xCA931C, 0, 0, 690, 550, app.stage, 1);
