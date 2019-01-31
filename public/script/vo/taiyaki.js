@@ -103,6 +103,7 @@ class Taiyaki {
                 if (this.cookTime() > this._minCookStep[CookStage.INSIDE] && this.cookTime() < this._maxCookStep[CookStage.INSIDE]) {
                     this.cookStage++;
                     this.resetCookTime();
+                    TornadoUtil.playSE('flip');
                 } else if (this.cookTime() > this._maxCookStep[CookStage.INSIDE]) {
                     // Too late
                     this.cookStage = CookStage.BURNED;
@@ -112,6 +113,7 @@ class Taiyaki {
                 if (this.cookTime() > this._minCookStep[CookStage.SINGLEFLIP] && this.cookTime() < this._maxCookStep[CookStage.SINGLEFLIP]) {
                     this.cookStage++;
                     this.resetCookTime();
+                    TornadoUtil.playSE('flip');
                 } else if (this.cookTime() > this._maxCookStep[CookStage.SINGLEFLIP]) {
                     // Too late
                     this.cookStage = CookStage.BURNED;
@@ -127,6 +129,7 @@ class Taiyaki {
                     gameInfo.taiyakiCountText.visible = true;
                     gameInfo.taiyakiCountText.text = gameInfo.basket.count();
                     this.resetCookTime();
+                    TornadoUtil.playSE('paperbag');
                 } else if (this.cookTime() > this._maxCookStep[CookStage.DOUBLEFLIP]) {
                     // Too late
                     this.cookStage = CookStage.BURNED;

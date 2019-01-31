@@ -1,5 +1,6 @@
 function loadGameOverScoreScene() {
     visibleScene = 4;
+    TornadoUtil.clearStage(app.stage);
 
     // Background
     TornadoUtil.fillRect(0xCA931C, 0, 0, 690, 550, app.stage, 1);
@@ -55,7 +56,7 @@ function loadGameOverScoreScene() {
     // Submit
     let submit = TornadoUtil.createObjButton("assets/btns/submit.png", "assets/btns/submit_highlight.png", "assets/btns/submit_pressed.png", 0.9, app.stage, 510, 300, function () {
         if(!gameInfo.nickName){
-            alert("Please insert your name!");
+            alert("Please insert your name.\n\rIf you want to exit without recording, click the button [exit] below.");
             return;
         }
 
@@ -72,7 +73,6 @@ function loadGameOverScoreScene() {
         .catch(function(error) {
             console.error("Error writing rank: ", error);
         });
-        alert('Completed! Go to ranking page');
         sceneNumber = 2;
     });
 

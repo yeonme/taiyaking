@@ -132,6 +132,12 @@ function loadGameScene() {
     gameInfo.taiyakiCountText = TornadoUtil.textOut("0", 659, 510, app.stage, style);
     gameInfo.taiyakiCountText.visible = false;
 
+    // Red flag_1, 2
+    gameInfo.objredFlags[0] = TornadoUtil.createObjUsingTexture('assets/red flag.png', 0.02, app.stage, "Sprite", 240, 50);
+    gameInfo.objredFlags[0].visible = false;
+    gameInfo.objredFlags[1] = TornadoUtil.createObjUsingTexture('assets/red flag.png', 0.02, app.stage, "Sprite", 475, 50);
+    gameInfo.objredFlags[1].visible = false;
+
     // Kiji Drag event
     kiji.interactive = true;
     kiji.buttonMode = true;
@@ -150,7 +156,7 @@ function loadGameScene() {
         .on('pointerupoutside', DragEvents.ankoOnDragEnd)
         .on('pointermove', DragEvents.ankoOnDragMove);
 
-    // Hand Drag event
+    // Hand event
     hand.interactive = true;
     hand.buttonMode = true;
     hand
@@ -181,7 +187,7 @@ function loadGameScene() {
     gameInfo.animman.add(new AnimItem(gameTimer+1000, 500, AnimationType.SCALE,
         startCall, EasingType.EASING, 1.0, undefined, 0.5, undefined, true));
     
-    TornadoUtil.playSE('bgmGame');
+    TornadoUtil.playSE('bgmGame', true, false);
 
     $('.tai-time').show();
     // @ts-ignore

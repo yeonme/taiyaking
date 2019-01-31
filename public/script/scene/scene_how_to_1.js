@@ -1,6 +1,8 @@
 function loadHowTo1Scene() {
     visibleScene = 5;
 
+    TornadoUtil.clearStage(app.stage);
+
     // Background
     TornadoUtil.fillRect(0xCA931C, 0, 0, 690, 550, app.stage, 1);
     TornadoUtil.fillRect(0xAA6A01, 40, 0, 15, 550, app.stage);
@@ -48,12 +50,12 @@ function loadHowTo1Scene() {
     TornadoUtil.textOut("Use mouse", 507, 385, app.stage, style2);
     TornadoUtil.textOut("click", 529, 402, app.stage, style3);
 
-    // Play btn
-    TornadoUtil.createObjButton("assets/btns/btn_back.png", "assets/btns/btn_back_highlight.png", "assets/btns/btn_back_pressed.png", 0.12, app.stage, 365, 472, function () {
+    // Back btn
+    TornadoUtil.createObjButton("assets/btns/btn_back.png", "assets/btns/btn_back_highlight.png", "assets/btns/btn_back_pressed.png", 0.12, app.stage, 460, 517, function () {
         sceneNumber = 0;
     });    
-    // Play btn
-    TornadoUtil.createObjButton("assets/btns/btn_next.png", "assets/btns/btn_next_highlight.png", "assets/btns/btn_next_pressed.png", 0.12, app.stage, 565, 472, function () {
+    // Next btn
+    TornadoUtil.createObjButton("assets/btns/btn_next.png", "assets/btns/btn_next_highlight.png", "assets/btns/btn_next_pressed.png", 0.12, app.stage, 572, 517, function () {
         sceneNumber = 6;
     });
 }

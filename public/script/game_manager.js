@@ -64,6 +64,9 @@ function goToProperScene(delta){
     } else if(sceneNumber == 7) { // Reject Mobile Phone
         isNewScene ? loadRejectMobileScene() :
             tickRejectMobileScene(delta);
+    } else if(sceneNumber == 8) { // How_To_3
+        isNewScene ? loadHowTo3Scene() :
+            tickRejectMobileScene(delta);
     }
 }
 
