@@ -187,7 +187,7 @@ function loadGameScene() {
     gameInfo.animman.add(new AnimItem(gameTimer+1000, 500, AnimationType.SCALE,
         startCall, EasingType.EASING, 1.0, undefined, 0.5, undefined, true));
     
-    TornadoUtil.playSE('bgmGame');
+    TornadoUtil.playSE('bgmGame',true);
 
     $('.tai-time').show();
     // @ts-ignore

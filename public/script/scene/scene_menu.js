@@ -46,7 +46,7 @@ function loadMenuScene(){
     });
 
     if(dismissedClick) {
-        TornadoUtil.playSE('bgmMain',false);
+        TornadoUtil.playSE('bgmMain', true, false);
     } else {
         btnHowto.interactive = false;
         btnPlay.interactive = false;
@@ -79,7 +79,7 @@ function loadMenuScene(){
 
             dismissedClick = true;
 
-            TornadoUtil.playSE('bgmMain', false);
+            TornadoUtil.playSE('bgmMain', true, false);
         };
 
         overlayGraphic.on("tap",onclick);

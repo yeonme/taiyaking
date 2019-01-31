@@ -186,7 +186,7 @@ class TornadoUtil {
      * @param {String} targetId media player selector id
      * @param {Boolean} stopAndPlay stop before playing
      */
-    static playSE(targetId, stopAndPlay = true) {
+    static playSE(targetId, isBgm = false, stopAndPlay = true) {
         /** @type {HTMLAudioElement} */
         // @ts-ignore
         var audio = document.getElementById(targetId);
@@ -194,7 +194,30 @@ class TornadoUtil {
             audio.pause();
             audio.currentTime = 0;
         }
+        if(isBgm) {
+            TornadoUtil._stopBGM(stopAndPlay ? targetId : undefined);
+        }
         var playPromise = audio.play();
+    }
+
+    /**
+     * Stops music before playing (internal)
+     * @param {String} exceptItem
+     */
+    static _stopBGM(exceptItem) {
+        /** @type {HTMLCollectionOf<HTMLAudioElement>} */
+        // @ts-ignore
+        let audios = document.getElementsByClassName("bgm");
+        for(let idx = 0; idx < audios.length; idx++) {
+            const player = audios.item(idx);
+            if(player.id === exceptItem) {
+                continue;
+            }
+            if(player !== null && player.pause) {
+                player.pause();
+                player.currentTime = 0;
+            }
+        }
     }
 
     /**
