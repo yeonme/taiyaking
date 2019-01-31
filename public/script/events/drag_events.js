@@ -174,6 +174,7 @@ class DragEvents {
         } else if (gameInfo.handClickCount > 1 && TornadoLogic.checkPointHitsRectangle(xy, gameInfo.objBasket)) {
             // Basket clicked
             console.log("basket!");
+            DragEvents.basketOnDragStart(event);
         } else if (gameInfo.handClickCount > 1 && typeof taiyaki === 'undefined') {
             // Outside of taiyaki clicked
             this.alpha = 1;
@@ -190,7 +191,11 @@ class DragEvents {
         }
     }
 
-    static handOnMouseMove() {
+    /**
+     * handOnMouseMove
+     * @param {PIXI.interaction.InteractionEvent} event 
+     */
+    static handOnMouseMove(event) {
         if (gameInfo.handClick) {
             var mousePosition = app.renderer.plugins.interaction.mouse.global;
             this.alpha = 1.0;
@@ -204,10 +209,24 @@ class DragEvents {
             this.y = mousePosition.y;
             //app.stage.cursor = "none";
             this.cursor = "none";
+
+            DragEvents.basketOnDragMove(event);
         }
     }
 
-    static handOnMouseUp() {
+    /**
+     * handOnMouseUp
+     * @param {PIXI.interaction.InteractionEvent} event 
+     */
+    static handOnMouseUp(event) {
+        //@ts-ignore
+        let xy = event.data.getLocalPosition(app.stage);
+        if (gameInfo.objBasket["dragging"] === true) {
+            // Basket sclicked
+            console.log("basket!");
+            DragEvents.basketOnDragEnd();
+            return;
+        }
         //let taiyaki = DragEvents.findNearTaiyaki();
         let taiyaki = gameInfo.targetTaiyaki;
         if (gameInfo.handClick && gameInfo.handClickCount > 1 && !(typeof taiyaki === 'undefined')) {
@@ -233,13 +252,13 @@ class DragEvents {
     static basketOnDragStart(event) {
         console.log('basketOnDragStart');
         this.data = event.data;
-        this.dragging = true;
+        gameInfo.objBasket["dragging"] = true;
     }
-    static basketOnDragMove() {
-        if (this.dragging) {
+    static basketOnDragMove(event) {
+        if (gameInfo.objBasket["dragging"]) {
             console.log('basketOnDragMove');
             // @ts-ignore
-            var newPosition = this.data.getLocalPosition(this.parent);
+            var newPosition = event.data.getLocalPosition(app.stage);
 
             gameInfo.objRequestBasket.visible = true;
             gameInfo.objRequestBasket.texture = gameInfo.textureRequestBaseket[Math.min(gameInfo.textureBaseket.length - 1, gameInfo.basket.count())];
@@ -311,8 +330,8 @@ class DragEvents {
 
         gameInfo.objRequestBasket.visible = false;
 
-        this.dragging = false;
-        this.data = null;
+        gameInfo.objBasket["dragging"] = false;
+        gameInfo.objBasket["data"] = null;
     }
 
     /**
