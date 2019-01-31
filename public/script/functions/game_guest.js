@@ -6,13 +6,16 @@ class GuestManager {
         this.nextPos = 0;
         /** @type {Number} When the last guest entered. */
         this.lastGenerated = new Date().getTime();
+        /** @type {Number} When the last guest entered. */
+        this.lastGone = new Date().getTime();
+        this.lastGoneTriggered = false;
     }
     createGuest() {
         if(this.guests.length >= 2 || (gameTimer < 30000 && this.guests.length >= 1) ) {
             return;
         }
-        this.lastGenerated = new Date().getTime();
         let guest = new Guest();
+        this.lastGenerated = new Date().getTime();
         guest.newOrder();
         let randomValue = Math.random();
         let guestType = (randomValue < guestTypePercentage[0])?GuestType.VIP:(randomValue < guestTypePercentage[1]?GuestType.GIRL:GuestType.BOY);
@@ -28,16 +31,18 @@ class GuestManager {
         //60001-90000 : 5000
         if(gameTimer < 30000) {
             return 3000; //it will be blocked on createGuest() length 1
-        } else if(gameTimer < 60000) {
+        } else if(gameInfo.accumulateTaiyaki < 11) {
             return 10000;
-        } else if(gameTimer < 90000) {
+        } else if(gameInfo.accumulateTaiyaki < 21) {
+            return 7000;
+        } else if(gameInfo.accumulateTaiyaki < 31) {
             return 5000;
         } else {
             return 3000;
         }
     }
     tickGuest() {
-        let elapsed = new Date().getTime() - this.lastGenerated;
+        let elapsed = new Date().getTime() - this.lastGone;
         if(elapsed > Math.max(this.getGuestFrequency(),3000)) {
             this.createGuest();
         }
@@ -49,6 +54,7 @@ class GuestManager {
                 let guest = idx == 0 ? this.guests.shift() : this.guests.pop();
                 this.nextPos = guest.slotNumber;
                 guest.away();
+                this.lastGone = new Date().getTime();
             } else {
                 idx++;
             }

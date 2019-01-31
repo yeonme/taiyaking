@@ -160,12 +160,11 @@ class Guest {
         // 6-10: 1-4
         // 11-15: 1-5
         // 16-: 1-6
-        switch(gameInfo.accumulateTaiyaki){
-            case 0: case 1: case 2: case 3: case 4: case 5:
+        if(gameInfo.accumulateTaiyaki < 11) {
             return 3;
-            case 6: case 7: case 8: case 9: case 10:
+        } else if(gameInfo.accumulateTaiyaki < 21) {
             return 4;
-            case 11: case 12: case 13: case 14: case 15:
+        } else if(gameInfo.accumulateTaiyaki < 31) {
             return 5;
         }
         return 6;
