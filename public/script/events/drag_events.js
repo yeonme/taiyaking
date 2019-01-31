@@ -124,6 +124,7 @@ class DragEvents {
                     gameInfo.taiyakis[kvIdxSprite[0].key].cookStage = CookStage.BURNED;
                 } else {
                     gameInfo.taiyakis[kvIdxSprite[0].key].cookStage = CookStage.INSIDE;
+                    TornadoUtil.playSE('spoon');
                 }
                 // gameInfo.taiyakis[kvIdxSprite[0].key].resetCookTime(); // Not reset becasue we don't flip it!
                 gameInfo.taiyakis[kvIdxSprite[0].key].updateVisual();
@@ -320,6 +321,7 @@ class DragEvents {
                 gameInfo.taiyakiCountBoard.visible = false;
                 gameInfo.taiyakiCountText.visible = false;
                 guest.active = false;
+                TornadoUtil.playSE('buzz');
             }
         }
 
