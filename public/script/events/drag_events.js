@@ -139,6 +139,10 @@ class DragEvents {
         gameInfo.objAnkoSpoon.cursor = "pointer";
     }
 
+    /**
+     * handOnMouseDown
+     * @param {PIXI.interaction.InteractionEvent} event 
+     */
     static handOnMouseDown(event) {
         gameInfo.handClickCount++;
 
@@ -167,7 +171,7 @@ class DragEvents {
             } else if (!(taiyaki.cookStage == CookStage.EMPTY)) {
                 gameInfo.targetTaiyaki = taiyaki;
             }
-        } else if (gameInfo.handClickCount > 1 && gameInfo.objBasket.hitArea.contains(xy.x, xy.y)) {
+        } else if (gameInfo.handClickCount > 1 && TornadoLogic.checkPointHitsRectangle(xy, gameInfo.objBasket)) {
             // Basket clicked
             console.log("basket!");
         } else if (gameInfo.handClickCount > 1 && typeof taiyaki === 'undefined') {

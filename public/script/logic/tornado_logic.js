@@ -4,6 +4,12 @@
  * miri.yoo
  */
 class TornadoLogic {
+    /**
+     * Check r1 (smaller) hits r2 (larger)
+     * @param {PIXI.Sprite | PIXI.Graphics} r1 
+     * @param {PIXI.Sprite | PIXI.Graphics} r2 
+     * @returns {Boolean} True on hits
+     */
     static hitTestRectangle(r1, r2) {
         if(r1 == null || r2 == null) {
             return false;
@@ -15,24 +21,24 @@ class TornadoLogic {
         hit = false;
 
         //Find the center points of each sprite
-        r1.centerX = r1.x + r1.width / 2;
-        r1.centerY = r1.y + r1.height / 2;
-        r2.centerX = r2.x + r2.width / 2;
-        r2.centerY = r2.y + r2.height / 2;
+        r1["centerX"] = r1.x + r1.width / 2;
+        r1["centerY"] = r1.y + r1.height / 2;
+        r2["centerX"] = r2.x + r2.width / 2;
+        r2["centerY"] = r2.y + r2.height / 2;
 
         //Find the half-widths and half-heights of each sprite
-        r1.halfWidth = r1.width / 2;
-        r1.halfHeight = r1.height / 2;
-        r2.halfWidth = r2.width / 2;
-        r2.halfHeight = r2.height / 2;
+        r1["halfWidth"] = r1.width / 2;
+        r1["halfHeight"] = r1.height / 2;
+        r2["halfWidth"] = r2.width / 2;
+        r2["halfHeight"] = r2.height / 2;
 
         //Calculate the distance vector between the sprites
-        vx = r1.centerX - r2.centerX;
-        vy = r1.centerY - r2.centerY;
+        vx = r1["centerX"] - r2["centerX"];
+        vy = r1["centerY"] - r2["centerY"];
 
         //Figure out the combined half-widths and half-heights
-        combinedHalfWidths = r1.halfWidth + r2.halfWidth;
-        combinedHalfHeights = r1.halfHeight + r2.halfHeight;
+        combinedHalfWidths = r1["halfWidth"] + r2["halfWidth"];
+        combinedHalfHeights = r1["halfHeight"] + r2["halfHeight"];
 
         //Check for a collision on the x axis
         if (Math.abs(vx) < combinedHalfWidths) {
@@ -57,6 +63,12 @@ class TornadoLogic {
         return hit;
     }
 
+    /**
+     * check distance between r1, r2
+     * @param {PIXI.Sprite | PIXI.Graphics} r1 
+     * @param {PIXI.Sprite | PIXI.Graphics} r2 
+     * @returns {Number} (x distance)^2 + (y distance)^2
+     */
     static checkNearestPoint(r1, r2) {
         if(r1 == null || r2 == null) {
             return Number.MAX_VALUE;
@@ -66,17 +78,27 @@ class TornadoLogic {
         let vx, vy;
 
         //Find the center points of each sprite
-        r1.centerX = r1.x + r1.width / 2;
-        r1.centerY = r1.y + r1.height / 2;
-        r2.centerX = r2.x + r2.width / 2;
-        r2.centerY = r2.y + r2.height / 2;
+        r1["centerX"] = r1.x + r1.width / 2;
+        r1["centerY"] = r1.y + r1.height / 2;
+        r2["centerX"] = r2.x + r2.width / 2;
+        r2["centerY"] = r2.y + r2.height / 2;
 
         //Calculate the distance vector between the sprites
-        vx = r1.centerX - r2.centerX;
-        vy = r1.centerY - r2.centerY;
+        vx = r1["centerX"] - r2["centerX"];
+        vy = r1["centerY"] - r2["centerY"];
 
         //`hit` will be either `true` or `false`
         return Math.pow(Math.abs(vx), 2) + Math.pow(Math.abs(vy), 2);
+    }
+
+    /**
+     * check p1 hits r1
+     * @param {PIXI.Point} p1 
+     * @param {PIXI.Sprite | PIXI.Graphics} r1 
+     * @returns {Boolean} True if hits
+     */
+    static checkPointHitsRectangle(p1, r1) {
+        return (p1.x > r1.getBounds().left && p1.x < r1.getBounds().right && p1.y > r1.getBounds().top && p1.y < r1.getBounds().bottom);
     }
 }
 
