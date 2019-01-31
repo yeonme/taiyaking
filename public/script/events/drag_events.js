@@ -173,7 +173,6 @@ class DragEvents {
             }
         } else if (gameInfo.handClickCount > 1 && TornadoLogic.checkPointHitsRectangle(xy, gameInfo.objBasket)) {
             // Basket clicked
-            console.log("basket!");
             DragEvents.basketOnDragStart(event);
         } else if (gameInfo.handClickCount > 1 && typeof taiyaki === 'undefined') {
             // Outside of taiyaki clicked
@@ -222,8 +221,7 @@ class DragEvents {
         //@ts-ignore
         let xy = event.data.getLocalPosition(app.stage);
         if (gameInfo.objBasket["dragging"] === true) {
-            // Basket sclicked
-            console.log("basket!");
+            // Basket clicked
             DragEvents.basketOnDragEnd();
             return;
         }
@@ -250,13 +248,11 @@ class DragEvents {
      * @param {PIXI.interaction.InteractionEvent} event Event variable
      */
     static basketOnDragStart(event) {
-        console.log('basketOnDragStart');
         this.data = event.data;
         gameInfo.objBasket["dragging"] = true;
     }
     static basketOnDragMove(event) {
         if (gameInfo.objBasket["dragging"]) {
-            console.log('basketOnDragMove');
             // @ts-ignore
             var newPosition = event.data.getLocalPosition(app.stage);
 
@@ -271,7 +267,6 @@ class DragEvents {
     }
 
     static basketOnDragEnd() {
-        console.log('basketOnDragMove');
         let guest = DragEvents.findNearGuest();
         if (guest) {
             console.log(guest);
@@ -346,14 +341,12 @@ class DragEvents {
                 newitem.val = TornadoLogic.checkNearestPoint(gameInfo.objPointer, gameInfo.taiyakis[idx].objKiji);
                 kvIdxSprite.push(newitem);
             }
-            // console.log(kvIdxSprite);
             kvIdxSprite.sort(function (a, b) {
                 var dflt = Number.MAX_VALUE;
                 var aVal = (a == null ? dflt : a.val);
                 var bVal = (b == null ? dflt : b.val);
                 return aVal - bVal;
             });
-            // console.log(kvIdxSprite);
             return gameInfo.taiyakis[kvIdxSprite[0].key];
         }
     }
