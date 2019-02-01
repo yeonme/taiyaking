@@ -12,91 +12,161 @@ class DragEvents {
     }
 
     /**
-     * Kiji Drag Move
-     *
+     * kijiOnMouseDown
+     * @param {PIXI.interaction.InteractionEvent} event 
      */
-    static kijiOnDragMove() {
-        if (this.dragging) {
+    static kijiOnMouseDown(event) {
+        gameInfo.kijiClickCount++;
+
+        if (gameInfo.kijiClickCount == 1) {
+            this.data = event.data;
+            gameInfo.kijiClick = true;
+            //app.stage.cursor = "none";
+            this.cursor = "none";
+
+            // console.log(this);
+        }
+
+        let taiyaki = DragEvents.findNearTaiyaki();
+       
+        if (gameInfo.kijiClickCount > 1 && !(typeof taiyaki === 'undefined')) {
+            // Taiyaki clicked
+            if (taiyaki.cookStage === CookStage.EMPTY) {
+                taiyaki.cookStage = CookStage.KIJI;
+                taiyaki.resetCookTime();
+                taiyaki.updateVisual();
+                TornadoUtil.playSE('kiji');
+                //app.stage.cursor = "none";
+                this.cursor = "none";
+            } else if (!(taiyaki.cookStage == CookStage.EMPTY)) {
+                gameInfo.targetTaiyaki = taiyaki;
+            }
+        } else if (gameInfo.kijiClickCount > 1 && typeof taiyaki === 'undefined') {
+            // Outside of taiyaki clicked
+            this.alpha = 1;
+            this.rotation = 0.0;
             // @ts-ignore
-            var newPosition = this.data.getLocalPosition(this.parent);
+            this.anchor.set(0.7);
+            this.x = 640;
+            this.y = 303;
+            gameInfo.kijiClick = false;
+            gameInfo.objPointer.visible = false;
+            gameInfo.targetTaiyaki = undefined;
+            gameInfo.kijiClickCount = 0; // reset handClickCount
+            //app.stage.cursor = "inherit";
+            this.cursor = "pointer";
+        }
+    }
+
+    /**
+     * kijiOnMouseMove
+     * @param {PIXI.interaction.InteractionEvent} event 
+     */
+    static kijiOnMouseMove(event) {
+        if (gameInfo.kijiClick) {
+            var mousePosition = app.renderer.plugins.interaction.mouse.global;
             this.rotation = -0.8;
 
             gameInfo.objPointer.visible = true;
-
             // @ts-ignore
-            this.anchor.set(0.5);
-            gameInfo.objPointer.x = newPosition.x - 60;
-            gameInfo.objPointer.y = newPosition.y + 20;
-
-            this.x = newPosition.x;
-            this.y = newPosition.y;
-
+            this.anchor.set(0.5, 0.5);
+            gameInfo.objPointer.x = mousePosition.x - 55;
+            gameInfo.objPointer.y = mousePosition.y + 15;
+            this.x = mousePosition.x;
+            this.y = mousePosition.y;
+            //app.stage.cursor = "none";
             this.cursor = "none";
         }
     }
 
-    static kijiOnDragEnd() {
-        this.alpha = 1;
-        this.rotation = 0.0;
-
-        if (TornadoLogic.hitTestRectangle(gameInfo.objPointer, gameInfo.objBack)) {
-            let kvIdxSprite = [];
-            for (let idx = 0; idx < gameInfo.taiyakis.length; idx++) {
-                var newitem = {};
-                newitem.key = idx;
-                newitem.val = TornadoLogic.checkNearestPoint(gameInfo.objPointer, gameInfo.taiyakis[idx].objKiji);
-                kvIdxSprite.push(newitem);
-            }
-            // console.log(kvIdxSprite);
-            kvIdxSprite.sort(function (a, b) {
-                var dflt = Number.MAX_VALUE;
-
-                var aVal = (a == null ? dflt : a.val);
-                var bVal = (b == null ? dflt : b.val);
-                return aVal - bVal;
-            });
-            // console.log(kvIdxSprite);
-            if (gameInfo.taiyakis[kvIdxSprite[0].key].cookStage === CookStage.EMPTY) {
-                gameInfo.taiyakis[kvIdxSprite[0].key].cookStage = CookStage.KIJI;
-                gameInfo.taiyakis[kvIdxSprite[0].key].resetCookTime();
-                gameInfo.taiyakis[kvIdxSprite[0].key].updateVisual();
-                TornadoUtil.playSE('kiji');
-            }
-        }
-        // @ts-ignore
-        this.anchor.set(0.7);
-        gameInfo.objPointer.visible = false;
-
-        this.x = 640;
-        this.y = 303;
-        this.dragging = false;
-        this.data = null;
-
-        this.cursor = "pointer";
+    /**
+     * kijiOnMouseUp
+     * @param {PIXI.interaction.InteractionEvent} event 
+     */
+    static kijiOnMouseUp(event) {
+         this.cursor = "none";
     }
 
     /**
-     * Anko event
-     *
+     * ankoOnMouseDown
+     * @param {PIXI.interaction.InteractionEvent} event 
      */
-    static ankoOnDragMove() {
-        if (this.dragging) {
-            // @ts-ignore
-            var newPosition = this.data.getLocalPosition(this.parent);
+    static ankoOnMouseDown(event) {
+        gameInfo.ankoClickCount++;
+
+        if (gameInfo.ankoClickCount == 1) {
+            this.data = event.data;
+            this.alpha = 0.5;
+            gameInfo.ankoClick = true;
+            //app.stage.cursor = "none";
+            this.cursor = "none";
+
+            // console.log(this);
+        }
+
+        let taiyaki = DragEvents.findNearTaiyaki();
+
+        if (gameInfo.ankoClickCount > 1 && !(typeof taiyaki === 'undefined')) {
+            // Taiyaki clicked
+            if (taiyaki.cookStage == CookStage.KIJI) {
+                if (taiyaki.cookTime() > taiyaki._maxCookStep[CookStage.KIJI]) {
+                    taiyaki.cookStage = CookStage.BURNED;
+                } else {
+                    taiyaki.cookStage = CookStage.INSIDE;
+                    TornadoUtil.playSE('spoon');
+                }
+                taiyaki.updateVisual();
+                this.cursor = "none";
+            } else if (!(taiyaki.cookStage == CookStage.EMPTY)) {
+                gameInfo.targetTaiyaki = taiyaki;
+            }
+        } else if (gameInfo.ankoClickCount > 1 && typeof taiyaki === 'undefined') {
+            // Outside of taiyaki clicked
+            this.alpha = 1;
+            gameInfo.ankoClick = false;
+            gameInfo.objAnkoSpoon.visible = false;
+            gameInfo.objPointer.visible = false;
+            gameInfo.targetTaiyaki = undefined;
+            gameInfo.ankoClickCount = 0;
+
+            gameInfo.objAnkoSpoon.cursor = "pointer";
+            this.cursor = "pointer";
+        }
+    }
+
+    /**
+     * ankoOnMouseMove
+     * @param {PIXI.interaction.InteractionEvent} event 
+     */
+    static ankoOnMouseMove(event) {
+        if (gameInfo.ankoClick) {
+            var mousePosition = app.renderer.plugins.interaction.mouse.global;
 
             gameInfo.objAnkoSpoon.visible = true;
             gameInfo.objPointer.visible = true;
 
             gameInfo.objAnkoSpoon.anchor.set(0.6);
-            gameInfo.objPointer.x = newPosition.x - 30;
-            gameInfo.objPointer.y = newPosition.y + 50;
+            gameInfo.objPointer.x = mousePosition.x - 20;
+            gameInfo.objPointer.y = mousePosition.y + 25;
 
-            gameInfo.objAnkoSpoon.x = newPosition.x;
-            gameInfo.objAnkoSpoon.y = newPosition.y;
+            gameInfo.objAnkoSpoon.x = mousePosition.x;
+            gameInfo.objAnkoSpoon.y = mousePosition.y;
 
             gameInfo.objAnkoSpoon.cursor = "none";
+            gameInfo.objPointer.cursor = "none";
+            this.cursor = "none";
         }
     }
+
+    /**
+     * ankoOnMouseUp
+     * @param {PIXI.interaction.InteractionEvent} event 
+     */
+    static ankoOnMouseUp(event) {
+        this.cursor = "none";
+   }
+
+
 
     static ankoOnDragEnd() {
         this.alpha = 1;

@@ -24,6 +24,10 @@ class GameInfo {
         this.objPointer = null;
         /** @type {PIXI.Sprite} */
         this.objAnkoSpoon = null;
+        this.kijiClick = false;
+        this.kijiClickCount = 0;
+        this.ankoClick = false;
+        this.ankoClickCount = 0;
         this.handClick = false;
         this.handClickCount = 0;
         /** @type {Array<PIXI.Texture>} **/

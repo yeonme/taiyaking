@@ -142,19 +142,19 @@ function loadGameScene() {
     kiji.interactive = true;
     kiji.buttonMode = true;
     kiji
-        .on('pointerdown', DragEvents.onDragStart)
-        .on('pointerup', DragEvents.kijiOnDragEnd)
-        .on('pointerupoutside', DragEvents.kijiOnDragEnd)
-        .on('pointermove', DragEvents.kijiOnDragMove);
+        .on('pointerdown', DragEvents.kijiOnMouseDown)
+        .on('pointerup', DragEvents.kijiOnMouseUp)
+        .on('pointerupoutside', DragEvents.kijiOnMouseUp)
+        .on('pointermove', DragEvents.kijiOnMouseMove);
 
     // Anko Drag event
     anko.interactive = true;
     anko.buttonMode = true;
     anko
-        .on('pointerdown', DragEvents.onDragStart)
-        .on('pointerup', DragEvents.ankoOnDragEnd)
-        .on('pointerupoutside', DragEvents.ankoOnDragEnd)
-        .on('pointermove', DragEvents.ankoOnDragMove);
+        .on('pointerdown', DragEvents.ankoOnMouseDown)
+        .on('pointerup', DragEvents.ankoOnMouseUp)
+        .on('pointerupoutside', DragEvents.ankoOnMouseUp)
+        .on('pointermove', DragEvents.ankoOnMouseMove);
 
     // Hand event
     hand.interactive = true;
