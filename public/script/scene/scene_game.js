@@ -114,10 +114,6 @@ function loadGameScene() {
     gameInfo.objPointer = TornadoUtil.fillCircle(0xEB0000, 0, 0, 8, app.stage, null, null, null);
     gameInfo.objPointer.visible = false;
 
-    // Anko Spoon
-    gameInfo.objAnkoSpoon = TornadoUtil.createObjUsingTexture('assets/ankospoon.png', 0.5, app.stage, "Sprite", 0, 0);
-    gameInfo.objAnkoSpoon.visible = false;
-
     // TaiyakiCountBoard
     gameInfo.taiyakiCountBoard = TornadoUtil.fillCircle(0xDB005B, 667, 527, 20, app.stage, 3.5, 0xFFF0F5, 1);
     gameInfo.taiyakiCountBoard.visible = false;
@@ -156,6 +152,17 @@ function loadGameScene() {
         .on('pointerupoutside', DragEvents.ankoOnMouseUp)
         .on('pointermove', DragEvents.ankoOnMouseMove);
 
+    // Anko Spoon
+    gameInfo.objAnkoSpoon = TornadoUtil.createObjUsingTexture('assets/ankospoon.png', 0.5, app.stage, "Sprite", 0, 0);
+    gameInfo.objAnkoSpoon.visible = false;
+    gameInfo.objAnkoSpoon.interactive = true;
+    gameInfo.objAnkoSpoon.buttonMode = true;
+    gameInfo.objAnkoSpoon
+        .on('pointerdown', DragEvents.ankoOnMouseDown)
+        .on('pointerup', DragEvents.ankoOnMouseUp)
+        .on('pointerupoutside', DragEvents.ankoOnMouseUp)
+        .on('pointermove', DragEvents.ankoOnMouseMove);
+
     // Hand event
     hand.interactive = true;
     hand.buttonMode = true;
@@ -174,19 +181,19 @@ function loadGameScene() {
         .on('pointerupoutside', DragEvents.basketOnDragEnd)
         .on('pointermove', DragEvents.basketOnDragMove);
 
-    var backBtn = TornadoUtil.createObjButton("assets/btns/back.png", "assets/btns/back_highlight.png", "assets/btns/back_pressed.png", 0.7, app.stage, 60, 20, function() {
+    var backBtn = TornadoUtil.createObjButton("assets/btns/back.png", "assets/btns/back_highlight.png", "assets/btns/back_pressed.png", 0.7, app.stage, 60, 20, function () {
         sceneNumber = 0;
     });
 
     let startCall = TornadoUtil.createObjUsingTexture("assets/start.png",
-    0.5, app.stage, "Sprite", 30000, 30000);
-    startCall.anchor.set(0.5,0.5);
+        0.5, app.stage, "Sprite", 30000, 30000);
+    startCall.anchor.set(0.5, 0.5);
     startCall.position.set(app.screen.width / 2, app.screen.height / 2);
-    gameInfo.animman.add(new AnimItem(gameTimer+500, 500, AnimationType.SCALE,
+    gameInfo.animman.add(new AnimItem(gameTimer + 500, 500, AnimationType.SCALE,
         startCall, EasingType.EASING, 0.5, undefined, 1.0));
-    gameInfo.animman.add(new AnimItem(gameTimer+1000, 500, AnimationType.SCALE,
+    gameInfo.animman.add(new AnimItem(gameTimer + 1000, 500, AnimationType.SCALE,
         startCall, EasingType.EASING, 1.0, undefined, 0.5, undefined, true));
-    
+
     TornadoUtil.playSE('bgmGame', true, false);
 
     $('.tai-time').show();
@@ -196,15 +203,15 @@ function loadGameScene() {
         countdown: false,
         autoStart: false,
         callbacks: {
-            interval: function() {
-                if(visibleScene != 1) {
+            interval: function () {
+                if (visibleScene != 1) {
                     clock.stop();
                     $('.tai-time').hide();
                 }
                 var time = clock.getTime().time;
-                if(Math.floor(gameTimer/1000) - time >= 500) {
+                if (Math.floor(gameTimer / 1000) - time >= 500) {
                     console.log("adjust timer");
-                    clock.setTime(Math.floor(gameTimer/1000));
+                    clock.setTime(Math.floor(gameTimer / 1000));
                 }
             }
         }
@@ -246,15 +253,15 @@ let other;
 let triggeredOver = false;
 function lifeCheck() {
     showMonitor();
-    if(!triggeredOver && gameInfo.life <= 0) {
+    if (!triggeredOver && gameInfo.life <= 0) {
         triggeredOver = true;
         let size = 0;
         // GAME OVER
-        db.collection('highscores').where('score','>=',gameInfo.score).get().then(snap => {
+        db.collection('highscores').where('score', '>=', gameInfo.score).get().then(snap => {
             size = snap.size // will return the collection size
-            console.log("highscores: "+size);
+            console.log("highscores: " + size);
 
-            if(size >= 10) {
+            if (size >= 10) {
                 // Game Over Simple
                 sceneNumber = 3;
             } else {
@@ -277,7 +284,7 @@ function showMonitor() {
     }
 
     //Score (TEST BY GAMETIMER)
-    if(lastScore != gameInfo.score) {
+    if (lastScore != gameInfo.score) {
         lastScore = gameInfo.score;
         if (typeof gameInfo.objScore != "undefined" && gameInfo.objScore != null) {
             app.stage.removeChild(gameInfo.objScore);

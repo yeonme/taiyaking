@@ -17,6 +17,7 @@ class DragEvents {
      */
     static kijiOnMouseDown(event) {
         gameInfo.kijiClickCount++;
+        console.log(gameInfo.ankoClickCount);
 
         if (gameInfo.kijiClickCount == 1) {
             this.data = event.data;
@@ -28,6 +29,7 @@ class DragEvents {
         }
 
         let taiyaki = DragEvents.findNearTaiyaki();
+        console.log(typeof taiyaki);
        
         if (gameInfo.kijiClickCount > 1 && !(typeof taiyaki === 'undefined')) {
             // Taiyaki clicked
@@ -36,8 +38,6 @@ class DragEvents {
                 taiyaki.resetCookTime();
                 taiyaki.updateVisual();
                 TornadoUtil.playSE('kiji');
-                //app.stage.cursor = "none";
-                this.cursor = "none";
             } else if (!(taiyaki.cookStage == CookStage.EMPTY)) {
                 gameInfo.targetTaiyaki = taiyaki;
             }
@@ -54,8 +54,8 @@ class DragEvents {
             gameInfo.targetTaiyaki = undefined;
             gameInfo.kijiClickCount = 0; // reset handClickCount
             //app.stage.cursor = "inherit";
-            this.cursor = "pointer";
         }
+        this.cursor = "pointer";
     }
 
     /**
@@ -84,7 +84,7 @@ class DragEvents {
      * @param {PIXI.interaction.InteractionEvent} event 
      */
     static kijiOnMouseUp(event) {
-         this.cursor = "none";
+        
     }
 
     /**
@@ -93,18 +93,19 @@ class DragEvents {
      */
     static ankoOnMouseDown(event) {
         gameInfo.ankoClickCount++;
+        console.log(gameInfo.ankoClickCount);
 
         if (gameInfo.ankoClickCount == 1) {
             this.data = event.data;
-            this.alpha = 0.5;
+            this.alpha = 1;
             gameInfo.ankoClick = true;
-            //app.stage.cursor = "none";
-            this.cursor = "none";
+            // this.cursor = "none";
 
             // console.log(this);
         }
 
         let taiyaki = DragEvents.findNearTaiyaki();
+        console.log(typeof taiyaki);
 
         if (gameInfo.ankoClickCount > 1 && !(typeof taiyaki === 'undefined')) {
             // Taiyaki clicked
@@ -116,19 +117,19 @@ class DragEvents {
                     TornadoUtil.playSE('spoon');
                 }
                 taiyaki.updateVisual();
-                this.cursor = "none";
             } else if (!(taiyaki.cookStage == CookStage.EMPTY)) {
                 gameInfo.targetTaiyaki = taiyaki;
             }
         } else if (gameInfo.ankoClickCount > 1 && typeof taiyaki === 'undefined') {
             // Outside of taiyaki clicked
+            console.log("outside!");
             this.alpha = 1;
             gameInfo.ankoClick = false;
             gameInfo.objAnkoSpoon.visible = false;
             gameInfo.objPointer.visible = false;
             gameInfo.targetTaiyaki = undefined;
             gameInfo.ankoClickCount = 0;
-
+            
             gameInfo.objAnkoSpoon.cursor = "pointer";
             this.cursor = "pointer";
         }
@@ -152,9 +153,8 @@ class DragEvents {
             gameInfo.objAnkoSpoon.x = mousePosition.x;
             gameInfo.objAnkoSpoon.y = mousePosition.y;
 
-            gameInfo.objAnkoSpoon.cursor = "none";
-            gameInfo.objPointer.cursor = "none";
-            this.cursor = "none";
+            // gameInfo.objAnkoSpoon.cursor = "none";
+            // gameInfo.objPointer.cursor = "none";
         }
     }
 
@@ -163,10 +163,8 @@ class DragEvents {
      * @param {PIXI.interaction.InteractionEvent} event 
      */
     static ankoOnMouseUp(event) {
-        this.cursor = "none";
+        
    }
-
-
 
     static ankoOnDragEnd() {
         this.alpha = 1;
@@ -406,6 +404,7 @@ class DragEvents {
      */
     static findNearTaiyaki() {
         if (TornadoLogic.hitTestRectangle(gameInfo.objPointer, gameInfo.objBack)) {
+            console.log("collison");
             let kvIdxSprite = [];
             for (let idx = 0; idx < gameInfo.taiyakis.length; idx++) {
                 var newitem = {};
