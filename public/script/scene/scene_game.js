@@ -143,6 +143,17 @@ function loadGameScene() {
         .on('pointerupoutside', DragEvents.kijiOnMouseUp)
         .on('pointermove', DragEvents.kijiOnMouseMove);
 
+    gameInfo.objKiji = TornadoUtil.createObjUsingTexture('assets/ingredients1.png', 0.22, app.stage, "Sprite", 640, 303);
+    gameInfo.objKiji.rotation = -0.8;
+    gameInfo.objKiji.visible = false;
+    gameInfo.objKiji.interactive = true;
+    gameInfo.objKiji.buttonMode = true;
+    gameInfo.objKiji
+        .on('pointerdown', DragEvents.kijiOnMouseDown)
+        .on('pointerup', DragEvents.kijiOnMouseUp)
+        .on('pointerupoutside', DragEvents.kijiOnMouseUp)
+        .on('pointermove', DragEvents.kijiOnMouseMove);
+
     // Anko Drag event
     anko.interactive = true;
     anko.buttonMode = true;

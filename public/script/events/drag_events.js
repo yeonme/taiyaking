@@ -2,35 +2,20 @@
 class DragEvents {
 
     /**
-     * onDragStart 
-     * @param {PIXI.interaction.InteractionEvent} event Event variable
-     */
-    static onDragStart(event) {
-        this.data = event.data;
-        this.alpha = 0.5;
-        this.dragging = true;
-    }
-
-    /**
      * kijiOnMouseDown
      * @param {PIXI.interaction.InteractionEvent} event 
      */
     static kijiOnMouseDown(event) {
         gameInfo.kijiClickCount++;
-        console.log(gameInfo.ankoClickCount);
 
         if (gameInfo.kijiClickCount == 1) {
             this.data = event.data;
             gameInfo.kijiClick = true;
-            //app.stage.cursor = "none";
             this.cursor = "none";
-
-            // console.log(this);
         }
 
         let taiyaki = DragEvents.findNearTaiyaki();
-        console.log(typeof taiyaki);
-       
+
         if (gameInfo.kijiClickCount > 1 && !(typeof taiyaki === 'undefined')) {
             // Taiyaki clicked
             if (taiyaki.cookStage === CookStage.EMPTY) {
@@ -44,16 +29,14 @@ class DragEvents {
         } else if (gameInfo.kijiClickCount > 1 && typeof taiyaki === 'undefined') {
             // Outside of taiyaki clicked
             this.alpha = 1;
-            this.rotation = 0.0;
-            // @ts-ignore
-            this.anchor.set(0.7);
-            this.x = 640;
-            this.y = 303;
             gameInfo.kijiClick = false;
+            gameInfo.objKiji.visible = false;
             gameInfo.objPointer.visible = false;
             gameInfo.targetTaiyaki = undefined;
             gameInfo.kijiClickCount = 0; // reset handClickCount
-            //app.stage.cursor = "inherit";
+
+            gameInfo.objKiji.cursor = "pointer";
+            this.cursor = "pointer";
         }
         this.cursor = "pointer";
     }
@@ -65,17 +48,16 @@ class DragEvents {
     static kijiOnMouseMove(event) {
         if (gameInfo.kijiClick) {
             var mousePosition = app.renderer.plugins.interaction.mouse.global;
-            this.rotation = -0.8;
 
+            gameInfo.objKiji.visible = true;
             gameInfo.objPointer.visible = true;
-            // @ts-ignore
-            this.anchor.set(0.5, 0.5);
+
+            gameInfo.objKiji.anchor.set(0.5);
             gameInfo.objPointer.x = mousePosition.x - 55;
             gameInfo.objPointer.y = mousePosition.y + 15;
-            this.x = mousePosition.x;
-            this.y = mousePosition.y;
-            //app.stage.cursor = "none";
-            this.cursor = "none";
+
+            gameInfo.objKiji.x = mousePosition.x;
+            gameInfo.objKiji.y = mousePosition.y;
         }
     }
 
@@ -83,9 +65,7 @@ class DragEvents {
      * kijiOnMouseUp
      * @param {PIXI.interaction.InteractionEvent} event 
      */
-    static kijiOnMouseUp(event) {
-        
-    }
+    static kijiOnMouseUp(event) { }
 
     /**
      * ankoOnMouseDown
@@ -93,19 +73,14 @@ class DragEvents {
      */
     static ankoOnMouseDown(event) {
         gameInfo.ankoClickCount++;
-        console.log(gameInfo.ankoClickCount);
 
         if (gameInfo.ankoClickCount == 1) {
             this.data = event.data;
             this.alpha = 1;
             gameInfo.ankoClick = true;
-            // this.cursor = "none";
-
-            // console.log(this);
         }
 
         let taiyaki = DragEvents.findNearTaiyaki();
-        console.log(typeof taiyaki);
 
         if (gameInfo.ankoClickCount > 1 && !(typeof taiyaki === 'undefined')) {
             // Taiyaki clicked
@@ -129,7 +104,7 @@ class DragEvents {
             gameInfo.objPointer.visible = false;
             gameInfo.targetTaiyaki = undefined;
             gameInfo.ankoClickCount = 0;
-            
+
             gameInfo.objAnkoSpoon.cursor = "pointer";
             this.cursor = "pointer";
         }
@@ -152,9 +127,6 @@ class DragEvents {
 
             gameInfo.objAnkoSpoon.x = mousePosition.x;
             gameInfo.objAnkoSpoon.y = mousePosition.y;
-
-            // gameInfo.objAnkoSpoon.cursor = "none";
-            // gameInfo.objPointer.cursor = "none";
         }
     }
 
@@ -162,51 +134,7 @@ class DragEvents {
      * ankoOnMouseUp
      * @param {PIXI.interaction.InteractionEvent} event 
      */
-    static ankoOnMouseUp(event) {
-        
-   }
-
-    static ankoOnDragEnd() {
-        this.alpha = 1;
-
-        if (TornadoLogic.hitTestRectangle(gameInfo.objAnkoSpoon, gameInfo.objBack)) {
-            let kvIdxSprite = [];
-            for (let idx = 0; idx < gameInfo.taiyakis.length; idx++) {
-                var newitem = {};
-                newitem.key = idx;
-                newitem.val = TornadoLogic.checkNearestPoint(gameInfo.objPointer, gameInfo.taiyakis[idx].objKiji);
-                kvIdxSprite.push(newitem);
-            }
-            // console.log(kvIdxSprite);
-            kvIdxSprite.sort(function (a, b) {
-                var dflt = Number.MAX_VALUE;
-
-                var aVal = (a == null ? dflt : a.val);
-                var bVal = (b == null ? dflt : b.val);
-                return aVal - bVal;
-            });
-            // console.log(kvIdxSprite);
-
-            if (gameInfo.taiyakis[kvIdxSprite[0].key].cookStage == CookStage.KIJI) {
-                if (gameInfo.taiyakis[kvIdxSprite[0].key].cookTime() > gameInfo.taiyakis[kvIdxSprite[0].key]._maxCookStep[CookStage.KIJI]) {
-                    gameInfo.taiyakis[kvIdxSprite[0].key].cookStage = CookStage.BURNED;
-                } else {
-                    gameInfo.taiyakis[kvIdxSprite[0].key].cookStage = CookStage.INSIDE;
-                    TornadoUtil.playSE('spoon');
-                }
-                // gameInfo.taiyakis[kvIdxSprite[0].key].resetCookTime(); // Not reset becasue we don't flip it!
-                gameInfo.taiyakis[kvIdxSprite[0].key].updateVisual();
-            }
-        }
-
-        gameInfo.objPointer.visible = false;
-        gameInfo.objAnkoSpoon.visible = false;
-
-        this.dragging = false;
-        this.data = null;
-
-        gameInfo.objAnkoSpoon.cursor = "pointer";
-    }
+    static ankoOnMouseUp(event) { }
 
     /**
      * handOnMouseDown
@@ -219,10 +147,7 @@ class DragEvents {
             this.data = event.data;
             this.alpha = 0.5;
             gameInfo.handClick = true;
-            //app.stage.cursor = "none";
             this.cursor = "none";
-
-            // console.log(this);
         }
 
         let taiyaki = DragEvents.findNearTaiyaki();
@@ -254,7 +179,6 @@ class DragEvents {
             gameInfo.objPointer.visible = false;
             gameInfo.targetTaiyaki = undefined;
             gameInfo.handClickCount = 0; // reset handClickCount
-            //app.stage.cursor = "inherit";
             this.cursor = "pointer";
         }
     }
@@ -271,11 +195,10 @@ class DragEvents {
             gameInfo.objPointer.visible = true;
             // @ts-ignore
             this.anchor.set(0.5, 0.5);
-            gameInfo.objPointer.x = mousePosition.x - 25;
-            gameInfo.objPointer.y = mousePosition.y + 25;
+            gameInfo.objPointer.x = mousePosition.x - 20;
+            gameInfo.objPointer.y = mousePosition.y - 25;
             this.x = mousePosition.x;
             this.y = mousePosition.y;
-            //app.stage.cursor = "none";
             this.cursor = "none";
 
             DragEvents.basketOnDragMove(event);
@@ -404,7 +327,7 @@ class DragEvents {
      */
     static findNearTaiyaki() {
         if (TornadoLogic.hitTestRectangle(gameInfo.objPointer, gameInfo.objBack)) {
-            console.log("collison");
+            console.log("Collison");
             let kvIdxSprite = [];
             for (let idx = 0; idx < gameInfo.taiyakis.length; idx++) {
                 var newitem = {};

@@ -23,6 +23,8 @@ class GameInfo {
         /** @type {PIXI.Graphics} */
         this.objPointer = null;
         /** @type {PIXI.Sprite} */
+        this.objKiji = null;
+        /** @type {PIXI.Sprite} */
         this.objAnkoSpoon = null;
         this.kijiClick = false;
         this.kijiClickCount = 0;
