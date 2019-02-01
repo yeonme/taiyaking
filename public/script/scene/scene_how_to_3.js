@@ -14,7 +14,7 @@ function loadHowTo3Scene() {
     TornadoUtil.fillRect(0xAA6A01, 640, 0, 15, 550, app.stage);
 
     // Image
-    TornadoUtil.createObjUsingTexture('assets/how_to/howto_3.png', 1.0, app.stage, "Sprite", 0, 0);
+    TornadoUtil.createObjUsingTexture('assets/how_to/howto_3_edited.png', 1.0, app.stage, "Sprite", 0, 0);
 
     // Back btn
     TornadoUtil.createObjButton("assets/btns/btn_back.png", "assets/btns/btn_back_highlight.png", "assets/btns/btn_back_pressed.png", 0.12, app.stage, 460, 517, function () {
