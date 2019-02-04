@@ -1,4 +1,5 @@
 //@ts-nocheck
+var versionJS = "2019-02-04";
 function loadMenuScene(){
     if(visibleScene != 2 && visibleScene != 5 && visibleScene != 6) {
         //Score / Guide -> Menu: non-stop bgm!
@@ -88,6 +89,14 @@ function loadMenuScene(){
         overlayGraphic.endFill();
         app.stage.addChild(overlayGraphic);
     }
+
+    TornadoUtil.textOut(
+        "version "+versionJS, 0, 0, app.stage, new PIXI.TextStyle({
+            fontSize: 10,
+            fill: 0xFFFFFF,
+            fontWeight: 'lighter'
+        })
+    )
 }
 
 /**
