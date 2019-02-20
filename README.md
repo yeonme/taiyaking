@@ -1,7 +1,7 @@
 # Taiyaking!
 ## Participants
-Yoo, Miri
-Lee, Jinbaek
+* Yoo, Miri
+* Lee, Jinbaek
 
 ## Roadmap
 * Brainstorming and Debating
@@ -35,8 +35,7 @@ Lee, Jinbaek
 ### Detailed Schedule
 |Date|To do|Actual progress|Remarks|
 |--- |--- |--- |--- |
-|1/7|Discussion: Set the target subject
-UI Design (Just idea)
+|1/7|Discussion: Set the target subject UI Design (Just idea)
 Asking the mentor which library is recommended|Done||
 |1/8|Make simple assets
 Specify the detailed technical process and find out examples
@@ -51,8 +50,7 @@ Form the presentation|Done||
 [x] Guest orders
 [x] Hiding mouse pointer||
 |1/16|Second Presentation: in-progress check||by mentor (Kamitani-san)|
-|1/17-1/18|* Animating
-* Smoke appears|[x] Cooked taiyaki checking routine
+|1/17-1/18|* Animating * Smoke appears|[x] Cooked taiyaki checking routine
 [x] Animating (Guest)
 [x] AnimatedSprite
 [x] Guest time calculation added
